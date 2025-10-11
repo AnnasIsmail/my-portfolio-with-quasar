@@ -1,6 +1,91 @@
 import { Project } from '../components/models';
 const projects: Project[] = [
   {
+    id: '64d45a925a97fc4efd8a8080',
+    name: 'Student Career Monitoring',
+    type: 'Enterprise Application',
+    description:
+      'Architected and developed a comprehensive Student Career Monitoring application at Bina Nusantara from initial planning to full production deployment. Built using ASP.NET MVC, React.js, Cosmos DB, Azure Functions, and Azure DevOps with CI/CD pipeline. The system provides comprehensive tracking and monitoring of student career progress and achievements across the university.',
+    url: '',
+    urlGithub: '',
+    image: [require('../assets/my-portfolio.png')],
+    technology: [
+      '64cd01363807d13277294752',
+      '64cd01363807d1327729473f',
+      '64cd01363807d13277294754',
+      '64cd01363807d13277294753',
+      '64cd01363807d13277294751',
+      '64cd01363807d13277294750',
+    ],
+  },
+  {
+    id: '64d45a925a97fc4efd8a8081',
+    name: 'Online Exam Proctoring System',
+    type: 'Enterprise Application',
+    description:
+      'Rapidly modified and optimized the Online Exam Proctoring system at Bina Nusantara within two weeks, ensuring seamless exam execution capabilities. Implemented using ASP.NET Web Forms, React.js, and Azure services. The system provides secure online examination with advanced real-time monitoring and proctoring capabilities.',
+    url: '',
+    urlGithub: '',
+    image: [require('../assets/my-portfolio.png')],
+    technology: [
+      '64cd01363807d13277294752',
+      '64cd01363807d1327729473f',
+      '64cd01363807d13277294753',
+      '64cd01363807d13277294751',
+    ],
+  },
+  {
+    id: '64d45a925a97fc4efd8a8082',
+    name: 'Legal Document Management System',
+    type: 'Web Development',
+    description:
+      'Developed a comprehensive web-based legal document management system at Telkom Indonesia during internship. Built responsive user interfaces using Vue.js, robust backend services with CodeIgniter, and integrated Elasticsearch for advanced document search. Achieved significant improvements in document search speed and streamlined the legal team workflow using Quasar Framework, MySQL, MinIO, and Redis.',
+    url: '',
+    urlGithub: '',
+    image: [require('../assets/my-portfolio.png')],
+    technology: [
+      '64cd01363807d13277294740',
+      '64cd01363807d1327729474a',
+      '64cd01363807d1327729474b',
+      '64cd01363807d13277294755',
+      '64cd01363807d13277294756',
+      '64cd01363807d13277294758',
+      '64cd01363807d13277294748',
+    ],
+  },
+  {
+    id: '64d45a925a97fc4efd8a8083',
+    name: 'Quick Count System - 2024 Election',
+    type: 'Full-Stack Development',
+    description:
+      'Architected and developed a comprehensive quick count system for the 2024 Presidential Election for PTMA. Created a KoboCollect-based field data collection form and a real-time dashboard built with React.js and Node.js Express for media publication. Implemented automated data processing workflows to enhance accuracy and speed, leading the entire development process from system design to final implementation.',
+    url: '',
+    urlGithub: '',
+    image: [require('../assets/my-portfolio.png')],
+    technology: [
+      '64cd01363807d1327729473f',
+      '64cd01363807d13277294741',
+      '64cd01363807d13277294744',
+      '64cd01363807d1327729474c',
+    ],
+  },
+  {
+    id: '64d45a925a97fc4efd8a8084',
+    name: 'Tangkapp - Government Workflow',
+    type: 'Full-Stack Development',
+    description:
+      'Served as a Full-Stack Developer for the Tangkapp application, a comprehensive government document workflow solution for Ministry of Agrarian Affairs and Spatial Planning. Led comprehensive requirement analysis and system architecture design, collaborating closely with stakeholders to translate complex bureaucratic processes into an intuitive digital platform while successfully coordinating a small development team.',
+    url: '',
+    urlGithub: '',
+    image: [require('../assets/my-portfolio.png')],
+    technology: [
+      '64cd01363807d1327729473f',
+      '64cd01363807d13277294741',
+      '64cd01363807d1327729474b',
+      '64cd01363807d13277294744',
+    ],
+  },
+  {
     id: '64d45a925a97fc4efd8a8075',
     name: 'GCONN',
     type: 'Web Development',

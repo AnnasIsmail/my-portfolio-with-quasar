@@ -1,20 +1,7 @@
 <template>
-  <div
-    style="
-      display: flex;
-      padding-top: 10px;
-      padding-bottom: 30px;
-      justify-content: space-between;
-      border-bottom: 1px solid #4d4d4d;
-      font-family: 'poppins';
-    "
-  >
-    <div
-      class="text-h5 text-weight-bold"
-      style="letter-spacing: 1px; cursor: pointer"
-      @click="movePage('/', $route)"
-    >
-      Annas
+  <div class="main-navbar">
+    <div class="text-h5 text-weight-bold logo" @click="movePage('/', $route)">
+      <span class="gradient-text">Annas</span>
     </div>
     <div
       class="text-subtitle1 text-weight-light Main-Navigation"
@@ -41,10 +28,17 @@
       </div>
       <div
         class="child-navbar"
-        :class="{ 'on-page': $route.path === '/about' }"
-        @click="movePage('/about', this)"
+        :class="{ 'on-page': $route.path === '/experience' }"
+        @click="movePage('/experience', this)"
       >
-        About
+        Experience
+      </div>
+      <div
+        class="child-navbar"
+        :class="{ 'on-page': $route.path === '/education' }"
+        @click="movePage('/education', this)"
+      >
+        Education
       </div>
     </div>
     <div class="Mobile-Navigation">
@@ -80,6 +74,20 @@
               >About</q-item-section
             >
           </q-item>
+          <q-item clickable>
+            <q-item-section
+              @click="movePage('/experience', this)"
+              :class="{ 'on-page': $route.path === '/experience' }"
+              >Experience</q-item-section
+            >
+          </q-item>
+          <q-item clickable>
+            <q-item-section
+              @click="movePage('/education', this)"
+              :class="{ 'on-page': $route.path === '/education' }"
+              >Education</q-item-section
+            >
+          </q-item>
         </q-list>
       </q-menu>
     </div>
@@ -104,26 +112,94 @@ export default defineComponent({
 </script>
 
 <style scoped>
+.main-navbar {
+  display: flex;
+  padding: 20px 0;
+  padding-bottom: 30px;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  transition: all 0.3s ease;
+}
+
+.logo {
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.logo:hover {
+  transform: scale(1.05);
+}
+
 .child-navbar {
   color: #d1d1d1;
   cursor: pointer;
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  padding: 8px 16px;
+  border-radius: 8px;
 }
+
+.child-navbar::before {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 50%;
+  transform: translateX(-50%) scaleX(0);
+  width: 80%;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    rgba(59, 246, 134, 1),
+    rgba(76, 169, 255, 1)
+  );
+  transition: transform 0.3s ease;
+}
+
 .child-navbar:hover {
   color: #ffffff;
+  background: rgba(255, 255, 255, 0.05);
 }
+
+.child-navbar:hover::before {
+  transform: translateX(-50%) scaleX(1);
+}
+
 .on-page {
   color: white !important;
-  font-weight: bold !important;
+  font-weight: 600 !important;
+  background: rgba(59, 246, 134, 0.1);
 }
+
+.on-page::before {
+  transform: translateX(-50%) scaleX(1) !important;
+}
+
+.Main-Navigation {
+  display: flex;
+  gap: 30px;
+  align-items: center;
+  padding-top: 4px;
+}
+
 .Mobile-Navigation {
   display: none;
 }
+
 @media (max-width: 500px) {
   .Mobile-Navigation {
     display: block;
   }
   .Main-Navigation {
     display: none !important;
+  }
+  .main-navbar {
+    padding: 15px 0;
   }
 }
 </style>

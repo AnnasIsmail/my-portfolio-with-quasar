@@ -32,11 +32,46 @@ export default defineComponent({
 
 <style scoped>
 .bg {
-  font-family: 'Sora', sans-serif;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-color: #272727;
+  font-family: 'Inter', sans-serif;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  background-size: 400% 400%;
+  animation: gradient-shift 15s ease infinite;
+  position: relative;
+  overflow: hidden;
+}
+
+.bg::before {
+  content: '';
+  position: fixed;
+  width: 200%;
+  height: 200%;
+  top: -50%;
+  left: -50%;
+  z-index: 0;
+  background: radial-gradient(
+      circle,
+      rgba(59, 246, 134, 0.05) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 80% 80%,
+      rgba(76, 169, 255, 0.05) 0%,
+      transparent 50%
+    );
+  animation: rotate 30s linear infinite;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.bg > * {
+  position: relative;
+  z-index: 1;
 }
 </style>

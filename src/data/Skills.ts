@@ -121,7 +121,7 @@ const Skills: Skill[] = [
     id: '64cd01363807d1327729474b',
     name: 'MySQL',
     link: 'https://www.mysql.com/',
-    icon: 'vscode-icons:file-type-mysql',
+    icon: 'logos:mysql',
     type: 'database',
     description:
       'MySQL is an open-source relational database management system. It is commonly used for storing and managing structured data in various types of applications.',
@@ -170,6 +170,78 @@ const Skills: Skill[] = [
     type: 'language',
     description:
       'TypeScript is a superset of JavaScript that adds static typing and other features to enhance developer productivity and code quality. It can be compiled to plain JavaScript for browser compatibility.',
+  },
+  {
+    id: '64cd01363807d13277294751',
+    name: 'C#',
+    link: 'https://learn.microsoft.com/en-us/dotnet/csharp/',
+    icon: 'devicon:csharp',
+    type: 'language',
+    description:
+      'C# is a modern, object-oriented programming language developed by Microsoft. It is widely used for building enterprise applications, web services, and cloud-based solutions on the .NET platform.',
+  },
+  {
+    id: '64cd01363807d13277294752',
+    name: 'ASP.NET',
+    link: 'https://dotnet.microsoft.com/apps/aspnet',
+    icon: 'devicon:dotnetcore',
+    type: 'framework',
+    description:
+      'ASP.NET is a powerful web development framework by Microsoft for building modern web applications and services. It includes ASP.NET Web Forms and ASP.NET MVC for creating dynamic, scalable web solutions.',
+  },
+  {
+    id: '64cd01363807d13277294753',
+    name: 'Azure',
+    link: 'https://azure.microsoft.com/',
+    icon: 'devicon:azure',
+    type: 'tool',
+    description:
+      'Microsoft Azure is a comprehensive cloud computing platform offering services including Azure Functions, Azure DevOps, Cosmos DB, Event Hub, and more for building, deploying, and managing applications.',
+  },
+  {
+    id: '64cd01363807d13277294754',
+    name: 'Cosmos DB',
+    link: 'https://azure.microsoft.com/en-us/products/cosmos-db',
+    icon: 'devicon:azure',
+    type: 'database',
+    description:
+      'Azure Cosmos DB is a globally distributed, multi-model database service designed for scalable and high-performance applications. It supports multiple data models and offers low-latency access.',
+  },
+  {
+    id: '64cd01363807d13277294755',
+    name: 'Elasticsearch',
+    link: 'https://www.elastic.co/',
+    icon: 'logos:elasticsearch',
+    type: 'tool',
+    description:
+      'Elasticsearch is a distributed search and analytics engine built on Apache Lucene. It is used for full-text search, log analytics, and real-time data analysis in modern applications.',
+  },
+  {
+    id: '64cd01363807d13277294756',
+    name: 'Redis',
+    link: 'https://redis.io/',
+    icon: 'devicon:redis',
+    type: 'database',
+    description:
+      'Redis is an open-source, in-memory data structure store used as a database, cache, and message broker. It provides high performance and supports various data structures for fast data access.',
+  },
+  {
+    id: '64cd01363807d13277294757',
+    name: 'AWS',
+    link: 'https://aws.amazon.com/',
+    icon: 'logos:aws',
+    type: 'tool',
+    description:
+      'Amazon Web Services (AWS) is a comprehensive cloud computing platform offering services like S3, Lambda, Elastic Beanstalk, and more for scalable application development and deployment.',
+  },
+  {
+    id: '64cd01363807d13277294758',
+    name: 'MinIO',
+    link: 'https://min.io/',
+    icon: 'simple-icons:minio',
+    type: 'tool',
+    description:
+      'MinIO is a high-performance, S3-compatible object storage system designed for large-scale data infrastructure. It is ideal for cloud-native applications and AI/ML workloads.',
   },
 ];
 

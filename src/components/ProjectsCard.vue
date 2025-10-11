@@ -1,103 +1,67 @@
 <template>
-  <div
-    class="project-card"
-    style="
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      min-height: 150px;
-      max-height: 285px;
-      overflow: hidden;
-    "
-  >
-    <div
-      style="
-        background-color: #323443;
-        display: flex;
-        align-items: center;
-        justify-content: space-evenly;
-        max-height: 285px;
-        flex-direction: column;
-      "
-    >
-      <div
-        style="
-          padding: 10px;
-          display: flex;
-          justify-content: end;
-          gap: 10px;
-          width: 100%;
-        "
-      >
+  <div class="project-card glass-card">
+    <div class="project-image-section">
+      <div class="project-actions">
         <q-btn
-          style="
-            background-color: #3f4152;
-            padding: 5px;
-            display: flex;
-            border-radius: 8px;
-          "
+          class="action-btn"
           :href="Project.urlGithub"
           target="_blank"
+          unelevated
+          round
         >
-          <Icon icon="mdi:code" height="23px" />
+          <Icon icon="mdi:code" height="20px" />
+          <q-tooltip
+            class="glass-tooltip"
+            transition-show="scale"
+            transition-hide="scale"
+          >
+            <span class="gradient-text">View Code</span>
+          </q-tooltip>
         </q-btn>
         <q-btn
-          style="
-            background-color: #3f4152;
-            padding: 5px;
-            display: flex;
-            border-radius: 8px;
-          "
+          class="action-btn"
           :href="Project.url"
           target="_blank"
+          unelevated
+          round
         >
-          <Icon icon="ic:outline-arrow-outward" height="23px" />
+          <Icon icon="ic:outline-arrow-outward" height="20px" />
+          <q-tooltip
+            class="glass-tooltip"
+            transition-show="scale"
+            transition-hide="scale"
+          >
+            <span class="gradient-text">Live Demo</span>
+          </q-tooltip>
         </q-btn>
       </div>
-      <q-img
-        :src="Project.image[0]"
-        alt="asd"
-        width="90%"
-        style="margin auto; cursor: pointer;"
-        @click="movePageToDetail"
-      />
+      <div class="project-image-wrapper" @click="movePageToDetail">
+        <q-img
+          :src="Project.image[0]"
+          alt="Project preview"
+          class="project-image"
+        />
+        <div class="image-overlay">
+          <Icon icon="ic:outline-arrow-outward" height="40px" color="white" />
+        </div>
+      </div>
     </div>
-    <div style="padding: 20px">
-      <div class="text-subtitle2 q-pb-xs">
+    <div class="project-content">
+      <div class="project-type">
         {{ Project.type }}
       </div>
-      <div
-        class="text-h4 text-weight-bold"
-        style="cursor: pointer"
-        @click="movePageToDetail"
-      >
+      <div class="project-title" @click="movePageToDetail">
         {{ Project.name }}
       </div>
-      <div
-        class="text-body text-weight-regular"
-        style="
-          margin-top: 20px;
-          color: #d6d6d6;
-          overflow: hidden;
-          cursor: pointer;
-          display: -webkit-box;
-          -webkit-box-orient: vertical;
-          -webkit-line-clamp: 5;
-        "
-        @click="movePageToDetail"
-      >
+      <div class="project-description" @click="movePageToDetail">
         {{ Project.description }}
       </div>
-      <div>
-        <q-card-section
-          style="display: flex; flex-direction: row; flex-wrap: wrap; gap: 10px"
-        >
-          <chip-technology
-            v-for="tech in Project.technology"
-            :key="tech"
-            :Skill="getTechnology(tech)"
-          />
-        </q-card-section>
+      <div class="tech-stack">
+        <chip-technology
+          v-for="tech in Project.technology"
+          :key="tech"
+          :Skill="getTechnology(tech)"
+        />
       </div>
     </div>
   </div>
@@ -142,11 +106,186 @@ export default defineComponent({
 </script>
 
 <style scoped>
+.project-card {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  min-height: 150px;
+  max-height: 300px;
+  overflow: hidden;
+  border-radius: 20px;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+.project-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 60px rgba(59, 246, 134, 0.2);
+}
+
+.project-image-section {
+  background: linear-gradient(
+    135deg,
+    rgba(50, 52, 67, 0.8) 0%,
+    rgba(30, 32, 47, 0.9) 100%
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  position: relative;
+  padding: 20px;
+  gap: 15px;
+}
+
+.project-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  width: 100%;
+  z-index: 2;
+}
+
+.action-btn {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  padding: 8px;
+  min-width: 40px;
+  min-height: 40px;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.action-btn:hover {
+  background: rgba(59, 246, 134, 0.2);
+  border-color: rgba(59, 246, 134, 0.5);
+  transform: scale(1.1);
+}
+
+.project-image-wrapper {
+  position: relative;
+  width: 100%;
+  flex: 1;
+  cursor: pointer;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.project-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.image-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.project-image-wrapper:hover .image-overlay {
+  opacity: 1;
+}
+
+.project-image-wrapper:hover .project-image {
+  transform: scale(1.1);
+}
+
+.project-content {
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.project-type {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: rgba(59, 246, 134, 0.8);
+}
+
+.project-title {
+  font-size: 28px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: linear-gradient(135deg, #fff 0%, #e0e0e0 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  line-height: 1.2;
+}
+
+.project-title:hover {
+  background: linear-gradient(
+    135deg,
+    rgba(59, 246, 134, 1) 0%,
+    rgba(76, 169, 255, 1) 100%
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.project-description {
+  margin-top: 8px;
+  color: #d6d6d6;
+  font-size: 14px;
+  line-height: 1.6;
+  overflow: hidden;
+  cursor: pointer;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  transition: color 0.3s ease;
+}
+
+.project-description:hover {
+  color: #ffffff;
+}
+
+.tech-stack {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: auto;
+}
+
+.glass-tooltip {
+  background: rgba(50, 52, 67, 0.95) !important;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
 @media (max-width: 600px) {
   .project-card {
     grid-template-columns: 1fr !important;
-    grid-template-rows: 1fr 1fr !important;
+    grid-template-rows: 250px auto !important;
     max-height: none !important;
+  }
+
+  .project-image-section {
+    max-height: 250px;
+  }
+
+  .project-content {
+    padding: 20px;
+  }
+
+  .project-title {
+    font-size: 24px;
   }
 }
 </style>
