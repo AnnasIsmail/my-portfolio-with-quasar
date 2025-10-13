@@ -1,6 +1,9 @@
 [build]
-  command = "npm run build"
+  command = "npx quasar build -m spa"
   publish = "dist/spa"
+
+[build.environment]
+  NODE_VERSION = "18"
 
 # Ensure SPA history fallback works (alternative to public/_redirects)
 [[redirects]]
