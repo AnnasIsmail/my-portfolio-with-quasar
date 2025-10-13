@@ -1,5 +1,5 @@
 [build]
-  command = "npx quasar build -m spa"
+  command = "npm ci && npx quasar build -m spa"
   publish = "dist/spa"
 
 [build.environment]
