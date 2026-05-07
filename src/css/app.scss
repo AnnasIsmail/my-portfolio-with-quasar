@@ -17,7 +17,7 @@ h4,
 h5,
 h6 {
   font-family: 'Space Grotesk', sans-serif !important;
-  letter-spacing: -0.02em;
+  letter-spacing: 0;
 }
 
 // Custom animations
@@ -46,10 +46,10 @@ h6 {
 @keyframes pulse-glow {
   0%,
   100% {
-    box-shadow: 0 0 20px rgba(59, 246, 134, 0.3);
+    box-shadow: 0 0 20px rgba(45, 212, 191, 0.24);
   }
   50% {
-    box-shadow: 0 0 40px rgba(59, 246, 134, 0.6);
+    box-shadow: 0 0 40px rgba(244, 184, 96, 0.34);
   }
 }
 
@@ -68,14 +68,14 @@ h6 {
 }
 
 ::-webkit-scrollbar-track {
-  background: #1a1a1a;
+  background: #071113;
 }
 
 ::-webkit-scrollbar-thumb {
   background: linear-gradient(
     to bottom,
-    rgba(59, 246, 134, 0.8),
-    rgba(76, 169, 255, 0.8)
+    rgba(45, 212, 191, 0.86),
+    rgba(244, 184, 96, 0.86)
   );
   border-radius: 10px;
 }
@@ -83,34 +83,30 @@ h6 {
 ::-webkit-scrollbar-thumb:hover {
   background: linear-gradient(
     to bottom,
-    rgba(59, 246, 134, 1),
-    rgba(76, 169, 255, 1)
+    rgba(45, 212, 191, 1),
+    rgba(244, 184, 96, 1)
   );
 }
 
 // Glassmorphism utility class
 .glass-card {
-  background: rgba(50, 52, 67, 0.7);
+  background: rgba(9, 24, 28, 0.72);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(233, 244, 241, 0.1);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .glass-card:hover {
-  background: rgba(50, 52, 67, 0.9);
-  border: 1px solid rgba(59, 246, 134, 0.3);
+  background: rgba(13, 34, 40, 0.88);
+  border: 1px solid rgba(45, 212, 191, 0.28);
   transform: translateY(-5px);
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
 }
 
 // Gradient text utility
 .gradient-text {
-  background: linear-gradient(
-    135deg,
-    rgba(59, 246, 134, 1) 0%,
-    rgba(76, 169, 255, 1) 100%
-  );
+  background: linear-gradient(135deg, #2dd4bf 0%, #f4b860 60%, #ff7a59 100%);
   background-size: 200% 200%;
   animation: gradient-shift 3s ease infinite;
   -webkit-background-clip: text;

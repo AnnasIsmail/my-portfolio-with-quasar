@@ -101,7 +101,7 @@ export default defineComponent({
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 12px;
+  border-radius: 8px;
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.1);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -110,9 +110,9 @@ export default defineComponent({
 
 .logo-wrapper:hover {
   background: rgba(255, 255, 255, 0.1);
-  border-color: rgba(59, 246, 134, 0.3);
+  border-color: rgba(45, 212, 191, 0.3);
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(59, 246, 134, 0.15);
+  box-shadow: 0 8px 25px rgba(45, 212, 191, 0.15);
 }
 
 .company-logo {
@@ -147,17 +147,14 @@ export default defineComponent({
 }
 
 .logo-timeline {
-  background: rgba(59, 246, 134, 0.1);
-  border: 1px solid rgba(59, 246, 134, 0.2);
+  background: rgba(45, 212, 191, 0.1);
+  border: 1px solid rgba(45, 212, 191, 0.2);
 }
 
 /* Education page specific styling */
-.logo-card .company-logo {
-  border-radius: 12px;
-}
-
+.logo-card .company-logo,
 .logo-timeline .company-logo {
-  border-radius: 10px;
+  border-radius: 8px;
 }
 
 /* Responsive adjustments */

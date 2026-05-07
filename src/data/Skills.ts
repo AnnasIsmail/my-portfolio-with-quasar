@@ -243,6 +243,33 @@ const Skills: Skill[] = [
     description:
       'MinIO is a high-performance, S3-compatible object storage system designed for large-scale data infrastructure. It is ideal for cloud-native applications and AI/ML workloads.',
   },
+  {
+    id: '64cd01363807d13277294759',
+    name: 'Angular',
+    link: 'https://angular.dev/',
+    icon: 'logos:angular-icon',
+    type: 'framework',
+    description:
+      'Angular is a TypeScript-based web framework for building maintainable enterprise applications with structured components, services, and routing.',
+  },
+  {
+    id: '64cd01363807d1327729475a',
+    name: 'SQL Server',
+    link: 'https://www.microsoft.com/en-us/sql-server',
+    icon: 'devicon:microsoftsqlserver',
+    type: 'database',
+    description:
+      'Microsoft SQL Server is a relational database platform used for transactional systems, reporting, and enterprise data management.',
+  },
+  {
+    id: '64cd01363807d1327729475b',
+    name: 'LINQ',
+    link: 'https://learn.microsoft.com/en-us/dotnet/csharp/linq/',
+    icon: 'devicon:dotnetcore',
+    type: 'library',
+    description:
+      'LINQ provides expressive query capabilities in C# for working with collections, relational data, and optimized application data flows.',
+  },
 ];
 
 export default Skills;

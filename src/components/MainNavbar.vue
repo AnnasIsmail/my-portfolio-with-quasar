@@ -69,13 +69,6 @@
           </q-item>
           <q-item clickable>
             <q-item-section
-              @click="movePage('/about', this)"
-              :class="{ 'on-page': $route.path === '/about' }"
-              >About</q-item-section
-            >
-          </q-item>
-          <q-item clickable>
-            <q-item-section
               @click="movePage('/experience', this)"
               :class="{ 'on-page': $route.path === '/experience' }"
               >Experience</q-item-section
@@ -118,7 +111,7 @@ export default defineComponent({
   padding-bottom: 30px;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(233, 244, 241, 0.1);
   backdrop-filter: blur(10px);
   position: sticky;
   top: 0;
@@ -127,7 +120,7 @@ export default defineComponent({
 }
 
 .logo {
-  letter-spacing: 1px;
+  letter-spacing: 0;
   cursor: pointer;
   transition: transform 0.3s ease;
 }
@@ -137,7 +130,7 @@ export default defineComponent({
 }
 
 .child-navbar {
-  color: #d1d1d1;
+  color: #c9d3d0;
   cursor: pointer;
   position: relative;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -153,17 +146,13 @@ export default defineComponent({
   transform: translateX(-50%) scaleX(0);
   width: 80%;
   height: 2px;
-  background: linear-gradient(
-    90deg,
-    rgba(59, 246, 134, 1),
-    rgba(76, 169, 255, 1)
-  );
+  background: linear-gradient(90deg, #2dd4bf, #f4b860);
   transition: transform 0.3s ease;
 }
 
 .child-navbar:hover {
   color: #ffffff;
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(233, 244, 241, 0.06);
 }
 
 .child-navbar:hover::before {
@@ -173,7 +162,7 @@ export default defineComponent({
 .on-page {
   color: white !important;
   font-weight: 600 !important;
-  background: rgba(59, 246, 134, 0.1);
+  background: rgba(45, 212, 191, 0.12);
 }
 
 .on-page::before {

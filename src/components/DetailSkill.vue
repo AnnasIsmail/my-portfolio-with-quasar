@@ -1,58 +1,16 @@
 <template>
-  <div
-    style="
-      background-color: #323443;
-      min-height: 100px;
-      width: 100%;
-      border-radius: 12px;
-      margin-left: 40px;
-    "
-  >
-    <div
-      style="
-        position: absolute;
-        margin-left: -40px;
-        margin-top: 20px;
-        background-color: #323443;
-        border-radius: 20px;
-        background-image: linear-gradient(
-          to bottom right,
-          rgba(59, 246, 134, 1) 40%,
-          rgba(76, 169, 255, 1) 60%
-        );
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 3px;
-      "
-    >
-      <Icon
-        :icon="Skill.icon"
-        width="55px"
-        style="background-color: #fbfbfb; padding: 10px; border-radius: 20px"
-      />
+  <article class="skill-detail">
+    <div class="skill-icon">
+      <Icon :icon="Skill.icon" width="42px" />
     </div>
-    <div style="margin: 5px; margin-left: 40px">
-      <div class="text-h6 text-weight-bold">
-        <a
-          :href="Skill.link"
-          target="_blank"
-          style="margin: auto; height: 30px; color: white"
-        >
-          {{ Skill.name }}
-        </a>
-      </div>
-      <div
-        class="text-overline text-weight-bold text-capitalize"
-        style="margin-top: -8px; margin-bottom: 5px"
-      >
-        {{ Skill.type }}
-      </div>
-      <div class="text-body2">
-        {{ Skill.description }}
-      </div>
+    <div class="skill-content">
+      <a :href="Skill.link" target="_blank" class="skill-name">
+        {{ Skill.name }}
+      </a>
+      <div class="skill-type">{{ Skill.type }}</div>
+      <p>{{ Skill.description }}</p>
     </div>
-  </div>
+  </article>
 </template>
 
 <script lang="ts">
@@ -73,3 +31,51 @@ export default defineComponent({
   },
 });
 </script>
+
+<style scoped>
+.skill-detail {
+  display: flex;
+  gap: 18px;
+  min-height: 110px;
+  padding: 20px;
+  border: 1px solid rgba(233, 244, 241, 0.12);
+  border-radius: 8px;
+  background: rgba(9, 24, 28, 0.72);
+}
+
+.skill-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 64px;
+  width: 64px;
+  height: 64px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #2dd4bf, #f4b860);
+}
+
+.skill-content {
+  min-width: 0;
+}
+
+.skill-name {
+  color: #f8faf8;
+  font-size: 18px;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.skill-type {
+  margin-top: 2px;
+  color: #f4b860;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.skill-content p {
+  margin: 8px 0 0;
+  color: #c9d3d0;
+  line-height: 1.6;
+}
+</style>

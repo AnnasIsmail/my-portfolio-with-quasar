@@ -120,6 +120,31 @@ export default defineComponent({
     const experiences = [
       {
         id: 1,
+        company: 'FxMedia',
+        companyKey: 'placeholder',
+        position: 'Full Stack Developer',
+        duration: 'Dec 2025 - Apr 2026',
+        location: 'Singapore',
+        icon: 'mdi:warehouse',
+        description:
+          'Contributed to the development and maintenance of an internal warehouse application, covering frontend, backend, database operations, deployment, and production support in an English-speaking team environment.',
+        achievements: [
+          'Developed and maintained Angular and ASP.NET modules for warehouse operations',
+          'Improved system stability through bug fixing, troubleshooting, and reliability-focused maintenance',
+          'Managed SQL Server data workflows and supported AWS EC2 deployment for application delivery',
+        ],
+        technologies: [
+          'Angular',
+          'ASP.NET',
+          'C#',
+          'SQL Server',
+          'SSMS',
+          'AWS EC2',
+          'English Collaboration',
+        ],
+      },
+      {
+        id: 2,
         company: 'IT Division Bina Nusantara',
         companyKey: 'binus',
         position: 'Programmer',
@@ -147,7 +172,7 @@ export default defineComponent({
         ],
       },
       {
-        id: 2,
+        id: 3,
         company: 'IT Division Bina Nusantara',
         companyKey: 'binus',
         position: 'Junior Programmer',
@@ -170,7 +195,7 @@ export default defineComponent({
         ],
       },
       {
-        id: 3,
+        id: 4,
         company: 'Telkom Indonesia',
         companyKey: 'telkom',
         position: 'Website Developer Intern',
@@ -196,10 +221,10 @@ export default defineComponent({
         ],
       },
       {
-        id: 4,
+        id: 5,
         company: "Perguruan Tinggi Muhammadiyah dan 'Aisyiyah (PTMA)",
         companyKey: 'ptma',
-        position: 'IT Developer – Quick Count System Development',
+        position: 'IT Developer - Quick Count System Development',
         duration: 'Feb 2024 - Mar 2024',
         location: 'Indonesia',
         icon: 'simple-icons:vote',
@@ -217,7 +242,7 @@ export default defineComponent({
         ],
       },
       {
-        id: 5,
+        id: 6,
         company:
           'Ministry of Agrarian Affairs and Spatial Planning/National Land Agency',
         companyKey: 'atr-bpn',
@@ -274,11 +299,7 @@ export default defineComponent({
   transform: translateX(-50%);
   width: 80px;
   height: 4px;
-  background: linear-gradient(
-    90deg,
-    rgba(59, 246, 134, 1),
-    rgba(76, 169, 255, 1)
-  );
+  background: linear-gradient(90deg, #2dd4bf, #f4b860);
   border-radius: 2px;
 }
 
@@ -302,8 +323,8 @@ export default defineComponent({
   width: 3px;
   background: linear-gradient(
     180deg,
-    rgba(59, 246, 134, 0.3),
-    rgba(76, 169, 255, 0.3)
+    rgba(45, 212, 191, 0.34),
+    rgba(244, 184, 96, 0.3)
   );
   transform: translateX(-50%);
   border-radius: 2px;
@@ -324,12 +345,8 @@ export default defineComponent({
   transform: translate(-50%, -50%);
   width: 20px;
   height: 20px;
-  background: linear-gradient(
-    135deg,
-    rgba(59, 246, 134, 1),
-    rgba(76, 169, 255, 1)
-  );
-  border-radius: 50%;
+  background: linear-gradient(135deg, #2dd4bf, #f4b860);
+  border-radius: 8px;
   border: 4px solid #1a1a2e;
   z-index: 2;
 }
@@ -339,7 +356,7 @@ export default defineComponent({
   background: rgba(255, 255, 255, 0.03);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 16px;
+  border-radius: 8px;
   padding: 30px;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
@@ -347,9 +364,9 @@ export default defineComponent({
 
 .experience-card:hover {
   background: rgba(255, 255, 255, 0.05);
-  border-color: rgba(59, 246, 134, 0.3);
+  border-color: rgba(45, 212, 191, 0.3);
   transform: translateY(-5px);
-  box-shadow: 0 20px 40px rgba(59, 246, 134, 0.1);
+  box-shadow: 0 20px 40px rgba(45, 212, 191, 0.12);
 }
 
 .experience-item:nth-child(odd) .experience-card {
@@ -381,7 +398,7 @@ export default defineComponent({
 .position {
   font-size: 1rem;
   font-weight: 600;
-  color: rgba(59, 246, 134, 1);
+  color: #2dd4bf;
   margin-bottom: 5px;
 }
 
@@ -402,9 +419,9 @@ export default defineComponent({
   justify-content: center;
   width: 60px;
   height: 60px;
-  background: rgba(59, 246, 134, 0.1);
-  border-radius: 12px;
-  border: 1px solid rgba(59, 246, 134, 0.2);
+  background: rgba(45, 212, 191, 0.1);
+  border-radius: 8px;
+  border: 1px solid rgba(45, 212, 191, 0.2);
 }
 
 .experience-content {
@@ -442,18 +459,18 @@ export default defineComponent({
 }
 
 .tech-tag {
-  background: rgba(59, 246, 134, 0.1);
-  color: rgba(59, 246, 134, 1);
+  background: rgba(45, 212, 191, 0.1);
+  color: #2dd4bf;
   padding: 4px 12px;
-  border-radius: 20px;
+  border-radius: 8px;
   font-size: 0.8rem;
   font-weight: 500;
-  border: 1px solid rgba(59, 246, 134, 0.2);
+  border: 1px solid rgba(45, 212, 191, 0.2);
   transition: all 0.3s ease;
 }
 
 .tech-tag:hover {
-  background: rgba(59, 246, 134, 0.2);
+  background: rgba(45, 212, 191, 0.18);
   transform: translateY(-2px);
 }
 

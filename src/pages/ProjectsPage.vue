@@ -80,7 +80,7 @@ export default defineComponent({
   data() {
     return {
       styleFontTooltip:
-        'background-image: linear-gradient(to bottom right,rgba(59, 246, 134, 1) 40%,rgba(76, 169, 255, 1) 60%);background-clip: text;-webkit-background-clip: text;-webkit-text-fill-color: transparent;',
+        'background-image: linear-gradient(to bottom right,#2dd4bf 40%,#f4b860 60%);background-clip: text;-webkit-background-clip: text;-webkit-text-fill-color: transparent;',
       search: '',
       filter: '',
       showElement: false,
@@ -99,20 +99,18 @@ export default defineComponent({
   },
   setup() {
     const dataProjects = Projects as Project[];
+    const personalProjectNames = ['GCONN', 'Account Nguk', 'My Portfolio'];
 
-    // Separate professional and personal projects
     const professionalProjects = dataProjects.filter(
       (project) =>
-        project.type === 'Enterprise Application' ||
-        project.type === 'Full-Stack Development' ||
-        project.type === 'Web Development'
+        !personalProjectNames.includes(project.name) &&
+        (project.type === 'Enterprise Application' ||
+          project.type === 'Full-Stack Development' ||
+          project.type === 'Web Development')
     );
 
-    const personalProjects = dataProjects.filter(
-      (project) =>
-        project.name === 'GCONN' ||
-        project.name === 'Account Nguk' ||
-        project.name === 'My Portfolio'
+    const personalProjects = dataProjects.filter((project) =>
+      personalProjectNames.includes(project.name)
     );
 
     return {
@@ -144,11 +142,7 @@ export default defineComponent({
   transform: translateX(-50%);
   width: 80px;
   height: 4px;
-  background: linear-gradient(
-    90deg,
-    rgba(59, 246, 134, 1),
-    rgba(76, 169, 255, 1)
-  );
+  background: linear-gradient(90deg, #2dd4bf, #f4b860);
   border-radius: 2px;
 }
 
@@ -167,7 +161,7 @@ export default defineComponent({
 
 .category-section {
   background: rgba(255, 255, 255, 0.02);
-  border-radius: 20px;
+  border-radius: 8px;
   padding: 40px;
   border: 1px solid rgba(255, 255, 255, 0.05);
 }
@@ -181,7 +175,7 @@ export default defineComponent({
   color: #ffffff;
   margin-bottom: 30px;
   padding-bottom: 15px;
-  border-bottom: 2px solid rgba(59, 246, 134, 0.3);
+  border-bottom: 2px solid rgba(45, 212, 191, 0.3);
 }
 
 .projects-grid {

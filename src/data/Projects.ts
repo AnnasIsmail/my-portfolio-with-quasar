@@ -1,6 +1,24 @@
 import { Project } from '../components/models';
 const projects: Project[] = [
   {
+    id: '64d45a925a97fc4efd8a8085',
+    name: 'Internal Warehouse Application',
+    type: 'Enterprise Application',
+    description:
+      'Contributed as a Full Stack Developer at FxMedia to an internal warehouse application for operational workflows. Built and maintained frontend modules with Angular, backend services with ASP.NET, managed data through SQL Server Management Studio, handled troubleshooting and bug fixing, and supported deployment on AWS EC2 in an English-speaking team environment.',
+    url: '',
+    urlGithub: '',
+    image: [require('../assets/my-portfolio.png')],
+    technology: [
+      '64cd01363807d13277294759',
+      '64cd01363807d13277294752',
+      '64cd01363807d1327729475a',
+      '64cd01363807d13277294757',
+      '64cd01363807d13277294751',
+      '64cd01363807d13277294750',
+    ],
+  },
+  {
     id: '64d45a925a97fc4efd8a8080',
     name: 'Student Career Monitoring',
     type: 'Enterprise Application',

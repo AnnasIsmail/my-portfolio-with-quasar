@@ -1,262 +1,184 @@
 <template>
-  <q-page style="height: auto; overflow: hidden">
+  <q-page class="home-page">
     <input type="hidden" id="move-page" @click="movePageDocument" />
-    <q-intersection style="min-height: 500px" class="main-bio-intersection">
-      <div
-        class="main-bio"
-        style="
-          display: grid;
-          grid-template-rows: auto auto;
-          grid-template-columns: 200px 50% auto;
-          align-items: start;
-          gap: 10px;
-          transition: all 1s ease-in-out;
-        "
-      >
-        <transition
-          appear
-          enter-active-class="animated fadeInUp"
-          leave-active-class="animated fadeOut"
-          :style="{ animationDuration: '1s', animationDelay: '0.1s' }"
-        >
-          <div
-            class="text-h4 text-weight-bold main-bio-item-1 hero-text floating-text"
-            v-if="showElement"
-          >
-            Hello, I'm
-            <span class="gradient-text typing-animation">Annas</span>, a
-            passionate Full-Stack Developer with a Master's in Computer
-            Engineering. I specialize in building enterprise-grade applications
-            using modern technologies like .NET, React.js, and Azure cloud
-            services.
-          </div>
-        </transition>
-        <transition
-          appear
-          enter-active-class="animated zoomIn"
-          leave-active-class="animated zoomOut"
-          :style="{ animationDuration: '0.8s', animationDelay: '0.2s' }"
-        >
-          <div
-            class="main-bio-item-2 profile-image-container pulse-image"
-            v-if="showElement"
-          >
-            <q-img
-              src="~assets/photo.png"
-              class="profile-image rotating-image"
-            />
-            <div class="image-glow"></div>
-          </div>
-        </transition>
-        <transition
-          appear
-          enter-active-class="animated slideInLeft"
-          leave-active-class="animated slideOutLeft"
-          :style="{ animationDuration: '0.8s', animationDelay: '0.3s' }"
-        >
-          <div
-            class="main-bio-item-3 bio-card floating-card"
-            v-if="showElement"
-          >
-            <div class="text-h6 text-weight-bold section-title slide-in-text">
-              Biography
-            </div>
-            <div
-              class="text-body text-weight-regular fade-in-text"
-              style="margin-top: 20px; color: #d6d6d6"
-            >
-              I am a dedicated software developer with expertise in optimizing
-              database performance and building scalable web applications. My
-              passion lies in creating innovative solutions using AI and cloud
-              technologies. I excel in
-              <span v-for="(skill, index) in biographySkills" :key="skill.name">
-                {{
-                  index > 0
-                    ? index === biographySkills.length - 1
-                      ? ' and '
-                      : ', '
-                    : ''
-                }}
-                <a
-                  :href="skill.link"
-                  target="_blank"
-                  :class="['q-link', 'text-weight-bold', 'skill-link']"
-                  :style="{ color: skill.color }"
-                >
-                  {{ skill.name }}
-                </a>
-              </span>
-            </div>
-          </div>
-        </transition>
-        <transition
-          appear
-          enter-active-class="animated fadeInRight"
-          leave-active-class="animated fadeOut"
-          :style="{ animationDuration: '0.8s', animationDelay: '0.4s' }"
-        >
-          <div
-            class="main-bio-item-4 social-card floating-card"
-            v-if="showElement"
-          >
-            <div
-              class="text-h6 text-weight-bold lets-connect section-title bounce-in-text"
-            >
-              Let's Connect
-            </div>
-            <div class="social-links">
-              <a
-                href="https://www.linkedin.com/in/annas-ismail-muhammad/"
-                target="_blank"
-                class="social-icon social-icon-animated"
-              >
-                <Icon icon="skill-icons:linkedin" height="35px" />
-                <q-tooltip
-                  transition-show="scale"
-                  transition-hide="scale"
-                  class="glass-tooltip"
-                >
-                  <span :style="styleFontTooltip"> My LinkedIn </span>
-                </q-tooltip>
-              </a>
-              <a
-                href="https://github.com/AnnasIsmail"
-                target="_blank"
-                class="social-icon social-icon-animated"
-              >
-                <Icon icon="uiw:github" height="35px" color="#cdd9e5" />
-                <q-tooltip
-                  transition-show="scale"
-                  transition-hide="scale"
-                  class="glass-tooltip"
-                >
-                  <span :style="styleFontTooltip"> My Github </span>
-                </q-tooltip>
-              </a>
-              <a
-                href="https://www.instagram.com/annas_i_m/"
-                target="_blank"
-                class="social-icon social-icon-animated"
-              >
-                <Icon icon="skill-icons:instagram" height="35px" />
-                <q-tooltip
-                  transition-show="scale"
-                  transition-hide="scale"
-                  class="glass-tooltip"
-                >
-                  <span :style="styleFontTooltip"> My Instagram </span>
-                </q-tooltip>
-              </a>
-            </div>
-          </div>
-        </transition>
-      </div>
-    </q-intersection>
-    <q-intersection style="min-height: 400px" class="second-bio-intersection">
+
+    <q-intersection class="hero-section" :threshold="0.1">
       <transition
         appear
         enter-active-class="animated fadeInUp"
         leave-active-class="animated fadeOut"
-        :style="{ animationDuration: '0.8s', animationDelay: '0.5s' }"
+        :style="{ animationDuration: '0.7s' }"
       >
-        <div class="technology wave-animation" v-if="showElement">
-          <div class="what-i-do-section slide-in-section">
-            <div class="text-h6 text-weight-bold section-title typewriter-text">
-              What I do
-            </div>
-            <div
-              class="text-body text-weight-regular fade-in-paragraph"
-              style="margin-top: 20px; color: #d6d6d6"
-            >
-              I am a full-stack developer specializing in enterprise web
-              applications. Currently working as a Programmer at Bina Nusantara,
-              I develop and maintain critical internal systems including Online
-              Exam platforms, Scheduling systems, Student Career Monitoring, and
-              Event Management solutions using ASP.NET, React.js, Azure, and
-              cutting-edge cloud technologies.
-            </div>
-          </div>
-          <div>
-            <div class="glass-card tech-search-card">
-              <q-card-section class="search-section">
-                <q-input
-                  filled
-                  v-model="search"
-                  label="Search"
-                  placeholder="React"
-                  @update:model-value="searchTechnologies"
-                />
-                <q-select
-                  clearable
-                  filled
-                  v-model="filter"
-                  :options="filterType"
-                  label="Filter"
-                  style="width: 100%"
-                  @update:model-value="filterTechnologies"
-                />
-              </q-card-section>
-              <q-card-section
-                style="
-                  display: flex;
-                  flex-direction: row;
-                  flex-wrap: wrap;
-                  gap: 10px;
-                  justify-content: center;
-                "
+        <section v-if="showElement" class="hero-grid">
+          <div class="hero-copy">
+            <div class="eyebrow">Full Stack Developer</div>
+            <h1>
+              Annas Ismail Muhammad
+              <span>builds reliable enterprise web applications.</span>
+            </h1>
+            <p>
+              Programmer with Information Systems and Computer Science
+              education, experienced in .NET, Angular, React.js, Azure, AWS, SQL
+              Server, and performance-focused data retrieval.
+            </p>
+
+            <div class="hero-actions">
+              <q-btn
+                class="primary-action"
+                unelevated
+                @click="movePage('/projects', this)"
               >
-                <chip-technology
-                  v-for="tech in TechWID"
-                  :key="tech.name"
-                  :Skill="tech"
-                />
-              </q-card-section>
-              <q-card-section style="padding-top: 0">
-                <div class="text-body" style="color: #b0b1b7">
-                  {{ TechWID.length }} Result
-                </div>
-              </q-card-section>
+                <Icon icon="mdi:briefcase-outline" height="20px" />
+                <span>View Projects</span>
+              </q-btn>
+              <q-btn
+                class="secondary-action"
+                outline
+                href="mailto:annasismailmuhammad@gmail.com"
+              >
+                <Icon icon="mdi:email-outline" height="20px" />
+                <span>Contact Me</span>
+              </q-btn>
             </div>
           </div>
-        </div>
+
+          <div class="profile-panel">
+            <div class="profile-frame">
+              <q-img src="~assets/photo.png" class="profile-image" />
+            </div>
+            <div class="signal-list">
+              <div
+                v-for="item in careerSignals"
+                :key="item.label"
+                class="signal"
+              >
+                <span>{{ item.value }}</span>
+                <p>{{ item.label }}</p>
+              </div>
+            </div>
+          </div>
+        </section>
       </transition>
     </q-intersection>
-    <q-intersection
-      style="min-height: 500px"
-      class="main-bio-intersection"
-      :threshold="0.1"
-      :root-margin="'50px'"
-    >
+
+    <q-intersection class="summary-section" :threshold="0.15">
       <transition
         appear
         enter-active-class="animated fadeInUp"
         leave-active-class="animated fadeOut"
-        :style="{ animationDuration: '0.6s', animationDelay: '0.1s' }"
+        :style="{ animationDuration: '0.7s', animationDelay: '0.1s' }"
       >
-        <div v-if="showElement">
-          <div
-            class="text-h5 text-weight-bold q-pb-lg section-title projects-title"
-          >
-            Projects
+        <section v-if="showElement" class="summary-grid">
+          <article class="summary-card">
+            <Icon icon="mdi:speedometer" height="28px" />
+            <h2>Performance Mindset</h2>
+            <p>
+              Optimized LINQ-based query performance from more than one minute
+              to around three seconds for academic systems.
+            </p>
+          </article>
+          <article class="summary-card">
+            <Icon icon="mdi:cloud-sync-outline" height="28px" />
+            <h2>Cloud Delivery</h2>
+            <p>
+              Delivered applications with Azure Functions, Azure DevOps, CI/CD,
+              Cosmos DB, and AWS EC2 deployment experience.
+            </p>
+          </article>
+          <article class="summary-card">
+            <Icon icon="mdi:account-group-outline" height="28px" />
+            <h2>Cross-Team Execution</h2>
+            <p>
+              Worked with vendors, government stakeholders, and English-speaking
+              product teams to keep systems stable and production-ready.
+            </p>
+          </article>
+        </section>
+      </transition>
+    </q-intersection>
+
+    <q-intersection class="technology-section" :threshold="0.15">
+      <transition
+        appear
+        enter-active-class="animated fadeInUp"
+        leave-active-class="animated fadeOut"
+        :style="{ animationDuration: '0.7s', animationDelay: '0.15s' }"
+      >
+        <section v-if="showElement" class="technology-grid">
+          <div class="section-copy">
+            <div class="eyebrow">Technical Focus</div>
+            <h2>Strong around enterprise stacks, data, and cloud workflows.</h2>
+            <p>
+              My recent work spans internal warehouse systems, online exam
+              platforms, student career monitoring, legal document management,
+              quick count dashboards, and government workflow applications.
+            </p>
           </div>
-          <div class="flex q-mb-md" style="gap: 20px">
+
+          <div class="tech-panel">
+            <div class="search-section">
+              <q-input
+                dense
+                filled
+                v-model="search"
+                label="Search"
+                placeholder="Angular"
+                @update:model-value="searchTechnologies"
+              />
+              <q-select
+                dense
+                clearable
+                filled
+                v-model="filter"
+                :options="filterType"
+                label="Filter"
+                @update:model-value="filterTechnologies"
+              />
+            </div>
+            <div class="tech-stack">
+              <chip-technology
+                v-for="tech in TechWID"
+                :key="tech.name"
+                :Skill="tech"
+              />
+            </div>
+            <div class="result-count">{{ TechWID.length }} result</div>
+          </div>
+        </section>
+      </transition>
+    </q-intersection>
+
+    <q-intersection class="projects-section" :threshold="0.1">
+      <transition
+        appear
+        enter-active-class="animated fadeInUp"
+        leave-active-class="animated fadeOut"
+        :style="{ animationDuration: '0.7s', animationDelay: '0.2s' }"
+      >
+        <section v-if="showElement">
+          <div class="section-heading">
+            <div>
+              <div class="eyebrow">Selected Work</div>
+              <h2>Projects aligned with the resume</h2>
+            </div>
+            <q-btn
+              class="secondary-action"
+              outline
+              @click="movePage('/projects', this)"
+            >
+              <Icon icon="mdi:arrow-right" height="20px" />
+              <span>See More</span>
+            </q-btn>
+          </div>
+
+          <div class="project-list">
             <projects-card
               v-for="data in dataProjects.slice(0, 3)"
               :key="data.name"
               :Project="data"
             />
           </div>
-          <div style="width: 100%; display: flex; justify-content: center">
-            <q-btn
-              class="btn-primary see-more-btn"
-              @click="movePage('/projects', this)"
-              unelevated
-            >
-              <Icon icon="uiw:more" height="28px" />
-              <div class="text-caption q-pl-sm btn-text">See More</div>
-            </q-btn>
-          </div>
-        </div>
+        </section>
       </transition>
     </q-intersection>
   </q-page>
@@ -281,8 +203,6 @@ export default defineComponent({
   },
   data() {
     return {
-      styleFontTooltip:
-        'background-image: linear-gradient(to bottom right,rgba(59, 246, 134, 1) 40%,rgba(76, 169, 255, 1) 60%);background-clip: text;-webkit-background-clip: text;-webkit-text-fill-color: transparent;',
       search: '',
       filter: '',
       showElement: false,
@@ -290,19 +210,18 @@ export default defineComponent({
   },
   mounted() {
     this.showElement = true;
-    document.getElementById('notification')?.click();
   },
   unmounted() {
     this.showElement = false;
   },
   computed: {
     searchedTechnologies(): Skill[] {
-      return this.TechWID.filter((tech) =>
+      return this.TechWIDOrigin.filter((tech) =>
         tech.name.toLowerCase().includes(this.search.toLowerCase())
       );
     },
     filteredTechnologies(): Skill[] {
-      return this.TechWID.filter(
+      return this.TechWIDOrigin.filter(
         (tech) => tech.type.toLowerCase() === this.filter.toLowerCase()
       );
     },
@@ -316,43 +235,31 @@ export default defineComponent({
       this.TechWID = this.TechWIDOrigin;
       if (this.filter) this.TechWID = this.filteredTechnologies;
       if (!this.search) return;
-      this.TechWID = this.searchedTechnologies;
+      this.TechWID = this.TechWID.filter((tech: Skill) =>
+        tech.name.toLowerCase().includes(this.search.toLowerCase())
+      );
     },
     filterTechnologies() {
       this.TechWID = this.TechWIDOrigin;
       if (this.search) this.TechWID = this.searchedTechnologies;
       if (!this.filter) return;
-      this.TechWID = this.filteredTechnologies;
+      this.TechWID = this.TechWID.filter(
+        (tech: Skill) => tech.type.toLowerCase() === this.filter.toLowerCase()
+      );
     },
   },
   setup() {
-    const biographySkills = [
-      {
-        name: 'ASP.NET',
-        color: '#512BD4',
-        link: 'https://dotnet.microsoft.com/apps/aspnet',
-      },
-      {
-        name: 'React.js',
-        color: '#3b82f6',
-        link: 'https://react.dev/',
-      },
-      {
-        name: 'Vue.js',
-        color: '#41b883',
-        link: 'https://vuejs.org/',
-      },
-      {
-        name: 'Azure',
-        color: '#0089D6',
-        link: 'https://azure.microsoft.com/',
-      },
+    const careerSignals = [
+      { value: '3+', label: 'years building web systems' },
+      { value: '.NET', label: 'enterprise backend focus' },
+      { value: 'Cloud', label: 'Azure and AWS delivery' },
     ];
     const TechWIDOrigin = Skills as Skill[];
     const filterType = ['Language', 'Framework', 'Library', 'Database', 'Tool'];
     const dataProjects = Projects as Project[];
+
     return {
-      biographySkills,
+      careerSignals,
       TechWIDOrigin,
       TechWID: ref(TechWIDOrigin),
       filterType,
@@ -363,593 +270,291 @@ export default defineComponent({
 </script>
 
 <style scoped>
-/* Hero text styling */
-.hero-text {
-  margin: 70px 0;
-  padding-bottom: 6px;
-  grid-column: 1 / span 3;
-  line-height: 1.3;
-  animation: fadeInUp 1.2s ease-out;
+.home-page {
+  height: auto;
+  overflow: hidden;
 }
 
-/* Profile image styling */
-.profile-image-container {
-  border-radius: 50%;
-  width: 200px;
-  height: 200px;
-  background: linear-gradient(
-    135deg,
-    rgba(59, 246, 134, 1) 0%,
-    rgba(76, 169, 255, 1) 100%
-  );
-  padding: 4px;
-  grid-row: 2;
-  grid-column: 1;
-  position: relative;
-  animation: pulse-glow 3s ease-in-out infinite;
-  transition: transform 0.3s ease;
-  display: flex;
+.hero-section,
+.summary-section,
+.technology-section,
+.projects-section {
+  margin: 72px 0;
+}
+
+.hero-grid,
+.technology-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.12fr) minmax(320px, 0.88fr);
+  gap: 36px;
   align-items: center;
-  justify-content: center;
 }
 
-.profile-image-container:hover {
-  transform: scale(1.05) rotate(5deg);
+.hero-copy h1,
+.section-copy h2,
+.section-heading h2 {
+  margin: 0;
+  color: #f8faf8;
+  line-height: 1.05;
+  letter-spacing: 0;
+}
+
+.hero-copy h1 {
+  max-width: 780px;
+  font-size: clamp(42px, 7vw, 76px);
+}
+
+.hero-copy h1 span {
+  display: block;
+  color: #a9b8b5;
+}
+
+.hero-copy p,
+.section-copy p,
+.summary-card p {
+  color: #c9d3d0;
+  line-height: 1.7;
+}
+
+.hero-copy p {
+  max-width: 680px;
+  margin: 24px 0 0;
+  font-size: 17px;
+}
+
+.eyebrow {
+  width: fit-content;
+  margin-bottom: 18px;
+  color: #f4b860;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 32px;
+}
+
+.primary-action,
+.secondary-action {
+  min-height: 46px;
+  border-radius: 8px;
+  gap: 8px;
+  padding: 0 18px;
+  font-weight: 700;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.primary-action {
+  color: #0b1719;
+  background: linear-gradient(135deg, #2dd4bf, #f4b860);
+  box-shadow: 0 18px 34px rgba(45, 212, 191, 0.18);
+}
+
+.secondary-action {
+  color: #e9f4f1;
+  border-color: rgba(233, 244, 241, 0.28);
+}
+
+.profile-panel {
+  position: relative;
+  display: grid;
+  gap: 18px;
+  animation: panel-float 8s ease-in-out infinite;
+}
+
+.profile-frame {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 1;
+  border-radius: 8px;
+  border: 1px solid rgba(233, 244, 241, 0.12);
+  background: linear-gradient(145deg, #173840, #1c4b4d);
+  box-shadow: 0 24px 70px rgba(5, 14, 16, 0.36);
+}
+
+.profile-frame::after {
+  content: '';
+  position: absolute;
+  inset: auto 18px 18px;
+  height: 3px;
+  background: linear-gradient(90deg, #2dd4bf, #f4b860, #ff7a59);
+  border-radius: 8px;
 }
 
 .profile-image {
   width: 100%;
   height: 100%;
-  border-radius: 50%;
   object-fit: cover;
-  object-position: center;
-  background-color: #1a1a2e;
-  border: 3px solid #1a1a2e;
-  display: block;
 }
 
-/* Bio and social cards */
-.bio-card,
-.social-card {
-  grid-row: 2;
-  margin-top: 20px;
-  padding: 20px;
-  border-radius: 16px;
-  background: rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.bio-card:hover,
-.social-card:hover {
-  background: rgba(255, 255, 255, 0.05);
-  border-color: rgba(59, 246, 134, 0.3);
-  transform: translateY(-5px);
-}
-
-.bio-card {
-  grid-column: 2;
-}
-
-.social-card {
-  grid-column: 3;
-}
-
-/* Section titles */
-.section-title {
-  position: relative;
-  display: inline-block;
-  margin-bottom: 10px;
-}
-
-.section-title::after {
-  content: '';
-  position: absolute;
-  bottom: -5px;
-  left: 0;
-  width: 50px;
-  height: 3px;
-  background: linear-gradient(
-    90deg,
-    rgba(59, 246, 134, 1),
-    rgba(76, 169, 255, 1)
-  );
-  border-radius: 2px;
-}
-
-/* Social links */
-.social-links {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 20px;
-  margin-top: 20px;
-  flex-wrap: wrap;
-}
-
-.social-icon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 50px;
-  height: 50px;
-  border-radius: 12px;
-  background: rgba(255, 255, 255, 0.05);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  position: relative;
-  overflow: hidden;
-}
-
-.social-icon::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 0;
-  height: 0;
-  border-radius: 50%;
-  background: rgba(59, 246, 134, 0.2);
-  transition: all 0.5s ease;
-  transform: translate(-50%, -50%);
-}
-
-.social-icon:hover::before {
-  width: 100%;
-  height: 100%;
-  border-radius: 12px;
-}
-
-.social-icon:hover {
-  transform: translateY(-5px) scale(1.1);
-  box-shadow: 0 10px 25px rgba(59, 246, 134, 0.3);
-}
-
-/* Technology section */
-.technology {
-  margin: 70px 0;
+.signal-list,
+.summary-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 40px;
-  align-items: center;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
 }
 
-.what-i-do-section {
+.signal,
+.summary-card,
+.tech-panel {
+  border: 1px solid rgba(233, 244, 241, 0.1);
+  border-radius: 8px;
+  background: rgba(9, 24, 28, 0.7);
+  box-shadow: 0 18px 42px rgba(4, 12, 14, 0.22);
+}
+
+.signal {
+  padding: 18px;
+}
+
+.signal span {
+  display: block;
+  color: #f8faf8;
+  font-size: 22px;
+  font-weight: 800;
+}
+
+.signal p {
+  margin: 6px 0 0;
+  color: #a9b8b5;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.summary-card {
+  padding: 24px;
+  transition: transform 0.28s ease, border-color 0.28s ease,
+    background 0.28s ease;
+}
+
+.summary-card:hover,
+.tech-panel:hover {
+  border-color: rgba(45, 212, 191, 0.32);
+  background: rgba(13, 34, 40, 0.82);
+  transform: translateY(-4px);
+}
+
+.summary-card svg {
+  color: #2dd4bf;
+}
+
+.summary-card h2 {
+  margin: 18px 0 10px;
+  color: #f8faf8;
+  font-size: 21px;
+  line-height: 1.25;
+}
+
+.summary-card p {
+  margin: 0;
+}
+
+.section-copy h2,
+.section-heading h2 {
+  font-size: clamp(30px, 4vw, 48px);
+}
+
+.section-copy p {
+  margin: 20px 0 0;
+  max-width: 620px;
+}
+
+.tech-panel {
   padding: 20px;
-}
-
-.tech-search-card {
-  border-radius: 20px;
-  padding: 10px;
-  background: rgba(255, 255, 255, 0.08) !important;
-  backdrop-filter: blur(15px);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  transition: transform 0.28s ease, border-color 0.28s ease,
+    background 0.28s ease;
 }
 
 .search-section {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 10px;
+  gap: 12px;
+  margin-bottom: 18px;
 }
 
-/* Projects section */
-.projects-title {
-  text-align: left;
-  position: relative;
-  padding-left: 20px;
-}
-
-.projects-title::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 5px;
-  height: 70%;
-  background: linear-gradient(
-    180deg,
-    rgba(59, 246, 134, 1),
-    rgba(76, 169, 255, 1)
-  );
-  border-radius: 3px;
-}
-
-/* Button styling */
-.see-more-btn {
-  background: linear-gradient(
-    135deg,
-    rgba(59, 246, 134, 0.2) 0%,
-    rgba(76, 169, 255, 0.2) 100%
-  );
-  border: 1px solid rgba(59, 246, 134, 0.3);
-  padding: 12px 24px;
-  border-radius: 12px;
+.tech-stack {
   display: flex;
-  align-items: center;
-  gap: 8px;
-  transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
 }
 
-.see-more-btn:hover {
-  background: linear-gradient(
-    135deg,
-    rgba(59, 246, 134, 0.3) 0%,
-    rgba(76, 169, 255, 0.3) 100%
-  );
-  border-color: rgba(59, 246, 134, 0.5);
-  transform: translateY(-2px);
-  box-shadow: 0 10px 30px rgba(59, 246, 134, 0.3);
+.result-count {
+  margin-top: 16px;
+  color: #a9b8b5;
+  font-size: 13px;
 }
 
-.btn-text {
-  text-transform: capitalize;
-  font-size: 14px;
-  font-weight: 500;
+.section-heading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 28px;
 }
 
-/* Glass tooltip */
-.glass-tooltip {
-  background: rgba(50, 52, 67, 0.95) !important;
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+.project-list {
+  display: grid;
+  gap: 22px;
 }
 
-/* Responsive styles */
-@media (max-width: 850px) {
-  .main-bio {
-    grid-template-columns: 180px 50% auto !important;
-  }
-  .main-bio-intersection {
-    min-height: 560px !important;
-  }
-  .second-bio-intersection {
-    min-height: 450px !important;
-  }
-  .profile-image-container {
-    width: 180px;
-    height: 180px;
-  }
-}
-
-@media (max-width: 750px) {
-  .main-bio {
-    grid-template-columns: 180px 40% auto !important;
-  }
-  .main-bio-intersection {
-    min-height: 670px !important;
-  }
-  .profile-image-container {
-    width: 160px;
-    height: 160px;
-  }
-}
-
-@media (max-width: 650px) {
-  .main-bio {
-    grid-template-columns: 1fr 1fr !important;
-  }
-  .bio-card {
-    grid-row: 3 !important;
-    grid-column: 1 / span 2 !important;
-  }
-  .social-card {
-    grid-column: 2 !important;
-  }
-  .main-bio-item-1 {
-    font-size: 36px;
-  }
-  .technology {
-    grid-template-columns: 1fr !important;
-    gap: 20px;
-  }
-  .main-bio-intersection {
-    min-height: 750px !important;
-  }
-  .second-bio-intersection {
-    min-height: 530px !important;
-  }
-}
-
-@media (max-width: 500px) {
-  .main-bio {
-    grid-template-columns: 1fr !important;
-  }
-  .profile-image-container {
-    grid-row: 1 !important;
-    grid-column: 1 / span 3 !important;
-    margin: auto !important;
-    margin-top: 20px !important;
-  }
-  .profile-image-container {
-    width: 150px;
-    height: 150px;
-  }
-  .lets-connect {
-    display: none;
-  }
-  .social-card {
-    grid-row: 2 !important;
-    grid-column: 1 / span 3 !important;
-    margin: auto !important;
-    width: 100%;
-  }
-  .bio-card {
-    grid-row: 4 !important;
-    grid-column: 1 / span 2 !important;
-    text-align: center;
-  }
-  .hero-text {
-    grid-row: 3 !important;
-    grid-column: 1 / span 2 !important;
-    text-align: center;
-    font-size: 32px;
-    margin: 20px 0 !important;
-  }
-  .main-bio-intersection {
-    min-height: 890px !important;
-  }
-  .second-bio-intersection {
-    min-height: 630px !important;
-  }
-  .social-links {
-    justify-content: center;
-  }
-}
-
-/* Enhanced Animations */
-.floating-text {
-  animation: gentle-float 8s ease-in-out infinite;
-}
-
-.typing-animation {
-  animation: typing 2s steps(40, end), blink-caret 0.75s step-end infinite;
-  border-right: 2px solid #3bf686;
-  white-space: nowrap;
-  overflow: hidden;
-}
-
-.pulse-image {
-  animation: gentle-pulse 6s ease-in-out infinite;
-  position: relative;
-}
-
-.rotating-image {
-  transition: transform 0.3s ease;
-}
-
-.rotating-image:hover {
-  transform: scale(1.05);
-}
-
-.image-glow {
-  position: absolute;
-  top: -10px;
-  left: -10px;
-  right: -10px;
-  bottom: -10px;
-  background: linear-gradient(45deg, #3bf686, #4ca9ff);
-  border-radius: 50%;
-  opacity: 0;
-  animation: gentle-glow 4s ease-in-out infinite;
-  z-index: -1;
-}
-
-.floating-card {
-  animation: gentle-float-card 10s ease-in-out infinite;
-}
-
-.slide-in-text {
-  animation: slideInFromLeft 1s ease-out;
-}
-
-.fade-in-text {
-  animation: fadeInUp 1.5s ease-out 0.5s both;
-}
-
-.skill-link {
-  transition: all 0.3s ease;
-  position: relative;
-}
-
-.skill-link:hover {
-  transform: translateY(-2px);
-  text-shadow: 0 0 10px currentColor;
-}
-
-.bounce-in-text {
-  animation: gentle-bounce 1.2s ease-out;
-}
-
-.social-icon-animated {
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  position: relative;
-}
-
-.social-icon-animated:hover {
-  transform: translateY(-3px) scale(1.05);
-  filter: drop-shadow(0 8px 16px rgba(59, 246, 134, 0.2));
-}
-
-.social-icon-animated::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 0;
-  height: 0;
-  background: radial-gradient(
-    circle,
-    rgba(59, 246, 134, 0.3) 0%,
-    transparent 70%
-  );
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
-  transition: all 0.3s ease;
-  z-index: -1;
-}
-
-.social-icon-animated:hover::before {
-  width: 50px;
-  height: 50px;
-}
-
-.wave-animation {
-  animation: gentle-wave 12s ease-in-out infinite;
-}
-
-.slide-in-section {
-  animation: slideInFromBottom 1.5s ease-out;
-}
-
-.typewriter-text {
-  animation: typewriter 2s steps(20, end) 0.5s both;
-  border-right: 2px solid #3bf686;
-  white-space: nowrap;
-  overflow: hidden;
-}
-
-.fade-in-paragraph {
-  animation: fadeInUp 2s ease-out 1s both;
-}
-
-/* Keyframe Animations */
-@keyframes gentle-float {
+@keyframes panel-float {
   0%,
   100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-3px);
-  }
-}
-
-@keyframes typing {
-  from {
-    width: 0;
-  }
-  to {
-    width: 100%;
-  }
-}
-
-@keyframes blink-caret {
-  from,
-  to {
-    border-color: transparent;
-  }
-  50% {
-    border-color: #3bf686;
-  }
-}
-
-@keyframes gentle-pulse {
-  0%,
-  100% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.02);
-  }
-}
-
-@keyframes rotate {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@keyframes gentle-glow {
-  0%,
-  100% {
-    opacity: 0;
-    transform: scale(0.9);
-  }
-  50% {
-    opacity: 0.2;
-    transform: scale(1.05);
-  }
-}
-
-@keyframes gentle-float-card {
-  0%,
-  100% {
-    transform: translateY(0px) rotate(0deg);
-  }
-  50% {
-    transform: translateY(-2px) rotate(0deg);
-  }
-}
-
-@keyframes slideInFromLeft {
-  from {
-    transform: translateX(-100px);
-    opacity: 0;
-  }
-  to {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
-
-@keyframes fadeInUp {
-  from {
-    transform: translateY(30px);
-    opacity: 0;
-  }
-  to {
     transform: translateY(0);
-    opacity: 1;
-  }
-}
-
-@keyframes gentle-bounce {
-  0% {
-    transform: scale(0.8);
-    opacity: 0;
   }
   50% {
-    transform: scale(1.02);
-  }
-  100% {
-    transform: scale(1);
-    opacity: 1;
+    transform: translateY(-8px);
   }
 }
 
-@keyframes gentle-wave {
-  0%,
-  100% {
-    transform: translateY(0px);
+@media (max-width: 900px) {
+  .hero-grid,
+  .technology-grid {
+    grid-template-columns: 1fr;
   }
-  50% {
-    transform: translateY(-2px);
+
+  .profile-panel {
+    max-width: 520px;
+  }
+
+  .summary-grid {
+    grid-template-columns: 1fr;
   }
 }
 
-@keyframes slideInFromBottom {
-  from {
-    transform: translateY(50px);
-    opacity: 0;
+@media (max-width: 600px) {
+  .hero-section,
+  .summary-section,
+  .technology-section,
+  .projects-section {
+    margin: 48px 0;
   }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
 
-@keyframes typewriter {
-  from {
-    width: 0;
+  .hero-copy h1 {
+    font-size: 40px;
   }
-  to {
+
+  .hero-actions,
+  .section-heading {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .primary-action,
+  .secondary-action {
     width: 100%;
+  }
+
+  .signal-list,
+  .search-section {
+    grid-template-columns: 1fr;
   }
 }
 </style>

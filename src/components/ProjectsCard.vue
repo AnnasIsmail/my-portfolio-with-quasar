@@ -1,8 +1,9 @@
 <template>
   <div class="project-card glass-card">
     <div class="project-image-section">
-      <div class="project-actions">
+      <div v-if="Project.urlGithub || Project.url" class="project-actions">
         <q-btn
+          v-if="Project.urlGithub"
           class="action-btn"
           :href="Project.urlGithub"
           target="_blank"
@@ -19,6 +20,7 @@
           </q-tooltip>
         </q-btn>
         <q-btn
+          v-if="Project.url"
           class="action-btn"
           :href="Project.url"
           target="_blank"
@@ -90,7 +92,7 @@ export default defineComponent({
   data() {
     return {
       styleFontTooltip:
-        'background-image: linear-gradient(to bottom right,rgba(59, 246, 134, 1) 40%,rgba(76, 169, 255, 1) 60%);background-clip: text;-webkit-background-clip: text;-webkit-text-fill-color: transparent;',
+        'background-image: linear-gradient(to bottom right,#2dd4bf 40%,#f4b860 60%);background-clip: text;-webkit-background-clip: text;-webkit-text-fill-color: transparent;',
       Skills,
     };
   },
@@ -113,21 +115,21 @@ export default defineComponent({
   min-height: 150px;
   max-height: 300px;
   overflow: hidden;
-  border-radius: 20px;
+  border-radius: 8px;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
 }
 
 .project-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 20px 60px rgba(59, 246, 134, 0.2);
+  transform: translateY(-6px);
+  box-shadow: 0 18px 48px rgba(1, 166, 147, 0.18);
 }
 
 .project-image-section {
   background: linear-gradient(
     135deg,
-    rgba(50, 52, 67, 0.8) 0%,
-    rgba(30, 32, 47, 0.9) 100%
+    rgba(13, 34, 43, 0.9) 0%,
+    rgba(26, 52, 58, 0.95) 100%
   );
   display: flex;
   align-items: center;
@@ -157,8 +159,8 @@ export default defineComponent({
 }
 
 .action-btn:hover {
-  background: rgba(59, 246, 134, 0.2);
-  border-color: rgba(59, 246, 134, 0.5);
+  background: rgba(45, 212, 191, 0.18);
+  border-color: rgba(45, 212, 191, 0.45);
   transform: scale(1.1);
 }
 
@@ -167,7 +169,7 @@ export default defineComponent({
   width: 100%;
   flex: 1;
   cursor: pointer;
-  border-radius: 12px;
+  border-radius: 8px;
   overflow: hidden;
 }
 
@@ -211,8 +213,8 @@ export default defineComponent({
   font-size: 12px;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 1px;
-  color: rgba(59, 246, 134, 0.8);
+  letter-spacing: 0;
+  color: #f4b860;
 }
 
 .project-title {
@@ -228,11 +230,7 @@ export default defineComponent({
 }
 
 .project-title:hover {
-  background: linear-gradient(
-    135deg,
-    rgba(59, 246, 134, 1) 0%,
-    rgba(76, 169, 255, 1) 100%
-  );
+  background: linear-gradient(135deg, #2dd4bf 0%, #f4b860 100%);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;

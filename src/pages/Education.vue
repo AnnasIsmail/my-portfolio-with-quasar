@@ -122,7 +122,7 @@
                       Multidimensional Approach"
                     </div>
                     <div class="publication-status">
-                      Scopus Q3–indexed Scientific Article
+                      Scopus Q3-indexed Scientific Article
                     </div>
                   </div>
                   <div class="publication-details">
@@ -190,7 +190,7 @@ export default defineComponent({
         description:
           'Pursued advanced studies in computer science with specialized focus on artificial intelligence, cloud computing, and decision modeling systems.',
         achievements: [
-          'Published a Scopus Q3–indexed scientific article titled "Decision Model for Evaluating the Readiness of the Indonesian Capital Relocation to Nusantara Based on a Multidimensional Approach"',
+          'Published a Scopus Q3-indexed scientific article titled "Decision Model for Evaluating the Readiness of the Indonesian Capital Relocation to Nusantara Based on a Multidimensional Approach"',
           'Achieved Alibaba Cloud Certified Associate (ACA) certification in Cloud Computing',
           'Applied advanced research methodologies including Decision Model, Expert Judgement, Fuzzy Logic, and BERT techniques',
         ],
@@ -207,7 +207,7 @@ export default defineComponent({
         description:
           'Completed comprehensive studies in information systems with extensive practical experience in web development and system analysis.',
         achievements: [
-          'Successfully completed the State-Owned Enterprise Talent Generation Internship Program (MAGENTA BUMN) at PT Telekomunikasi Indonesia (Persero) Tbk as a Web Developer (March 1, 2023 – August 31, 2023) with an A grade',
+          'Successfully completed the State-Owned Enterprise Talent Generation Internship Program (MAGENTA BUMN) at PT Telekomunikasi Indonesia (Persero) Tbk as a Web Developer (March 1, 2023 - August 31, 2023) with an A grade',
           'Contributed to developing a comprehensive web-based system for managing the creation and revision of legal regulations using Vue.js, React.js, CodeIgniter, MySQL, Git, Minio, Redis, Quasar Framework, and Elasticsearch',
           'Conducted an advanced Sentiment Analysis study on Google Play Store application reviews using the Naive Bayes algorithm as part of the final thesis project',
         ],
@@ -260,11 +260,7 @@ export default defineComponent({
   transform: translateX(-50%);
   width: 80px;
   height: 4px;
-  background: linear-gradient(
-    90deg,
-    rgba(59, 246, 134, 1),
-    rgba(76, 169, 255, 1)
-  );
+  background: linear-gradient(90deg, #2dd4bf, #f4b860);
   border-radius: 2px;
 }
 
@@ -285,7 +281,7 @@ export default defineComponent({
 .certifications-section,
 .research-section {
   background: rgba(255, 255, 255, 0.02);
-  border-radius: 20px;
+  border-radius: 8px;
   padding: 40px;
   border: 1px solid rgba(255, 255, 255, 0.05);
 }
@@ -299,7 +295,7 @@ export default defineComponent({
   color: #ffffff;
   margin-bottom: 30px;
   padding-bottom: 15px;
-  border-bottom: 2px solid rgba(59, 246, 134, 0.3);
+  border-bottom: 2px solid rgba(45, 212, 191, 0.3);
 }
 
 .education-timeline {
@@ -321,8 +317,8 @@ export default defineComponent({
   width: 2px;
   background: linear-gradient(
     180deg,
-    rgba(59, 246, 134, 0.3),
-    rgba(76, 169, 255, 0.3)
+    rgba(45, 212, 191, 0.3),
+    rgba(244, 184, 96, 0.3)
   );
 }
 
@@ -330,7 +326,7 @@ export default defineComponent({
   background: rgba(255, 255, 255, 0.03);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 16px;
+  border-radius: 8px;
   padding: 30px;
   margin-left: 60px;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -344,20 +340,16 @@ export default defineComponent({
   top: 30px;
   width: 20px;
   height: 20px;
-  background: linear-gradient(
-    135deg,
-    rgba(59, 246, 134, 1),
-    rgba(76, 169, 255, 1)
-  );
-  border-radius: 50%;
+  background: linear-gradient(135deg, #2dd4bf, #f4b860);
+  border-radius: 8px;
   border: 4px solid #1a1a2e;
 }
 
 .education-card:hover {
   background: rgba(255, 255, 255, 0.05);
-  border-color: rgba(59, 246, 134, 0.3);
+  border-color: rgba(45, 212, 191, 0.3);
   transform: translateY(-5px);
-  box-shadow: 0 20px 40px rgba(59, 246, 134, 0.1);
+  box-shadow: 0 20px 40px rgba(45, 212, 191, 0.1);
 }
 
 .education-header {
@@ -381,7 +373,7 @@ export default defineComponent({
 .university {
   font-size: 1.1rem;
   font-weight: 600;
-  color: rgba(59, 246, 134, 1);
+  color: #2dd4bf;
   margin-bottom: 8px;
 }
 
@@ -394,7 +386,7 @@ export default defineComponent({
 }
 
 .gpa {
-  color: rgba(76, 169, 255, 1);
+  color: #f4b860;
   font-weight: 600;
 }
 
@@ -404,9 +396,9 @@ export default defineComponent({
   justify-content: center;
   width: 80px;
   height: 80px;
-  background: rgba(59, 246, 134, 0.1);
-  border-radius: 16px;
-  border: 1px solid rgba(59, 246, 134, 0.2);
+  background: rgba(45, 212, 191, 0.1);
+  border-radius: 8px;
+  border: 1px solid rgba(45, 212, 191, 0.2);
 }
 
 .education-content-details {
@@ -446,16 +438,16 @@ export default defineComponent({
   background: rgba(255, 255, 255, 0.03);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 16px;
+  border-radius: 8px;
   padding: 25px;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .certification-card:hover {
   background: rgba(255, 255, 255, 0.05);
-  border-color: rgba(59, 246, 134, 0.3);
+  border-color: rgba(45, 212, 191, 0.3);
   transform: translateY(-5px);
-  box-shadow: 0 15px 30px rgba(59, 246, 134, 0.1);
+  box-shadow: 0 15px 30px rgba(45, 212, 191, 0.1);
 }
 
 .cert-header {
@@ -471,9 +463,9 @@ export default defineComponent({
   justify-content: center;
   width: 60px;
   height: 60px;
-  background: rgba(59, 246, 134, 0.1);
-  border-radius: 12px;
-  border: 1px solid rgba(59, 246, 134, 0.2);
+  background: rgba(45, 212, 191, 0.1);
+  border-radius: 8px;
+  border: 1px solid rgba(45, 212, 191, 0.2);
 }
 
 .cert-info {
@@ -489,7 +481,7 @@ export default defineComponent({
 
 .cert-issuer {
   font-size: 0.9rem;
-  color: rgba(59, 246, 134, 1);
+  color: #2dd4bf;
   margin-bottom: 5px;
 }
 
@@ -513,16 +505,16 @@ export default defineComponent({
   background: rgba(255, 255, 255, 0.03);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 16px;
+  border-radius: 8px;
   padding: 30px;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .publication-card:hover {
   background: rgba(255, 255, 255, 0.05);
-  border-color: rgba(59, 246, 134, 0.3);
+  border-color: rgba(45, 212, 191, 0.3);
   transform: translateY(-5px);
-  box-shadow: 0 20px 40px rgba(59, 246, 134, 0.1);
+  box-shadow: 0 20px 40px rgba(45, 212, 191, 0.1);
 }
 
 .publication-header {
@@ -539,7 +531,7 @@ export default defineComponent({
 
 .publication-status {
   font-size: 0.9rem;
-  color: rgba(59, 246, 134, 1);
+  color: #2dd4bf;
   font-weight: 600;
 }
 

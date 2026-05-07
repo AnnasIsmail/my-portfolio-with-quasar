@@ -23,7 +23,7 @@
               Project.url
             }}</a>
           </div>
-          <div>
+          <div v-if="Project.urlGithub">
             <span class="text-body1"> Link Source Code: </span>
             <a :href="Project.urlGithub" style="color: white" target="_blank">{{
               Project.urlGithub
@@ -64,7 +64,7 @@ export default defineComponent({
       id: this.$route.params.id,
       Project: {} as Project,
       styleFontTooltip:
-        'background-image: linear-gradient(to bottom right,rgba(59, 246, 134, 1) 40%,rgba(76, 169, 255, 1) 60%);background-clip: text;-webkit-background-clip: text;-webkit-text-fill-color: transparent;',
+        'background-image: linear-gradient(to bottom right,#2dd4bf 40%,#f4b860 60%);background-clip: text;-webkit-background-clip: text;-webkit-text-fill-color: transparent;',
       search: '',
       filter: '',
       showElement: false,

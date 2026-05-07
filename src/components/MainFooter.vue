@@ -16,7 +16,7 @@
         ></span
       >
     </div>
-    <div class="footer-year">© {{ currentYear }} All rights reserved</div>
+    <div class="footer-year">(c) {{ currentYear }} All rights reserved</div>
   </div>
 </template>
 
@@ -47,12 +47,12 @@ export default defineComponent({
   justify-content: center;
   background: linear-gradient(
     135deg,
-    rgba(50, 52, 67, 0.9) 0%,
-    rgba(30, 32, 47, 0.95) 100%
+    rgba(9, 24, 28, 0.94) 0%,
+    rgba(13, 34, 40, 0.98) 100%
   );
   backdrop-filter: blur(10px);
   padding: 25px 20px;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 1px solid rgba(233, 244, 241, 0.1);
   gap: 8px;
   position: relative;
   overflow: hidden;
@@ -68,8 +68,8 @@ export default defineComponent({
   background: linear-gradient(
     90deg,
     transparent,
-    rgba(59, 246, 134, 0.5),
-    rgba(76, 169, 255, 0.5),
+    rgba(45, 212, 191, 0.5),
+    rgba(244, 184, 96, 0.5),
     transparent
   );
 }
@@ -81,7 +81,7 @@ export default defineComponent({
   font-size: 14px;
   color: #d1d1d1;
   font-weight: 400;
-  letter-spacing: 0.5px;
+  letter-spacing: 0;
 }
 
 .heart-icon {
@@ -106,7 +106,7 @@ export default defineComponent({
 
 .footer-name {
   font-weight: 700;
-  letter-spacing: 0.5px;
+  letter-spacing: 0;
   transition: all 0.3s ease;
   cursor: default;
 }
@@ -137,7 +137,7 @@ export default defineComponent({
 }
 
 .contact-item:hover {
-  color: rgba(59, 246, 134, 1);
+  color: #2dd4bf;
   transform: translateY(-2px);
 }
 

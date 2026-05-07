@@ -33,9 +33,8 @@ export default defineComponent({
 <style scoped>
 .bg {
   font-family: 'Inter', sans-serif;
-  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
-  background-size: 400% 400%;
-  animation: gradient-shift 15s ease infinite;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #071113 0%, #0f2428 48%, #1f3431 100%);
   position: relative;
   overflow: hidden;
 }
@@ -43,31 +42,16 @@ export default defineComponent({
 .bg::before {
   content: '';
   position: fixed;
-  width: 200%;
-  height: 200%;
-  top: -50%;
-  left: -50%;
+  inset: 0;
   z-index: 0;
-  background: radial-gradient(
-      circle,
-      rgba(59, 246, 134, 0.05) 0%,
-      transparent 50%
+  pointer-events: none;
+  background-image: linear-gradient(
+      rgba(233, 244, 241, 0.035) 1px,
+      transparent 1px
     ),
-    radial-gradient(
-      circle at 80% 80%,
-      rgba(76, 169, 255, 0.05) 0%,
-      transparent 50%
-    );
-  animation: rotate 30s linear infinite;
-}
-
-@keyframes rotate {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
+    linear-gradient(90deg, rgba(233, 244, 241, 0.035) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.9), transparent 80%);
 }
 
 .bg > * {
