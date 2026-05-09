@@ -1,60 +1,95 @@
 <template>
-  <div class="main-footer">
-    <div class="footer-contact">
-      <a href="mailto:annasismailmuhammad@gmail.com" class="contact-item">
-        <Icon icon="ic:baseline-email" width="18px" />
-        <span>annasismailmuhammad@gmail.com</span>
-      </a>
+  <footer class="main-footer">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <span class="logo-mark">A</span>
+          <div>
+            <div class="brand-name gradient-text">Annas Ismail Muhammad</div>
+            <div class="brand-tag">Full Stack Developer in Jakarta, ID</div>
+          </div>
+        </div>
+
+        <div class="footer-links">
+          <a
+            v-for="item in socials"
+            :key="item.label"
+            :href="item.href"
+            :target="item.external ? '_blank' : '_self'"
+            :rel="item.external ? 'noopener noreferrer' : undefined"
+            class="footer-link"
+            :aria-label="item.label"
+          >
+            <Icon :icon="item.icon" width="18px" />
+            <span>{{ item.label }}</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-divider" aria-hidden="true"></div>
+
+      <div class="footer-bottom">
+        <div class="made-with">
+          <span>Crafted with</span>
+          <Icon icon="mdi:heart" width="14px" class="heart-icon" />
+          <span>using Vue and Quasar</span>
+        </div>
+        <div class="copyright">
+          (c) {{ currentYear }} Annas Ismail Muhammad. All rights reserved.
+        </div>
+      </div>
     </div>
-    <div class="footer-content">
-      <span>Made with </span>
-      <Icon icon="mdi:love" width="24px" class="heart-icon" />
-      <span
-        >by
-        <span class="gradient-text footer-name"
-          >Annas Ismail Muhammad</span
-        ></span
-      >
-    </div>
-    <div class="footer-year">(c) {{ currentYear }} All rights reserved</div>
-  </div>
+  </footer>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { computed, defineComponent } from 'vue';
 import { Icon } from '@iconify/vue';
 
 export default defineComponent({
   name: 'MainFooter',
-  components: {
-    Icon,
-  },
-  computed: {
-    currentYear() {
-      return new Date().getFullYear();
-    },
+  components: { Icon },
+  setup() {
+    const currentYear = computed(() => new Date().getFullYear());
+    const socials = [
+      {
+        label: 'Email',
+        href: 'mailto:annasismailmuhammad@gmail.com',
+        icon: 'mdi:email-outline',
+        external: false,
+      },
+      {
+        label: 'GitHub',
+        href: 'https://github.com/AnnasIsmail',
+        icon: 'mdi:github',
+        external: true,
+      },
+      {
+        label: 'LinkedIn',
+        href: 'https://www.linkedin.com/in/annasismail/',
+        icon: 'mdi:linkedin',
+        external: true,
+      },
+    ];
+    return { currentYear, socials };
   },
 });
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+@import '../css/tokens';
+
 .main-footer {
-  width: 100%;
-  min-height: 80px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(
-    135deg,
-    rgba(9, 24, 28, 0.94) 0%,
-    rgba(13, 34, 40, 0.98) 100%
-  );
-  backdrop-filter: blur(10px);
-  padding: 25px 20px;
-  border-top: 1px solid rgba(233, 244, 241, 0.1);
-  gap: 8px;
   position: relative;
+  background: linear-gradient(
+    180deg,
+    rgba(7, 17, 19, 0) 0%,
+    rgba(7, 17, 19, 0.85) 30%,
+    rgba(13, 34, 40, 0.96) 100%
+  );
+  backdrop-filter: blur(12px);
+  border-top: 1px solid $border-subtle;
+  padding: 36px 24px 28px;
   overflow: hidden;
 }
 
@@ -64,104 +99,134 @@ export default defineComponent({
   top: 0;
   left: 0;
   right: 0;
-  height: 2px;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(45, 212, 191, 0.5),
-    rgba(244, 184, 96, 0.5),
-    transparent
-  );
+  height: 1px;
+  background: linear-gradient(90deg, transparent, $brand-teal, $brand-amber, transparent);
+  opacity: 0.45;
 }
 
-.footer-content {
+.footer-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 22px;
+}
+
+.footer-brand {
   display: flex;
   align-items: center;
+  gap: 14px;
+}
+
+.logo-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: $r-md;
+  background: $grad-brand;
+  color: #08171a;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 800;
+  font-size: 18px;
+  box-shadow: 0 8px 22px rgba(45, 212, 191, 0.30);
+}
+
+.brand-name {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.brand-tag {
+  margin-top: 2px;
+  color: $text-muted;
+  font-size: 12px;
+}
+
+.footer-links {
+  display: flex;
   gap: 8px;
-  font-size: 14px;
-  color: #d1d1d1;
-  font-weight: 400;
-  letter-spacing: 0;
+  flex-wrap: wrap;
+}
+
+.footer-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 14px;
+  color: $text-base;
+  font-size: 13px;
+  font-weight: 500;
+  border-radius: $r-md;
+  border: 1px solid $border-subtle;
+  background: $surface-glass;
+  text-decoration: none;
+  transition: all 0.3s $ease-emph;
+}
+
+.footer-link:hover {
+  color: $text-strong;
+  border-color: $border-accent;
+  background: rgba(45, 212, 191, 0.10);
+  transform: translateY(-2px);
+}
+
+.footer-divider {
+  height: 1px;
+  margin: 22px 0 18px;
+  background: linear-gradient(90deg, transparent, $border-subtle, transparent);
+}
+
+.footer-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  color: $text-muted;
+  font-size: 12px;
+}
+
+.made-with {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
 }
 
 .heart-icon {
   color: #ff6b9d;
-  animation: heartbeat 1.5s ease-in-out infinite;
+  animation: heartbeat 1.6s ease-in-out infinite;
 }
 
 @keyframes heartbeat {
-  0%,
-  100% {
-    transform: scale(1);
-  }
-  10%,
-  30% {
-    transform: scale(1.1);
-  }
-  20%,
-  40% {
-    transform: scale(1);
-  }
+  0%, 100% { transform: scale(1); }
+  20%, 60% { transform: scale(1.18); }
+  40%, 80% { transform: scale(0.95); }
 }
 
-.footer-name {
-  font-weight: 700;
-  letter-spacing: 0;
-  transition: all 0.3s ease;
-  cursor: default;
+.copyright {
+  color: $text-soft;
+  font-size: 11.5px;
 }
 
-.footer-year {
-  font-size: 12px;
-  color: rgba(255, 255, 255, 0.5);
-  font-weight: 300;
-}
-
-.footer-contact {
-  display: flex;
-  gap: 20px;
-  margin-bottom: 15px;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-}
-
-.contact-item {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  color: #d1d1d1;
-  font-size: 13px;
-  text-decoration: none;
-  transition: all 0.3s ease;
-}
-
-.contact-item:hover {
-  color: #2dd4bf;
-  transform: translateY(-2px);
-}
-
-@media (max-width: 768px) {
-  .footer-contact {
+@media (max-width: $bp-sm) {
+  .footer-top {
     flex-direction: column;
-    gap: 10px;
-  }
-}
-
-@media (max-width: 500px) {
-  .footer-content {
-    font-size: 12px;
-    flex-wrap: wrap;
-    justify-content: center;
-    text-align: center;
+    align-items: flex-start;
   }
 
-  .footer-year {
-    font-size: 11px;
-  }
-
-  .contact-item {
-    font-size: 11px;
+  .footer-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
   }
 }
 </style>

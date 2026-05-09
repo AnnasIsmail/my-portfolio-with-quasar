@@ -144,8 +144,8 @@ module.exports = configure(function (ctx) {
         description: '',
         display: 'standalone',
         orientation: 'portrait',
-        background_color: '#ffffff',
-        theme_color: '#027be3',
+        background_color: '#071113',
+        theme_color: '#2dd4bf',
         icons: [
           {
             src: 'icons/icon-128x128.png',

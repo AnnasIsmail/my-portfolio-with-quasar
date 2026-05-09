@@ -1,137 +1,113 @@
 <template>
-  <q-page style="height: auto; overflow: hidden">
-    <input type="hidden" id="move-page" @click="movePage" />
-    <q-intersection
-      style="min-height: 500px; padding-top: 30px"
-      class="main-bio-intersection"
-      :threshold="0.1"
-      :root-margin="'50px'"
-    >
-      <transition
-        appear
-        enter-active-class="animated fadeInUp"
-        leave-active-class="animated fadeOut"
-        :style="{ animationDuration: '0.6s', animationDelay: '0.1s' }"
+  <q-page class="projects-page">
+    <header class="page-header" data-reveal>
+      <div class="eyebrow">Portfolio</div>
+      <h1 class="section-title">
+        <span class="gradient-text">My Projects</span>
+      </h1>
+      <p class="page-description">
+        A comprehensive showcase of my professional enterprise projects and
+        personal development initiatives.
+      </p>
+    </header>
+
+    <div class="project-categories">
+      <section
+        v-for="(group, gIdx) in groups"
+        :key="group.title"
+        class="category-section"
+        data-reveal
+        :data-reveal-delay="gIdx + 1"
       >
-        <div v-if="showElement">
-          <div class="page-header">
-            <div class="text-h3 text-weight-bold section-title">
-              <span class="gradient-text">My Projects</span>
-            </div>
-            <div class="text-body1 text-weight-regular page-description">
-              A comprehensive showcase of my professional enterprise projects
-              and personal development initiatives
-            </div>
-          </div>
-
-          <!-- Project Categories -->
-          <div class="project-categories">
-            <div class="category-section">
-              <div class="category-header">
-                <Icon icon="mdi:briefcase" width="24px" />
-                <span>Professional Projects</span>
-              </div>
-              <div class="projects-grid">
-                <projects-card
-                  v-for="(data, index) in professionalProjects"
-                  :key="data.name"
-                  :Project="data"
-                  :style="{ animationDelay: `${0.05 * index}s` }"
-                  class="project-item"
-                />
-              </div>
-            </div>
-
-            <div class="category-section">
-              <div class="category-header">
-                <Icon icon="mdi:code-tags" width="24px" />
-                <span>Personal Projects</span>
-              </div>
-              <div class="projects-grid">
-                <projects-card
-                  v-for="(data, index) in personalProjects"
-                  :key="data.name"
-                  :Project="data"
-                  :style="{ animationDelay: `${0.05 * index}s` }"
-                  class="project-item"
-                />
-              </div>
-            </div>
-          </div>
+        <div class="category-header">
+          <Icon :icon="group.icon" width="22px" />
+          <span>{{ group.title }}</span>
+          <span class="count-badge">{{ group.items.length }}</span>
         </div>
-      </transition>
-    </q-intersection>
+        <div class="projects-grid">
+          <projects-card
+            v-for="(data, idx) in group.items"
+            :key="data.id"
+            :Project="data"
+            data-reveal
+            :data-reveal-delay="(idx % 4) + 1"
+          />
+        </div>
+      </section>
+    </div>
   </q-page>
 </template>
 
 <script lang="ts">
-import Projects from 'src/data/Projects';
-import { defineComponent } from 'vue';
-import ProjectsCard from '../components/ProjectsCard.vue';
-import { Project } from '../components/models';
+import { computed, defineComponent } from 'vue';
 import { Icon } from '@iconify/vue';
+import ProjectsCard from '../components/ProjectsCard.vue';
+import Projects from '../data/Projects';
+import type { Project } from '../components/models';
 
 export default defineComponent({
   name: 'ProjectsPage',
-  components: {
-    ProjectsCard,
-    Icon,
-  },
-  data() {
-    return {
-      styleFontTooltip:
-        'background-image: linear-gradient(to bottom right,#2dd4bf 40%,#f4b860 60%);background-clip: text;-webkit-background-clip: text;-webkit-text-fill-color: transparent;',
-      search: '',
-      filter: '',
-      showElement: false,
-    };
-  },
-  mounted() {
-    this.showElement = true;
-  },
-  unmounted() {
-    this.showElement = false;
-  },
-  methods: {
-    movePage() {
-      this.showElement = false;
-    },
-  },
+  components: { ProjectsCard, Icon },
   setup() {
-    const dataProjects = Projects as Project[];
-    const personalProjectNames = ['GCONN', 'Account Nguk', 'My Portfolio'];
+    const personalProjectNames = [
+      'CPNS Tryouts',
+      'GCONN',
+      'Account Nguk',
+      'My Portfolio',
+    ];
+    const data = Projects as Project[];
 
-    const professionalProjects = dataProjects.filter(
-      (project) =>
-        !personalProjectNames.includes(project.name) &&
-        (project.type === 'Enterprise Application' ||
-          project.type === 'Full-Stack Development' ||
-          project.type === 'Web Development')
-    );
+    const groups = computed(() => [
+      {
+        title: 'Professional Projects',
+        icon: 'mdi:briefcase-variant-outline',
+        items: data.filter((p) => !personalProjectNames.includes(p.name)),
+      },
+      {
+        title: 'Personal Projects',
+        icon: 'mdi:code-tags',
+        items: data.filter((p) => personalProjectNames.includes(p.name)),
+      },
+    ]);
 
-    const personalProjects = dataProjects.filter((project) =>
-      personalProjectNames.includes(project.name)
-    );
-
-    return {
-      dataProjects,
-      professionalProjects,
-      personalProjects,
-    };
+    return { groups };
   },
 });
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+@import '../css/tokens';
+
+.projects-page {
+  height: auto;
+  overflow: visible;
+  padding-top: 36px;
+}
+
 .page-header {
   text-align: center;
-  margin-bottom: 60px;
+  margin-bottom: 56px;
+}
+
+.eyebrow {
+  display: inline-block;
+  padding: 4px 14px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: $brand-amber;
+  background: rgba(244, 184, 96, 0.10);
+  border: 1px solid rgba(244, 184, 96, 0.24);
+  border-radius: $r-pill;
+  margin-bottom: 18px;
 }
 
 .section-title {
   position: relative;
   display: inline-block;
-  margin-bottom: 20px;
+  margin: 0 0 16px;
+  font-size: clamp(34px, 5vw, 52px);
 }
 
 .section-title::after {
@@ -142,77 +118,80 @@ export default defineComponent({
   transform: translateX(-50%);
   width: 80px;
   height: 4px;
-  background: linear-gradient(90deg, #2dd4bf, #f4b860);
-  border-radius: 2px;
+  background: $grad-brand;
+  border-radius: $r-pill;
 }
 
 .page-description {
-  color: #d6d6d6;
-  max-width: 600px;
-  margin: 0 auto;
-  line-height: 1.6;
+  color: $text-base;
+  max-width: 620px;
+  margin: 24px auto 0;
+  line-height: 1.7;
+  font-size: 15px;
 }
 
 .project-categories {
   display: flex;
   flex-direction: column;
-  gap: 60px;
+  gap: 48px;
 }
 
 .category-section {
-  background: rgba(255, 255, 255, 0.02);
-  border-radius: 8px;
-  padding: 40px;
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: $surface-glass;
+  border: 1px solid $border-subtle;
+  border-radius: $r-lg;
+  padding: 36px;
+  backdrop-filter: blur(10px);
 }
 
 .category-header {
   display: flex;
   align-items: center;
   gap: 12px;
-  font-size: 1.3rem;
+  font-size: 1.1rem;
   font-weight: 700;
-  color: #ffffff;
-  margin-bottom: 30px;
-  padding-bottom: 15px;
-  border-bottom: 2px solid rgba(45, 212, 191, 0.3);
+  color: $text-strong;
+  margin-bottom: 24px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid $border-subtle;
+}
+
+.category-header :deep(svg),
+.category-header > svg {
+  color: $brand-teal;
+}
+
+.count-badge {
+  margin-left: auto;
+  padding: 3px 10px;
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: $brand-teal;
+  background: rgba(45, 212, 191, 0.12);
+  border: 1px solid rgba(45, 212, 191, 0.28);
+  border-radius: $r-pill;
 }
 
 .projects-grid {
   display: flex;
   flex-direction: column;
-  gap: 30px;
-  margin-bottom: 40px;
+  gap: 22px;
 }
 
-.project-item {
-  animation: fadeInUp 0.6s ease-out backwards;
-}
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+@media (max-width: $bp-md) {
+  .category-section {
+    padding: 26px;
   }
 }
 
-@media (max-width: 768px) {
-  .project-categories {
-    gap: 40px;
+@media (max-width: $bp-sm) {
+  .projects-page {
+    padding-top: 20px;
   }
 
   .category-section {
-    padding: 25px;
-  }
-}
-
-@media (max-width: 600px) {
-  .projects-grid {
-    gap: 20px;
+    padding: 22px;
   }
 }
 </style>

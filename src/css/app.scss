@@ -1,13 +1,27 @@
-// app global css in SCSS form
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+// ---------------------------------------------------------------------
+// app global styles
+// ---------------------------------------------------------------------
+@import './tokens';
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap');
 
+// ---------------------------------------------------------------------
+// Base
+// ---------------------------------------------------------------------
 * {
   scroll-behavior: smooth;
 }
 
+html,
 body {
-  font-family: 'Inter', sans-serif !important;
+  background: $bg-base;
+  color: $text-base;
+}
+
+body {
+  font-family: 'Inter', system-ui, sans-serif !important;
   overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 h1,
@@ -16,18 +30,59 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: 'Space Grotesk', sans-serif !important;
-  letter-spacing: 0;
+  font-family: 'Space Grotesk', 'Inter', sans-serif !important;
+  letter-spacing: -0.01em;
+  color: $text-strong;
 }
 
-// Custom animations
+a {
+  color: $brand-teal;
+  text-decoration: none;
+  transition: color 0.25s $ease-soft;
+
+  &:hover {
+    color: lighten($brand-teal, 8%);
+  }
+}
+
+// Selection
+::selection {
+  background: rgba(45, 212, 191, 0.32);
+  color: $text-strong;
+}
+
+// ---------------------------------------------------------------------
+// Scrollbar
+// ---------------------------------------------------------------------
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: $bg-deep;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $grad-brand-soft;
+  border-radius: $r-pill;
+  border: 2px solid $bg-deep;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: $grad-brand;
+}
+
+// ---------------------------------------------------------------------
+// Keyframes
+// ---------------------------------------------------------------------
 @keyframes float {
   0%,
   100% {
-    transform: translateY(0px);
+    transform: translateY(0);
   }
   50% {
-    transform: translateY(-20px);
+    transform: translateY(-12px);
   }
 }
 
@@ -46,109 +101,321 @@ h6 {
 @keyframes pulse-glow {
   0%,
   100% {
-    box-shadow: 0 0 20px rgba(45, 212, 191, 0.24);
+    box-shadow: 0 0 22px rgba(45, 212, 191, 0.22);
   }
   50% {
-    box-shadow: 0 0 40px rgba(244, 184, 96, 0.34);
+    box-shadow: 0 0 44px rgba(244, 184, 96, 0.32);
   }
 }
 
-@keyframes shimmer {
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 20px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes shimmer-line {
   0% {
-    background-position: -1000px 0;
+    transform: translateX(-100%);
   }
   100% {
-    background-position: 1000px 0;
+    transform: translateX(200%);
   }
 }
 
-// Smooth scroll
-::-webkit-scrollbar {
-  width: 10px;
+// Page-level Vue <transition> classes
+.page-fade-enter-active,
+.page-fade-leave-active {
+  transition: opacity 0.45s $ease-soft, transform 0.45s $ease-soft;
 }
 
-::-webkit-scrollbar-track {
-  background: #071113;
+.page-fade-enter-from {
+  opacity: 0;
+  transform: translateY(12px);
 }
 
-::-webkit-scrollbar-thumb {
-  background: linear-gradient(
-    to bottom,
-    rgba(45, 212, 191, 0.86),
-    rgba(244, 184, 96, 0.86)
-  );
-  border-radius: 10px;
+.page-fade-leave-to {
+  opacity: 0;
+  transform: translateY(-8px);
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(
-    to bottom,
-    rgba(45, 212, 191, 1),
-    rgba(244, 184, 96, 1)
-  );
-}
-
-// Glassmorphism utility class
+// ---------------------------------------------------------------------
+// Utility classes
+// ---------------------------------------------------------------------
 .glass-card {
-  background: rgba(9, 24, 28, 0.72);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(233, 244, 241, 0.1);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  background: $surface-1;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid $border-subtle;
+  border-radius: $r-lg;
+  transition: transform 0.35s $ease-emph, border-color 0.35s $ease-soft,
+    background 0.35s $ease-soft, box-shadow 0.35s $ease-soft;
 }
 
 .glass-card:hover {
-  background: rgba(13, 34, 40, 0.88);
-  border: 1px solid rgba(45, 212, 191, 0.28);
-  transform: translateY(-5px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  background: $surface-2;
+  border-color: $border-accent;
+  transform: translateY(-4px);
+  box-shadow: $shadow-md;
 }
 
-// Gradient text utility
 .gradient-text {
-  background: linear-gradient(135deg, #2dd4bf 0%, #f4b860 60%, #ff7a59 100%);
+  background: $grad-brand;
   background-size: 200% 200%;
-  animation: gradient-shift 3s ease infinite;
+  animation: gradient-shift 6s ease infinite;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  color: transparent;
 }
 
-// Enhanced button styles
-.btn-primary {
+// ---------------------------------------------------------------------
+// Button system (use plain <button> or <a> with these classes)
+// .btn          -> base
+// .btn--primary -> filled gradient (high emphasis)
+// .btn--ghost   -> outlined transparent (medium emphasis)
+// .btn--soft    -> subtle filled chip (low emphasis, e.g. back buttons)
+// .btn--sm      -> compact size
+// .btn--block   -> full width
+// ---------------------------------------------------------------------
+.btn {
+  appearance: none;
+  -webkit-appearance: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  height: 48px;
+  padding: 0 22px;
+  border: 1px solid transparent;
+  border-radius: $r-md;
+  font-family: 'Inter', sans-serif;
+  font-size: 14.5px;
+  font-weight: 600;
+  letter-spacing: 0.005em;
+  line-height: 1;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  user-select: none;
   position: relative;
   overflow: hidden;
-  transition: all 0.3s ease;
+  transition: transform 0.3s $ease-emph, box-shadow 0.3s $ease-soft,
+    border-color 0.3s $ease-soft, background 0.3s $ease-soft,
+    color 0.3s $ease-soft;
+  isolation: isolate;
 }
 
-.btn-primary::before {
+.btn:focus-visible {
+  outline: 2px solid $brand-teal;
+  outline-offset: 3px;
+}
+
+.btn:disabled,
+.btn[aria-disabled='true'] {
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+.btn svg {
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+}
+
+// Primary (filled gradient)
+.btn--primary {
+  color: #08171a;
+  background: $grad-brand;
+  background-size: 200% 200%;
+  background-position: 0% 50%;
+  box-shadow: 0 14px 32px rgba(45, 212, 191, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.35);
+}
+
+.btn--primary::before {
   content: '';
   position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
+  inset: 0;
   background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 255, 255, 0.2),
-    transparent
+    115deg,
+    transparent 35%,
+    rgba(255, 255, 255, 0.35) 50%,
+    transparent 65%
   );
-  transition: left 0.5s ease;
+  transform: translateX(-110%);
+  transition: transform 0.7s $ease-emph;
+  z-index: -1;
 }
 
-.btn-primary:hover::before {
-  left: 100%;
+.btn--primary:hover {
+  transform: translateY(-2px);
+  background-position: 100% 50%;
+  box-shadow: 0 22px 46px rgba(45, 212, 191, 0.42),
+    inset 0 1px 0 rgba(255, 255, 255, 0.45);
 }
 
+.btn--primary:hover::before {
+  transform: translateX(110%);
+}
+
+.btn--primary:active {
+  transform: translateY(0);
+}
+
+// Ghost (outlined)
+.btn--ghost {
+  color: $text-strong;
+  background: rgba(233, 244, 241, 0.04);
+  border-color: $border-soft;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.btn--ghost:hover {
+  color: $text-strong;
+  border-color: $border-accent;
+  background: rgba(45, 212, 191, 0.08);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(45, 212, 191, 0.14);
+}
+
+.btn--ghost:active {
+  transform: translateY(0);
+}
+
+// Soft (subtle chip)
+.btn--soft {
+  color: $text-base;
+  background: $surface-glass;
+  border-color: $border-subtle;
+}
+
+.btn--soft:hover {
+  color: $text-strong;
+  background: rgba(45, 212, 191, 0.10);
+  border-color: $border-accent;
+  transform: translateY(-1px);
+}
+
+// Size variants
+.btn--sm {
+  height: 38px;
+  padding: 0 16px;
+  font-size: 13px;
+  gap: 8px;
+}
+
+.btn--sm svg {
+  width: 16px;
+  height: 16px;
+}
+
+.btn--lg {
+  height: 54px;
+  padding: 0 28px;
+  font-size: 15.5px;
+  gap: 12px;
+}
+
+.btn--lg svg {
+  width: 20px;
+  height: 20px;
+}
+
+.btn--block {
+  width: 100%;
+}
+
+// Icon-only (square)
+.btn--icon {
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  gap: 0;
+  border-radius: $r-md;
+}
+
+.btn--icon.btn--sm {
+  width: 38px;
+  height: 38px;
+}
+
+// Trailing icon — slides forward on hover (good for "View X →" buttons)
+.btn .trailing-icon {
+  transition: transform 0.3s $ease-emph;
+}
+
+.btn:hover .trailing-icon {
+  transform: translateX(4px);
+}
+
+// Leading icon — pulses subtly on hover (e.g. back arrow)
+.btn .leading-icon {
+  transition: transform 0.3s $ease-emph;
+}
+
+.btn:hover .leading-icon {
+  transform: translateX(-4px);
+}
+
+// Reveal-on-scroll helper. Add `data-reveal` attribute and the IntersectionObserver
+// in MainLayout.vue toggles `is-visible`.
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s $ease-emph, transform 0.7s $ease-emph;
+  will-change: opacity, transform;
+}
+
+[data-reveal].is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+[data-reveal][data-reveal-delay='1'].is-visible {
+  transition-delay: 0.08s;
+}
+[data-reveal][data-reveal-delay='2'].is-visible {
+  transition-delay: 0.16s;
+}
+[data-reveal][data-reveal-delay='3'].is-visible {
+  transition-delay: 0.24s;
+}
+[data-reveal][data-reveal-delay='4'].is-visible {
+  transition-delay: 0.32s;
+}
+
+// Mobile-only Quasar menu fix
 #menu-mobile-navigation {
   visibility: hidden !important;
 }
 
-@media (max-width: 500px) {
+@media (max-width: $bp-sm) {
   #menu-mobile-navigation {
     visibility: visible !important;
     width: auto;
     left: auto !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  [data-reveal] {
+    opacity: 1;
+    transform: none;
   }
 }

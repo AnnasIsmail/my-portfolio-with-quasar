@@ -1,194 +1,239 @@
 <template>
-  <div class="main-navbar">
-    <div class="text-h5 text-weight-bold logo" @click="movePage('/', $route)">
-      <span class="gradient-text">Annas</span>
+  <header class="main-navbar" :class="{ scrolled: isScrolled }">
+    <div class="logo" @click="navigateTo('/')">
+      <span class="logo-mark">A</span>
+      <span class="logo-name gradient-text">Annas</span>
     </div>
-    <div
-      class="text-subtitle1 text-weight-light Main-Navigation"
-      style="
-        display: flex;
-        gap: 30px;
-        vertical-align: baseline;
-        padding-top: 4px;
-      "
-    >
+
+    <nav class="main-navigation">
       <div
-        class="child-navbar"
-        :class="{ 'on-page': $route.path === '/' }"
-        @click="movePage('/', this)"
+        v-for="link in links"
+        :key="link.path"
+        class="nav-item"
+        :class="{ 'on-page': route.path === link.path }"
+        @click="navigateTo(link.path)"
       >
-        Home
+        {{ link.label }}
       </div>
-      <div
-        class="child-navbar"
-        :class="{ 'on-page': $route.path === '/projects' }"
-        @click="movePage('/projects', this)"
-      >
-        Projects
-      </div>
-      <div
-        class="child-navbar"
-        :class="{ 'on-page': $route.path === '/experience' }"
-        @click="movePage('/experience', this)"
-      >
-        Experience
-      </div>
-      <div
-        class="child-navbar"
-        :class="{ 'on-page': $route.path === '/education' }"
-        @click="movePage('/education', this)"
-      >
-        Education
-      </div>
-    </div>
-    <div class="Mobile-Navigation">
+    </nav>
+
+    <div class="mobile-navigation">
       <burger-navbar :isOpen="isOpen" @click="isOpen = !isOpen" />
       <q-menu
-        @show="isOpen = true"
-        @hide="isOpen = false"
-        :visible="isOpen"
-        transition-show="rotate"
-        transition-hide="rotate"
-        style="right: 25px !important"
+        v-model="isOpen"
+        transition-show="jump-down"
+        transition-hide="jump-up"
+        class="mobile-menu"
         id="menu-mobile-navigation"
       >
-        <q-list style="min-width: 150px">
-          <q-item clickable>
-            <q-item-section
-              @click="movePage('/', this)"
-              :class="{ 'on-page': $route.path === '/' }"
-              >Home</q-item-section
-            >
-          </q-item>
-          <q-item clickable>
-            <q-item-section
-              @click="movePage('/projects', this)"
-              :class="{ 'on-page': $route.path === '/projects' }"
-              >Projects</q-item-section
-            >
-          </q-item>
-          <q-item clickable>
-            <q-item-section
-              @click="movePage('/experience', this)"
-              :class="{ 'on-page': $route.path === '/experience' }"
-              >Experience</q-item-section
-            >
-          </q-item>
-          <q-item clickable>
-            <q-item-section
-              @click="movePage('/education', this)"
-              :class="{ 'on-page': $route.path === '/education' }"
-              >Education</q-item-section
-            >
+        <q-list class="mobile-menu-list">
+          <q-item
+            v-for="link in links"
+            :key="link.path"
+            clickable
+            class="mobile-menu-item"
+            :class="{ 'on-page': route.path === link.path }"
+            @click="navigateTo(link.path)"
+          >
+            <q-item-section>{{ link.label }}</q-item-section>
           </q-item>
         </q-list>
       </q-menu>
     </div>
-  </div>
+  </header>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, onBeforeUnmount, onMounted, ref } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
 import BurgerNavbar from './BurgerNavbar.vue';
 import { movePage } from '../functions/movePage';
 
 export default defineComponent({
-  components: { BurgerNavbar },
   name: 'MainNavbar',
-  data() {
-    return { isOpen: false };
-  },
-  methods: {
-    movePage,
+  components: { BurgerNavbar },
+  setup() {
+    const router = useRouter();
+    const route = useRoute();
+    const isOpen = ref(false);
+    const isScrolled = ref(false);
+
+    const links = [
+      { path: '/', label: 'Home' },
+      { path: '/projects', label: 'Projects' },
+      { path: '/experience', label: 'Experience' },
+      { path: '/education', label: 'Education' },
+    ];
+
+    const handleScroll = () => {
+      isScrolled.value = window.scrollY > 12;
+    };
+
+    const navigateTo = (path: string) => {
+      isOpen.value = false;
+      movePage(router, route.path, path);
+    };
+
+    onMounted(() => {
+      window.addEventListener('scroll', handleScroll, { passive: true });
+      handleScroll();
+    });
+
+    onBeforeUnmount(() => {
+      window.removeEventListener('scroll', handleScroll);
+    });
+
+    return { isOpen, isScrolled, links, navigateTo, route };
   },
 });
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+@import '../css/tokens';
+
 .main-navbar {
   display: flex;
-  padding: 20px 0;
-  padding-bottom: 30px;
-  justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid rgba(233, 244, 241, 0.1);
-  backdrop-filter: blur(10px);
+  justify-content: space-between;
+  padding: 18px 8px;
   position: sticky;
   top: 0;
   z-index: 100;
-  transition: all 0.3s ease;
+  border-bottom: 1px solid transparent;
+  transition: background 0.3s $ease-soft, border-color 0.3s $ease-soft,
+    backdrop-filter 0.3s $ease-soft, padding 0.3s $ease-soft;
+}
+
+.main-navbar.scrolled {
+  padding: 12px 8px;
+  background: rgba(7, 17, 19, 0.74);
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+  border-bottom-color: $border-subtle;
 }
 
 .logo {
-  letter-spacing: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
   cursor: pointer;
-  transition: transform 0.3s ease;
+  transition: transform 0.3s $ease-emph;
 }
 
 .logo:hover {
-  transform: scale(1.05);
+  transform: translateY(-1px);
 }
 
-.child-navbar {
-  color: #c9d3d0;
-  cursor: pointer;
+.logo-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: $r-md;
+  background: $grad-brand;
+  color: #08171a;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 800;
+  font-size: 18px;
+  box-shadow: 0 8px 22px rgba(45, 212, 191, 0.35);
+}
+
+.logo-name {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.main-navigation {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.nav-item {
   position: relative;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  padding: 8px 16px;
-  border-radius: 8px;
+  color: $text-muted;
+  cursor: pointer;
+  padding: 9px 16px;
+  border-radius: $r-md;
+  font-size: 14px;
+  font-weight: 500;
+  transition: color 0.3s $ease-soft, background 0.3s $ease-soft;
 }
 
-.child-navbar::before {
+.nav-item::after {
   content: '';
   position: absolute;
-  bottom: -5px;
+  bottom: 4px;
   left: 50%;
   transform: translateX(-50%) scaleX(0);
-  width: 80%;
+  width: 60%;
   height: 2px;
-  background: linear-gradient(90deg, #2dd4bf, #f4b860);
-  transition: transform 0.3s ease;
+  border-radius: 2px;
+  background: $grad-line;
+  transition: transform 0.3s $ease-emph;
 }
 
-.child-navbar:hover {
-  color: #ffffff;
-  background: rgba(233, 244, 241, 0.06);
+.nav-item:hover {
+  color: $text-strong;
+  background: rgba(233, 244, 241, 0.05);
 }
 
-.child-navbar:hover::before {
+.nav-item:hover::after {
   transform: translateX(-50%) scaleX(1);
 }
 
 .on-page {
-  color: white !important;
+  color: $text-strong !important;
   font-weight: 600 !important;
-  background: rgba(45, 212, 191, 0.12);
+  background: rgba(45, 212, 191, 0.10);
 }
 
-.on-page::before {
+.on-page::after {
   transform: translateX(-50%) scaleX(1) !important;
 }
 
-.Main-Navigation {
-  display: flex;
-  gap: 30px;
-  align-items: center;
-  padding-top: 4px;
-}
-
-.Mobile-Navigation {
+.mobile-navigation {
   display: none;
 }
 
-@media (max-width: 500px) {
-  .Mobile-Navigation {
+.mobile-menu-list {
+  background: rgba(7, 17, 19, 0.96);
+  backdrop-filter: blur(16px);
+  border: 1px solid $border-subtle;
+  border-radius: $r-md;
+  padding: 6px;
+  min-width: 180px;
+}
+
+.mobile-menu-item {
+  border-radius: $r-sm;
+  color: $text-base;
+  font-size: 14px;
+  transition: all 0.25s $ease-soft;
+}
+
+.mobile-menu-item:hover {
+  color: $text-strong;
+  background: rgba(45, 212, 191, 0.08);
+}
+
+.mobile-menu-item.on-page {
+  color: $text-strong !important;
+  background: rgba(45, 212, 191, 0.16) !important;
+}
+
+@media (max-width: $bp-sm) {
+  .mobile-navigation {
     display: block;
   }
-  .Main-Navigation {
+  .main-navigation {
     display: none !important;
   }
   .main-navbar {
-    padding: 15px 0;
+    padding: 14px 8px;
   }
 }
 </style>

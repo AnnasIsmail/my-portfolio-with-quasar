@@ -1,0 +1,59 @@
+// =====================================================================
+// Design Tokens - Modern Dark Theme
+// Single source of truth for colors, spacing, radius, and effects.
+// =====================================================================
+
+// Brand palette
+$brand-teal:   #2dd4bf;
+$brand-cyan:   #22d3ee;
+$brand-amber:  #f4b860;
+$brand-coral:  #ff7a59;
+$brand-mint:   #5eead4;
+
+// Surface palette (dark)
+$bg-deep:       #050d10;
+$bg-base:       #071113;
+$bg-mid:        #0f2428;
+$bg-soft:       #1f3431;
+$surface-1:     rgba(9, 24, 28, 0.72);
+$surface-2:     rgba(13, 34, 40, 0.82);
+$surface-glass: rgba(233, 244, 241, 0.05);
+
+// Text palette
+$text-strong: #f8faf8;
+$text-base:   #d9e3e0;
+$text-muted:  #a9b8b5;
+$text-soft:   #8a9794;
+
+// Borders & strokes
+$border-subtle: rgba(233, 244, 241, 0.10);
+$border-soft:   rgba(233, 244, 241, 0.16);
+$border-accent: rgba(45, 212, 191, 0.42);
+
+// Gradients
+$grad-brand:        linear-gradient(135deg, #{$brand-teal} 0%, #{$brand-amber} 60%, #{$brand-coral} 100%);
+$grad-brand-soft:   linear-gradient(135deg, rgba(45, 212, 191, 0.85), rgba(244, 184, 96, 0.85));
+$grad-line:         linear-gradient(90deg, #{$brand-teal}, #{$brand-amber});
+$grad-bg-page:      linear-gradient(135deg, #{$bg-deep} 0%, #{$bg-mid} 48%, #{$bg-soft} 100%);
+
+// Radii
+$r-sm: 6px;
+$r-md: 10px;
+$r-lg: 14px;
+$r-xl: 20px;
+$r-pill: 999px;
+
+// Shadows
+$shadow-sm:    0 6px 18px rgba(4, 12, 14, 0.22);
+$shadow-md:    0 18px 42px rgba(4, 12, 14, 0.28);
+$shadow-lg:    0 28px 72px rgba(4, 12, 14, 0.42);
+$shadow-glow:  0 18px 48px rgba(45, 212, 191, 0.18);
+
+// Easings
+$ease-emph:  cubic-bezier(0.22, 1, 0.36, 1);
+$ease-soft:  cubic-bezier(0.4, 0, 0.2, 1);
+
+// Breakpoints (used in @media)
+$bp-md: 900px;
+$bp-sm: 600px;
+$bp-xs: 480px;

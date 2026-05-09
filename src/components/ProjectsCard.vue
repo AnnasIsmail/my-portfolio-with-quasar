@@ -1,197 +1,202 @@
 <template>
-  <div class="project-card glass-card">
+  <article class="project-card">
     <div class="project-image-section">
-      <div v-if="Project.urlGithub || Project.url" class="project-actions">
-        <q-btn
+      <div
+        v-if="Project.urlGithub || Project.url"
+        class="project-actions"
+      >
+        <a
           v-if="Project.urlGithub"
-          class="action-btn"
           :href="Project.urlGithub"
           target="_blank"
-          unelevated
-          round
+          rel="noopener noreferrer"
+          class="btn btn--soft btn--icon btn--sm"
+          aria-label="View source code"
+          @click.stop
         >
-          <Icon icon="mdi:code" height="20px" />
-          <q-tooltip
-            class="glass-tooltip"
-            transition-show="scale"
-            transition-hide="scale"
-          >
-            <span class="gradient-text">View Code</span>
-          </q-tooltip>
-        </q-btn>
-        <q-btn
+          <Icon icon="mdi:github" />
+          <q-tooltip class="glass-tooltip">View Code</q-tooltip>
+        </a>
+        <a
           v-if="Project.url"
-          class="action-btn"
           :href="Project.url"
           target="_blank"
-          unelevated
-          round
+          rel="noopener noreferrer"
+          class="btn btn--soft btn--icon btn--sm"
+          aria-label="Open live demo"
+          @click.stop
         >
-          <Icon icon="ic:outline-arrow-outward" height="20px" />
-          <q-tooltip
-            class="glass-tooltip"
-            transition-show="scale"
-            transition-hide="scale"
-          >
-            <span class="gradient-text">Live Demo</span>
-          </q-tooltip>
-        </q-btn>
+          <Icon icon="mdi:open-in-new" />
+          <q-tooltip class="glass-tooltip">Live Demo</q-tooltip>
+        </a>
       </div>
-      <div class="project-image-wrapper" @click="movePageToDetail">
+
+      <div class="project-image-wrapper" @click="goToDetail">
         <q-img
           :src="Project.image[0]"
           alt="Project preview"
           class="project-image"
         />
         <div class="image-overlay">
-          <Icon icon="ic:outline-arrow-outward" height="40px" color="white" />
+          <Icon icon="mdi:arrow-top-right" height="34px" />
+          <span>View Details</span>
         </div>
       </div>
     </div>
+
     <div class="project-content">
-      <div class="project-type">
-        {{ Project.type }}
-      </div>
-      <div class="project-title" @click="movePageToDetail">
+      <div class="project-type">{{ Project.type }}</div>
+      <h3 class="project-title" @click="goToDetail">
         {{ Project.name }}
-      </div>
-      <div class="project-description" @click="movePageToDetail">
+      </h3>
+      <p class="project-description" @click="goToDetail">
         {{ Project.description }}
-      </div>
+      </p>
       <div class="tech-stack">
         <chip-technology
-          v-for="tech in Project.technology"
-          :key="tech"
-          :Skill="getTechnology(tech)"
+          v-for="tech in techStack"
+          :key="tech.id"
+          :Skill="tech"
         />
       </div>
     </div>
-  </div>
+  </article>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { computed, defineComponent } from 'vue';
 import { Icon } from '@iconify/vue';
-import { Project } from './models';
+import { useRoute, useRouter } from 'vue-router';
 import { movePage } from '../functions/movePage';
-import ChipTechnology from 'src/components/ChipTechnology.vue';
-import Skills from 'src/data/Skills';
+import ChipTechnology from './ChipTechnology.vue';
+import Skills from '../data/Skills';
+import type { Project, Skill } from './models';
 
 export default defineComponent({
-  name: 'ProjectCard',
+  name: 'ProjectsCard',
+  components: { Icon, ChipTechnology },
   props: {
     Project: {
       type: Object as () => Project,
       required: true,
     },
   },
-  components: {
-    Icon,
-    ChipTechnology,
-  },
-  data() {
-    return {
-      styleFontTooltip:
-        'background-image: linear-gradient(to bottom right,#2dd4bf 40%,#f4b860 60%);background-clip: text;-webkit-background-clip: text;-webkit-text-fill-color: transparent;',
-      Skills,
-    };
-  },
-  methods: {
-    movePageToDetail() {
-      movePage(`/detail-project/${this.Project.id}`, this);
-    },
-    getTechnology(id: string) {
-      return Skills.find((data) => data.id === id);
-    },
+  setup(props) {
+    const router = useRouter();
+    const route = useRoute();
+    const techStack = computed<Skill[]>(() =>
+      props.Project.technology
+        .map((id) => Skills.find((s) => s.id === id))
+        .filter((s): s is Skill => Boolean(s))
+    );
+
+    const goToDetail = () =>
+      movePage(router, route.path, `/detail-project/${props.Project.id}`);
+
+    return { techStack, goToDetail };
   },
 });
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+@import '../css/tokens';
+
 .project-card {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0;
-  min-height: 150px;
-  max-height: 300px;
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+  min-height: 220px;
+  border-radius: $r-lg;
   overflow: hidden;
-  border-radius: 8px;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  background: $surface-1;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid $border-subtle;
+  box-shadow: $shadow-sm;
+  transition: transform 0.4s $ease-emph, border-color 0.4s $ease-soft,
+    background 0.4s $ease-soft, box-shadow 0.4s $ease-soft;
   position: relative;
+}
+
+.project-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 100%;
+  background: $grad-brand;
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 0.45s $ease-emph;
 }
 
 .project-card:hover {
   transform: translateY(-6px);
-  box-shadow: 0 18px 48px rgba(1, 166, 147, 0.18);
+  border-color: $border-accent;
+  box-shadow: 0 22px 56px rgba(45, 212, 191, 0.18);
+  background: $surface-2;
+}
+
+.project-card:hover::after {
+  transform: scaleY(1);
 }
 
 .project-image-section {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  gap: 12px;
   background: linear-gradient(
     135deg,
-    rgba(13, 34, 43, 0.9) 0%,
-    rgba(26, 52, 58, 0.95) 100%
+    rgba(13, 34, 43, 0.65) 0%,
+    rgba(26, 52, 58, 0.85) 100%
   );
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  position: relative;
-  padding: 20px;
-  gap: 15px;
 }
 
 .project-actions {
   display: flex;
   justify-content: flex-end;
-  gap: 10px;
-  width: 100%;
+  gap: 8px;
   z-index: 2;
-}
-
-.action-btn {
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  padding: 8px;
-  min-width: 40px;
-  min-height: 40px;
-  transition: all 0.3s ease;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.action-btn:hover {
-  background: rgba(45, 212, 191, 0.18);
-  border-color: rgba(45, 212, 191, 0.45);
-  transform: scale(1.1);
 }
 
 .project-image-wrapper {
   position: relative;
-  width: 100%;
   flex: 1;
-  cursor: pointer;
-  border-radius: 8px;
   overflow: hidden;
+  cursor: pointer;
+  border-radius: $r-md;
+  border: 1px solid $border-subtle;
+  min-height: 160px;
 }
 
 .project-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.5s ease;
+  transition: transform 0.6s $ease-emph;
 }
 
 .image-overlay {
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.7);
+  inset: 0;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 6px;
+  background: linear-gradient(
+    135deg,
+    rgba(7, 17, 19, 0.78) 0%,
+    rgba(45, 212, 191, 0.18) 100%
+  );
+  color: $text-strong;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
   opacity: 0;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.3s $ease-soft;
 }
 
 .project-image-wrapper:hover .image-overlay {
@@ -199,91 +204,101 @@ export default defineComponent({
 }
 
 .project-image-wrapper:hover .project-image {
-  transform: scale(1.1);
+  transform: scale(1.08);
 }
 
 .project-content {
-  padding: 25px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
+  padding: 24px 26px;
 }
 
 .project-type {
-  font-size: 12px;
-  font-weight: 600;
+  display: inline-block;
+  width: fit-content;
+  padding: 3px 10px;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
-  letter-spacing: 0;
-  color: #f4b860;
+  color: $brand-amber;
+  background: rgba(244, 184, 96, 0.10);
+  border: 1px solid rgba(244, 184, 96, 0.24);
+  border-radius: $r-pill;
 }
 
 .project-title {
-  font-size: 28px;
+  margin: 4px 0 0;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 26px;
   font-weight: 700;
+  line-height: 1.2;
+  color: $text-strong;
   cursor: pointer;
-  transition: all 0.3s ease;
-  background: linear-gradient(135deg, #fff 0%, #e0e0e0 100%);
+  transition: color 0.3s $ease-soft;
+  background: linear-gradient(135deg, $text-strong 0%, $text-base 100%);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  line-height: 1.2;
 }
 
 .project-title:hover {
-  background: linear-gradient(135deg, #2dd4bf 0%, #f4b860 100%);
+  background: $grad-brand;
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .project-description {
-  margin-top: 8px;
-  color: #d6d6d6;
+  margin: 0;
+  color: $text-base;
   font-size: 14px;
   line-height: 1.6;
-  overflow: hidden;
   cursor: pointer;
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;
-  transition: color 0.3s ease;
+  overflow: hidden;
+  transition: color 0.3s $ease-soft;
 }
 
 .project-description:hover {
-  color: #ffffff;
+  color: $text-strong;
 }
 
 .tech-stack {
   display: flex;
-  flex-direction: row;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 6px;
   margin-top: auto;
+  padding-top: 6px;
 }
 
 .glass-tooltip {
-  background: rgba(50, 52, 67, 0.95) !important;
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(7, 17, 19, 0.95) !important;
+  border: 1px solid $border-subtle;
+  border-radius: $r-sm;
+  font-size: 12px;
+  font-weight: 600;
+  color: $text-strong;
 }
 
-@media (max-width: 600px) {
+@media (max-width: $bp-sm) {
   .project-card {
     grid-template-columns: 1fr !important;
-    grid-template-rows: 250px auto !important;
-    max-height: none !important;
   }
 
   .project-image-section {
-    max-height: 250px;
+    min-height: 220px;
   }
 
   .project-content {
-    padding: 20px;
+    padding: 22px;
   }
 
   .project-title {
-    font-size: 24px;
+    font-size: 22px;
   }
 }
 </style>

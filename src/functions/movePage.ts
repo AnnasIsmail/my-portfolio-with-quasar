@@ -1,10 +1,14 @@
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const movePage = (path: string, thisRouter: any): void => {
-  const element = document.getElementById('move-page');
-  if (element !== null && path !== thisRouter.$route.path) {
-    (element as HTMLElement).click();
-    setTimeout(() => {
-      thisRouter.$router.push(path);
-    }, 1000);
-  }
+import type { Router } from 'vue-router';
+
+/**
+ * Navigate to a new route only when the target differs from the current path.
+ * Keeping this helper pure makes it easier to reuse from both setup() and methods.
+ */
+export const movePage = (
+  router: Pick<Router, 'push'>,
+  currentPath: string,
+  path: string
+): void => {
+  if (path === currentPath) return;
+  void router.push(path);
 };

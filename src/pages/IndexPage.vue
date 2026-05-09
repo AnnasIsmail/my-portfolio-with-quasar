@@ -1,198 +1,343 @@
 <template>
   <q-page class="home-page">
-    <input type="hidden" id="move-page" @click="movePageDocument" />
+    <section class="hero-section" data-reveal>
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <div class="eyebrow">Full Stack Developer</div>
+          <h1>
+            Annas Ismail Muhammad
+            <span class="hero-tagline">
+              builds reliable enterprise web applications.
+            </span>
+          </h1>
+          <p>
+            Programmer with Information Systems and Computer Science
+            education, experienced in .NET, Angular, React.js, Azure, AWS, SQL
+            Server, and performance-focused data retrieval.
+          </p>
 
-    <q-intersection class="hero-section" :threshold="0.1">
-      <transition
-        appear
-        enter-active-class="animated fadeInUp"
-        leave-active-class="animated fadeOut"
-        :style="{ animationDuration: '0.7s' }"
-      >
-        <section v-if="showElement" class="hero-grid">
-          <div class="hero-copy">
-            <div class="eyebrow">Full Stack Developer</div>
-            <h1>
-              Annas Ismail Muhammad
-              <span>builds reliable enterprise web applications.</span>
-            </h1>
-            <p>
-              Programmer with Information Systems and Computer Science
-              education, experienced in .NET, Angular, React.js, Azure, AWS, SQL
-              Server, and performance-focused data retrieval.
-            </p>
-
-            <div class="hero-actions">
-              <q-btn
-                class="primary-action"
-                unelevated
-                @click="movePage('/projects', this)"
-              >
-                <Icon icon="mdi:briefcase-outline" height="20px" />
-                <span>View Projects</span>
-              </q-btn>
-              <q-btn
-                class="secondary-action"
-                outline
-                href="mailto:annasismailmuhammad@gmail.com"
-              >
-                <Icon icon="mdi:email-outline" height="20px" />
-                <span>Contact Me</span>
-              </q-btn>
-            </div>
-          </div>
-
-          <div class="profile-panel">
-            <div class="profile-frame">
-              <q-img src="~assets/photo.png" class="profile-image" />
-            </div>
-            <div class="signal-list">
-              <div
-                v-for="item in careerSignals"
-                :key="item.label"
-                class="signal"
-              >
-                <span>{{ item.value }}</span>
-                <p>{{ item.label }}</p>
-              </div>
-            </div>
-          </div>
-        </section>
-      </transition>
-    </q-intersection>
-
-    <q-intersection class="summary-section" :threshold="0.15">
-      <transition
-        appear
-        enter-active-class="animated fadeInUp"
-        leave-active-class="animated fadeOut"
-        :style="{ animationDuration: '0.7s', animationDelay: '0.1s' }"
-      >
-        <section v-if="showElement" class="summary-grid">
-          <article class="summary-card">
-            <Icon icon="mdi:speedometer" height="28px" />
-            <h2>Performance Mindset</h2>
-            <p>
-              Optimized LINQ-based query performance from more than one minute
-              to around three seconds for academic systems.
-            </p>
-          </article>
-          <article class="summary-card">
-            <Icon icon="mdi:cloud-sync-outline" height="28px" />
-            <h2>Cloud Delivery</h2>
-            <p>
-              Delivered applications with Azure Functions, Azure DevOps, CI/CD,
-              Cosmos DB, and AWS EC2 deployment experience.
-            </p>
-          </article>
-          <article class="summary-card">
-            <Icon icon="mdi:account-group-outline" height="28px" />
-            <h2>Cross-Team Execution</h2>
-            <p>
-              Worked with vendors, government stakeholders, and English-speaking
-              product teams to keep systems stable and production-ready.
-            </p>
-          </article>
-        </section>
-      </transition>
-    </q-intersection>
-
-    <q-intersection class="technology-section" :threshold="0.15">
-      <transition
-        appear
-        enter-active-class="animated fadeInUp"
-        leave-active-class="animated fadeOut"
-        :style="{ animationDuration: '0.7s', animationDelay: '0.15s' }"
-      >
-        <section v-if="showElement" class="technology-grid">
-          <div class="section-copy">
-            <div class="eyebrow">Technical Focus</div>
-            <h2>Strong around enterprise stacks, data, and cloud workflows.</h2>
-            <p>
-              My recent work spans internal warehouse systems, online exam
-              platforms, student career monitoring, legal document management,
-              quick count dashboards, and government workflow applications.
-            </p>
-          </div>
-
-          <div class="tech-panel">
-            <div class="search-section">
-              <q-input
-                dense
-                filled
-                v-model="search"
-                label="Search"
-                placeholder="Angular"
-                @update:model-value="searchTechnologies"
-              />
-              <q-select
-                dense
-                clearable
-                filled
-                v-model="filter"
-                :options="filterType"
-                label="Filter"
-                @update:model-value="filterTechnologies"
-              />
-            </div>
-            <div class="tech-stack">
-              <chip-technology
-                v-for="tech in TechWID"
-                :key="tech.name"
-                :Skill="tech"
-              />
-            </div>
-            <div class="result-count">{{ TechWID.length }} result</div>
-          </div>
-        </section>
-      </transition>
-    </q-intersection>
-
-    <q-intersection class="projects-section" :threshold="0.1">
-      <transition
-        appear
-        enter-active-class="animated fadeInUp"
-        leave-active-class="animated fadeOut"
-        :style="{ animationDuration: '0.7s', animationDelay: '0.2s' }"
-      >
-        <section v-if="showElement">
-          <div class="section-heading">
-            <div>
-              <div class="eyebrow">Selected Work</div>
-              <h2>Projects aligned with the resume</h2>
-            </div>
-            <q-btn
-              class="secondary-action"
-              outline
-              @click="movePage('/projects', this)"
+          <div class="hero-actions">
+            <button
+              type="button"
+              class="btn btn--primary btn--lg"
+              @click="navigateTo('/projects')"
             >
-              <Icon icon="mdi:arrow-right" height="20px" />
-              <span>See More</span>
-            </q-btn>
+              <Icon icon="mdi:briefcase-outline" />
+              <span>View Projects</span>
+              <Icon icon="mdi:arrow-right" class="trailing-icon" />
+            </button>
+            <a
+              class="btn btn--ghost btn--lg"
+              href="mailto:annasismailmuhammad@gmail.com"
+            >
+              <Icon icon="mdi:email-outline" />
+              <span>Contact Me</span>
+            </a>
           </div>
+        </div>
 
-          <div class="project-list">
-            <projects-card
-              v-for="data in dataProjects.slice(0, 3)"
-              :key="data.name"
-              :Project="data"
+        <div class="profile-panel">
+          <div class="profile-frame">
+            <q-img src="~assets/photo.png" class="profile-image" />
+            <div class="profile-shimmer" aria-hidden="true"></div>
+          </div>
+          <div class="signal-list">
+            <div
+              v-for="(item, idx) in careerSignals"
+              :key="item.label"
+              class="signal"
+              data-reveal
+              :data-reveal-delay="idx + 1"
+            >
+              <span>{{ item.value }}</span>
+              <p>{{ item.label }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="summary-section" data-reveal>
+      <div class="summary-grid">
+        <article
+          v-for="(card, idx) in summaryCards"
+          :key="card.title"
+          class="summary-card"
+          data-reveal
+          :data-reveal-delay="idx + 1"
+        >
+          <div class="summary-icon">
+            <Icon :icon="card.icon" height="26px" />
+          </div>
+          <h2>{{ card.title }}</h2>
+          <p>{{ card.body }}</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="technology-section" data-reveal>
+      <div class="technology-grid">
+        <div class="section-copy">
+          <div class="eyebrow">Technical Focus</div>
+          <h2>Strong around enterprise stacks, data, and cloud workflows.</h2>
+          <p>
+            My recent work spans internal warehouse systems, online exam
+            platforms, student career monitoring, legal document management,
+            quick count dashboards, and government workflow applications.
+          </p>
+        </div>
+
+        <div class="tech-panel">
+          <div class="search-section">
+            <q-input
+              dense
+              filled
+              v-model="search"
+              label="Search"
+              placeholder="Angular"
+              dark
+              @update:model-value="applyFilters"
+            />
+            <q-select
+              dense
+              clearable
+              filled
+              v-model="filter"
+              :options="filterType"
+              label="Filter"
+              dark
+              @update:model-value="applyFilters"
             />
           </div>
-        </section>
-      </transition>
-    </q-intersection>
+          <div class="tech-stack">
+            <chip-technology
+              v-for="tech in filteredTechs"
+              :key="tech.id"
+              :Skill="tech"
+            />
+          </div>
+          <div class="result-count">
+            {{ filteredTechs.length }} result{{ filteredTechs.length === 1 ? '' : 's' }}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="projects-section" data-reveal>
+      <div class="section-heading">
+        <div>
+          <div class="eyebrow">Selected Work</div>
+          <h2>Projects aligned with the resume</h2>
+        </div>
+        <button
+          type="button"
+          class="btn btn--ghost"
+          @click="navigateTo('/projects')"
+        >
+          <span>See More</span>
+          <Icon icon="mdi:arrow-right" />
+        </button>
+      </div>
+
+      <div class="project-list">
+        <projects-card
+          v-for="(data, idx) in featuredProjects"
+          :key="data.id"
+          :Project="data"
+          data-reveal
+          :data-reveal-delay="(idx % 4) + 1"
+        />
+      </div>
+    </section>
+
+    <section class="experience-preview-section" data-reveal>
+      <div class="section-heading">
+        <div>
+          <div class="eyebrow">Experience Snapshot</div>
+          <h2>Recent roles across enterprise, campus, and public-sector work.</h2>
+        </div>
+        <button
+          type="button"
+          class="btn btn--ghost"
+          @click="navigateTo('/experience')"
+        >
+          <Icon icon="mdi:briefcase-clock-outline" />
+          <span>View Experience</span>
+        </button>
+      </div>
+
+      <div class="experience-preview-grid">
+        <article
+          v-for="(item, idx) in featuredExperiences"
+          :key="item.id"
+          class="experience-preview-card"
+          data-reveal
+          :data-reveal-delay="(idx % 3) + 1"
+        >
+          <div class="experience-preview-head">
+            <company-logo
+              :company="item.companyKey"
+              size="small"
+              variant="card"
+            />
+            <div class="experience-preview-identity">
+              <h3>{{ item.position }}</h3>
+              <p>{{ item.company }}</p>
+            </div>
+          </div>
+
+          <div class="experience-preview-meta">
+            <span>
+              <Icon icon="mdi:calendar-blank-outline" height="14px" />
+              {{ item.duration }}
+            </span>
+            <span>
+              <Icon icon="mdi:map-marker-outline" height="14px" />
+              {{ item.location }}
+            </span>
+          </div>
+
+          <p class="experience-preview-description">
+            {{ item.description }}
+          </p>
+
+          <div class="experience-preview-tags">
+            <span
+              v-for="tech in item.technologies.slice(0, 4)"
+              :key="tech"
+              class="experience-preview-tag"
+            >
+              {{ tech }}
+            </span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="education-preview-section" data-reveal>
+      <div class="section-heading">
+        <div>
+          <div class="eyebrow">Education Snapshot</div>
+          <h2>Academic depth backed by certification and published research.</h2>
+        </div>
+        <button
+          type="button"
+          class="btn btn--ghost"
+          @click="navigateTo('/education')"
+        >
+          <Icon icon="mdi:school-outline" />
+          <span>View Education</span>
+        </button>
+      </div>
+
+      <div class="education-preview-grid">
+        <article
+          v-for="(item, idx) in featuredEducations"
+          :key="item.id"
+          class="education-preview-card"
+          data-reveal
+          :data-reveal-delay="idx + 1"
+        >
+          <div class="education-preview-head">
+            <div class="education-preview-copy">
+              <div class="education-preview-degree">{{ item.degree }}</div>
+              <h3>{{ item.university }}</h3>
+            </div>
+            <company-logo
+              :company="item.companyKey"
+              size="small"
+              variant="card"
+            />
+          </div>
+
+          <div class="education-preview-meta">
+            <span>
+              <Icon icon="mdi:calendar-blank-outline" height="14px" />
+              {{ item.duration }}
+            </span>
+            <span>
+              <Icon icon="mdi:star-outline" height="14px" />
+              GPA {{ item.gpa }}
+            </span>
+          </div>
+
+          <p class="education-preview-description">
+            {{ item.description }}
+          </p>
+
+          <ul
+            v-if="item.achievements && item.achievements.length"
+            class="education-preview-achievements"
+          >
+            <li
+              v-for="achievement in item.achievements.slice(0, 2)"
+              :key="achievement"
+            >
+              {{ achievement }}
+            </li>
+          </ul>
+        </article>
+
+        <aside class="education-highlight-card" data-reveal data-reveal-delay="3">
+          <div class="education-highlight-badge">Recognition</div>
+
+          <div class="education-highlight-block">
+            <div class="education-highlight-icon">
+              <Icon :icon="featuredCertification.icon" height="26px" />
+            </div>
+            <div>
+              <div class="education-highlight-title">
+                {{ featuredCertification.name }}
+              </div>
+              <p>
+                {{ featuredCertification.issuer }} • {{ featuredCertification.date }}
+              </p>
+            </div>
+          </div>
+
+          <div class="education-highlight-divider"></div>
+
+          <div class="education-highlight-block">
+            <div class="education-highlight-icon secondary">
+              <Icon icon="mdi:trophy-outline" height="26px" />
+            </div>
+            <div>
+              <div class="education-highlight-title">
+                {{ featuredPublication.status }}
+              </div>
+              <p>{{ featuredPublication.methods }}</p>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
   </q-page>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue';
+import { computed, defineComponent, ref } from 'vue';
 import { Icon } from '@iconify/vue';
+import { useRoute, useRouter } from 'vue-router';
 import ProjectsCard from '../components/ProjectsCard.vue';
+import ChipTechnology from '../components/ChipTechnology.vue';
+import CompanyLogo from '../components/CompanyLogo.vue';
 import { movePage } from '../functions/movePage';
 import Skills from '../data/Skills';
-import { Project, Skill } from '../components/models';
-import ChipTechnology from 'src/components/ChipTechnology.vue';
-import Projects from 'src/data/Projects';
+import Projects from '../data/Projects';
+import experiences from '../data/Experience';
+import {
+  certifications,
+  educations,
+  publication,
+} from '../data/Education';
+import type {
+  Certification,
+  Education,
+  Experience,
+  Project,
+  Publication,
+  Skill,
+} from '../components/models';
 
 export default defineComponent({
   name: 'IndexPage',
@@ -200,93 +345,112 @@ export default defineComponent({
     Icon,
     ProjectsCard,
     ChipTechnology,
-  },
-  data() {
-    return {
-      search: '',
-      filter: '',
-      showElement: false,
-    };
-  },
-  mounted() {
-    this.showElement = true;
-  },
-  unmounted() {
-    this.showElement = false;
-  },
-  computed: {
-    searchedTechnologies(): Skill[] {
-      return this.TechWIDOrigin.filter((tech) =>
-        tech.name.toLowerCase().includes(this.search.toLowerCase())
-      );
-    },
-    filteredTechnologies(): Skill[] {
-      return this.TechWIDOrigin.filter(
-        (tech) => tech.type.toLowerCase() === this.filter.toLowerCase()
-      );
-    },
-  },
-  methods: {
-    movePage,
-    movePageDocument() {
-      this.showElement = false;
-    },
-    searchTechnologies() {
-      this.TechWID = this.TechWIDOrigin;
-      if (this.filter) this.TechWID = this.filteredTechnologies;
-      if (!this.search) return;
-      this.TechWID = this.TechWID.filter((tech: Skill) =>
-        tech.name.toLowerCase().includes(this.search.toLowerCase())
-      );
-    },
-    filterTechnologies() {
-      this.TechWID = this.TechWIDOrigin;
-      if (this.search) this.TechWID = this.searchedTechnologies;
-      if (!this.filter) return;
-      this.TechWID = this.TechWID.filter(
-        (tech: Skill) => tech.type.toLowerCase() === this.filter.toLowerCase()
-      );
-    },
+    CompanyLogo,
   },
   setup() {
+    const router = useRouter();
+    const route = useRoute();
+    const search = ref('');
+    const filter = ref<string | null>(null);
+
     const careerSignals = [
       { value: '3+', label: 'years building web systems' },
       { value: '.NET', label: 'enterprise backend focus' },
       { value: 'Cloud', label: 'Azure and AWS delivery' },
     ];
-    const TechWIDOrigin = Skills as Skill[];
+
+    const summaryCards = [
+      {
+        icon: 'mdi:speedometer',
+        title: 'Performance Mindset',
+        body: 'Optimized LINQ-based query performance from more than one minute to around three seconds for academic systems.',
+      },
+      {
+        icon: 'mdi:cloud-sync-outline',
+        title: 'Cloud Delivery',
+        body: 'Delivered applications with Azure Functions, Azure DevOps, CI/CD, Cosmos DB, and AWS EC2 deployment experience.',
+      },
+      {
+        icon: 'mdi:account-group-outline',
+        title: 'Cross-Team Execution',
+        body: 'Worked with vendors, government stakeholders, and English-speaking product teams to keep systems stable and production-ready.',
+      },
+    ];
+
+    const allTechs = Skills as Skill[];
     const filterType = ['Language', 'Framework', 'Library', 'Database', 'Tool'];
     const dataProjects = Projects as Project[];
 
+    const filteredTechs = computed<Skill[]>(() => {
+      let list = allTechs;
+      if (filter.value) {
+        list = list.filter(
+          (t) => t.type.toLowerCase() === (filter.value || '').toLowerCase()
+        );
+      }
+      if (search.value) {
+        const q = search.value.toLowerCase();
+        list = list.filter((t) => t.name.toLowerCase().includes(q));
+      }
+      return list;
+    });
+
+    const featuredProjects = computed(() => dataProjects.slice(0, 3));
+    const featuredExperiences = computed<Experience[]>(() =>
+      (experiences as Experience[]).slice(0, 3)
+    );
+    const featuredEducations = computed<Education[]>(() =>
+      educations.slice(0, 2)
+    );
+    const featuredCertification = computed<Certification>(
+      () => certifications[0]
+    );
+    const featuredPublication = computed<Publication>(() => publication);
+    const navigateTo = (path: string) => movePage(router, route.path, path);
+
     return {
+      search,
+      filter,
       careerSignals,
-      TechWIDOrigin,
-      TechWID: ref(TechWIDOrigin),
+      summaryCards,
       filterType,
-      dataProjects,
+      filteredTechs,
+      featuredProjects,
+      featuredExperiences,
+      featuredEducations,
+      featuredCertification,
+      featuredPublication,
+      navigateTo,
+      applyFilters: () => {
+        /* computed handles it; method retained for template clarity */
+      },
     };
   },
 });
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+@import '../css/tokens';
+
 .home-page {
   height: auto;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .hero-section,
 .summary-section,
 .technology-section,
-.projects-section {
-  margin: 72px 0;
+.projects-section,
+.experience-preview-section,
+.education-preview-section {
+  margin: 88px 0;
 }
 
 .hero-grid,
 .technology-grid {
   display: grid;
   grid-template-columns: minmax(0, 1.12fr) minmax(320px, 0.88fr);
-  gap: 36px;
+  gap: 44px;
   align-items: center;
 }
 
@@ -294,9 +458,9 @@ export default defineComponent({
 .section-copy h2,
 .section-heading h2 {
   margin: 0;
-  color: #f8faf8;
+  color: $text-strong;
   line-height: 1.05;
-  letter-spacing: 0;
+  letter-spacing: -0.01em;
 }
 
 .hero-copy h1 {
@@ -304,15 +468,21 @@ export default defineComponent({
   font-size: clamp(42px, 7vw, 76px);
 }
 
-.hero-copy h1 span {
+.hero-tagline {
   display: block;
-  color: #a9b8b5;
+  background: $grad-brand;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  background-size: 200% 200%;
+  animation: gradient-shift 8s ease infinite;
 }
 
 .hero-copy p,
 .section-copy p,
 .summary-card p {
-  color: #c9d3d0;
+  color: $text-base;
   line-height: 1.7;
 }
 
@@ -325,11 +495,22 @@ export default defineComponent({
 .eyebrow {
   width: fit-content;
   margin-bottom: 18px;
-  color: #f4b860;
-  font-size: 13px;
+  color: $brand-amber;
+  font-size: 12px;
   font-weight: 700;
-  letter-spacing: 0;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
+}
+
+.eyebrow::before {
+  content: '';
+  display: inline-block;
+  width: 28px;
+  height: 1px;
+  background: $brand-amber;
+  vertical-align: middle;
+  margin-right: 12px;
+  transform: translateY(-3px);
 }
 
 .hero-actions {
@@ -339,43 +520,21 @@ export default defineComponent({
   margin-top: 32px;
 }
 
-.primary-action,
-.secondary-action {
-  min-height: 46px;
-  border-radius: 8px;
-  gap: 8px;
-  padding: 0 18px;
-  font-weight: 700;
-  text-transform: none;
-  letter-spacing: 0;
-}
-
-.primary-action {
-  color: #0b1719;
-  background: linear-gradient(135deg, #2dd4bf, #f4b860);
-  box-shadow: 0 18px 34px rgba(45, 212, 191, 0.18);
-}
-
-.secondary-action {
-  color: #e9f4f1;
-  border-color: rgba(233, 244, 241, 0.28);
-}
-
 .profile-panel {
   position: relative;
   display: grid;
   gap: 18px;
-  animation: panel-float 8s ease-in-out infinite;
+  animation: float 9s ease-in-out infinite;
 }
 
 .profile-frame {
   position: relative;
   overflow: hidden;
   aspect-ratio: 1;
-  border-radius: 8px;
-  border: 1px solid rgba(233, 244, 241, 0.12);
+  border-radius: $r-lg;
+  border: 1px solid $border-subtle;
   background: linear-gradient(145deg, #173840, #1c4b4d);
-  box-shadow: 0 24px 70px rgba(5, 14, 16, 0.36);
+  box-shadow: $shadow-lg;
 }
 
 .profile-frame::after {
@@ -383,8 +542,21 @@ export default defineComponent({
   position: absolute;
   inset: auto 18px 18px;
   height: 3px;
-  background: linear-gradient(90deg, #2dd4bf, #f4b860, #ff7a59);
-  border-radius: 8px;
+  background: $grad-brand;
+  border-radius: $r-pill;
+}
+
+.profile-shimmer {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    115deg,
+    transparent 35%,
+    rgba(255, 255, 255, 0.08) 50%,
+    transparent 65%
+  );
+  pointer-events: none;
+  animation: shimmer-line 4.5s ease-in-out infinite;
 }
 
 .profile-image {
@@ -403,50 +575,69 @@ export default defineComponent({
 .signal,
 .summary-card,
 .tech-panel {
-  border: 1px solid rgba(233, 244, 241, 0.1);
-  border-radius: 8px;
-  background: rgba(9, 24, 28, 0.7);
-  box-shadow: 0 18px 42px rgba(4, 12, 14, 0.22);
+  border: 1px solid $border-subtle;
+  border-radius: $r-lg;
+  background: $surface-1;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: $shadow-sm;
 }
 
 .signal {
   padding: 18px;
+  transition: transform 0.3s $ease-emph, border-color 0.3s $ease-soft;
+}
+
+.signal:hover {
+  transform: translateY(-3px);
+  border-color: $border-accent;
 }
 
 .signal span {
   display: block;
-  color: #f8faf8;
+  color: $text-strong;
   font-size: 22px;
   font-weight: 800;
+  font-family: 'Space Grotesk', sans-serif;
 }
 
 .signal p {
   margin: 6px 0 0;
-  color: #a9b8b5;
+  color: $text-muted;
   font-size: 13px;
   line-height: 1.4;
 }
 
 .summary-card {
-  padding: 24px;
-  transition: transform 0.28s ease, border-color 0.28s ease,
-    background 0.28s ease;
+  padding: 28px;
+  transition: transform 0.35s $ease-emph, border-color 0.35s $ease-soft,
+    background 0.35s $ease-soft, box-shadow 0.35s $ease-soft;
 }
 
 .summary-card:hover,
 .tech-panel:hover {
-  border-color: rgba(45, 212, 191, 0.32);
-  background: rgba(13, 34, 40, 0.82);
-  transform: translateY(-4px);
+  border-color: $border-accent;
+  background: $surface-2;
+  transform: translateY(-6px);
+  box-shadow: $shadow-md;
 }
 
-.summary-card svg {
-  color: #2dd4bf;
+.summary-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: $r-md;
+  background: linear-gradient(135deg, rgba(45, 212, 191, 0.18), rgba(244, 184, 96, 0.12));
+  border: 1px solid $border-subtle;
+  color: $brand-teal;
+  margin-bottom: 18px;
 }
 
 .summary-card h2 {
-  margin: 18px 0 10px;
-  color: #f8faf8;
+  margin: 0 0 10px;
+  color: $text-strong;
   font-size: 21px;
   line-height: 1.25;
 }
@@ -466,9 +657,9 @@ export default defineComponent({
 }
 
 .tech-panel {
-  padding: 20px;
-  transition: transform 0.28s ease, border-color 0.28s ease,
-    background 0.28s ease;
+  padding: 24px;
+  transition: transform 0.35s $ease-emph, border-color 0.35s $ease-soft,
+    background 0.35s $ease-soft, box-shadow 0.35s $ease-soft;
 }
 
 .search-section {
@@ -487,8 +678,9 @@ export default defineComponent({
 
 .result-count {
   margin-top: 16px;
-  color: #a9b8b5;
+  color: $text-muted;
   font-size: 13px;
+  text-align: center;
 }
 
 .section-heading {
@@ -504,19 +696,239 @@ export default defineComponent({
   gap: 22px;
 }
 
-@keyframes panel-float {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-8px);
-  }
+// ---------- Experience preview ----------
+.experience-preview-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 18px;
 }
 
-@media (max-width: 900px) {
+.experience-preview-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 24px;
+  border-radius: $r-lg;
+  background: $surface-1;
+  border: 1px solid $border-subtle;
+  transition: transform 0.35s $ease-emph, border-color 0.35s $ease-soft,
+    background 0.35s $ease-soft, box-shadow 0.35s $ease-soft;
+}
+
+.experience-preview-card:hover {
+  background: $surface-2;
+  border-color: $border-accent;
+  transform: translateY(-4px);
+  box-shadow: $shadow-md;
+}
+
+.experience-preview-head {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.experience-preview-identity h3 {
+  margin: 0 0 2px;
+  font-size: 16px;
+  color: $text-strong;
+  line-height: 1.25;
+}
+
+.experience-preview-identity p {
+  margin: 0;
+  color: $brand-teal;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.experience-preview-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  font-size: 12px;
+  color: $text-muted;
+}
+
+.experience-preview-meta span {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.experience-preview-description {
+  margin: 0;
+  color: $text-base;
+  line-height: 1.55;
+  font-size: 13.5px;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.experience-preview-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: auto;
+}
+
+.experience-preview-tag {
+  background: rgba(45, 212, 191, 0.08);
+  color: $brand-teal;
+  padding: 3px 9px;
+  border-radius: $r-pill;
+  font-size: 11px;
+  font-weight: 600;
+  border: 1px solid rgba(45, 212, 191, 0.20);
+}
+
+// ---------- Education preview ----------
+.education-preview-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 18px;
+  align-items: stretch;
+}
+
+.education-preview-card,
+.education-highlight-card {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 28px;
+  border-radius: $r-lg;
+  background: $surface-1;
+  border: 1px solid $border-subtle;
+  transition: transform 0.35s $ease-emph, border-color 0.35s $ease-soft,
+    background 0.35s $ease-soft, box-shadow 0.35s $ease-soft;
+}
+
+.education-preview-card:hover,
+.education-highlight-card:hover {
+  background: $surface-2;
+  border-color: $border-accent;
+  transform: translateY(-4px);
+  box-shadow: $shadow-md;
+}
+
+.education-preview-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.education-preview-degree {
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: $brand-amber;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.education-preview-copy h3 {
+  margin: 0;
+  font-size: 18px;
+  color: $text-strong;
+  line-height: 1.25;
+}
+
+.education-preview-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  font-size: 12px;
+  color: $text-muted;
+}
+
+.education-preview-meta span {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.education-preview-description {
+  margin: 0;
+  color: $text-base;
+  line-height: 1.6;
+  font-size: 13.5px;
+}
+
+.education-preview-achievements {
+  margin: 0;
+  padding-left: 18px;
+  color: $text-base;
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.education-preview-achievements li {
+  margin-bottom: 4px;
+}
+
+.education-highlight-badge {
+  display: inline-block;
+  width: fit-content;
+  padding: 3px 12px;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: $brand-amber;
+  background: rgba(244, 184, 96, 0.10);
+  border: 1px solid rgba(244, 184, 96, 0.24);
+  border-radius: $r-pill;
+}
+
+.education-highlight-block {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.education-highlight-block p {
+  margin: 4px 0 0;
+  color: $text-muted;
+  font-size: 12.5px;
+  line-height: 1.5;
+}
+
+.education-highlight-icon {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: $r-md;
+  background: linear-gradient(135deg, rgba(45, 212, 191, 0.18), rgba(244, 184, 96, 0.12));
+  border: 1px solid $border-subtle;
+  color: $brand-teal;
+}
+
+.education-highlight-icon.secondary {
+  color: $brand-amber;
+}
+
+.education-highlight-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: $text-strong;
+  line-height: 1.3;
+}
+
+.education-highlight-divider {
+  height: 1px;
+  background: $border-subtle;
+}
+
+@media (max-width: $bp-md) {
   .hero-grid,
-  .technology-grid {
+  .technology-grid,
+  .education-preview-grid {
     grid-template-columns: 1fr;
   }
 
@@ -529,12 +941,14 @@ export default defineComponent({
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: $bp-sm) {
   .hero-section,
   .summary-section,
   .technology-section,
-  .projects-section {
-    margin: 48px 0;
+  .projects-section,
+  .experience-preview-section,
+  .education-preview-section {
+    margin: 56px 0;
   }
 
   .hero-copy h1 {
@@ -545,11 +959,6 @@ export default defineComponent({
   .section-heading {
     align-items: stretch;
     flex-direction: column;
-  }
-
-  .primary-action,
-  .secondary-action {
-    width: 100%;
   }
 
   .signal-list,

@@ -104,6 +104,27 @@ const projects: Project[] = [
     ],
   },
   {
+    id: '6705a1b85c3e4d2f1a9b8c01',
+    name: 'CPNS Tryouts',
+    type: 'SaaS Product',
+    description:
+      'Founded and built tes-cpns.com, a SaaS platform that helps Indonesian civil-servant (CPNS) candidates prepare for the SKD selection test through realistic tryouts, full TWK/TIU/TKP question banks with discussions, performance analytics, and a public leaderboard. Built end-to-end with Next.js App Router, MongoDB Atlas, NextAuth, AWS S3 + CloudFront for media delivery, Resend for transactional email, and Midtrans for paid tryout package checkout. Engineered for SEO-friendly content (articles, materi, sitemaps) and a responsive Tailwind/shadcn UI optimized for low-end mobile devices used by exam candidates across Indonesia.',
+    url: 'https://tes-cpns.com',
+    urlGithub: 'https://github.com/AnnasIsmail/cpns-tryouts',
+    image: [require('../assets/cpns-tryouts.png')],
+    technology: [
+      '64cd01363807d1327729475c',
+      '64cd01363807d1327729473f',
+      '64cd01363807d13277294750',
+      '64cd01363807d1327729475d',
+      '64cd01363807d13277294741',
+      '64cd01363807d1327729474c',
+      '64cd01363807d1327729475e',
+      '64cd01363807d1327729475f',
+      '64cd01363807d13277294757',
+    ],
+  },
+  {
     id: '64d45a925a97fc4efd8a8075',
     name: 'GCONN',
     type: 'Web Development',

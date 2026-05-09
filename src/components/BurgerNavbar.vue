@@ -1,10 +1,15 @@
 <template>
-  <div>
-    <div class="menu-btn" :class="{ open: isOpen }">
-      <div class="menu-btn__burger"></div>
-    </div>
-  </div>
+  <button
+    type="button"
+    class="menu-btn"
+    :class="{ open: isOpen }"
+    aria-label="Toggle navigation menu"
+    :aria-expanded="isOpen"
+  >
+    <span class="menu-btn__burger" aria-hidden="true"></span>
+  </button>
 </template>
+
 <script lang="ts">
 import { defineComponent } from 'vue';
 
@@ -20,46 +25,69 @@ export default defineComponent({
 });
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+@import '../css/tokens';
+
 .menu-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border-radius: $r-md;
+  border: 1px solid $border-subtle;
+  background: $surface-glass;
   cursor: pointer;
+  transition: background 0.3s $ease-soft, border-color 0.3s $ease-soft;
 }
+
+.menu-btn:hover {
+  background: rgba(45, 212, 191, 0.10);
+  border-color: $border-accent;
+}
+
 .menu-btn__burger {
-  width: 30px;
-  height: 4px;
-  margin-top: 15px;
-  background: #fff;
-  border-radius: 5px;
-  box-shadow: 0 2px 5px rgba(255, 101, 47, 0.2);
-  transition: all 0.5s ease-in-out;
+  position: relative;
+  width: 22px;
+  height: 2.5px;
+  background: $text-strong;
+  border-radius: 2px;
+  transition: background 0.4s $ease-soft, transform 0.4s $ease-emph;
 }
+
 .menu-btn__burger::before,
 .menu-btn__burger::after {
   content: '';
   position: absolute;
-  width: 30px;
-  height: 4px;
-  background: #fff;
-  border-radius: 5px;
-  box-shadow: 0 2px 5px rgba(255, 101, 47, 0.2);
-  transition: all 0.5s ease-in-out;
+  left: 0;
+  width: 22px;
+  height: 2.5px;
+  background: $text-strong;
+  border-radius: 2px;
+  transition: transform 0.4s $ease-emph, top 0.4s $ease-emph;
 }
+
 .menu-btn__burger::before {
-  transform: translateY(-10px);
+  top: -7px;
 }
+
 .menu-btn__burger::after {
-  transform: translateY(10px);
+  top: 7px;
 }
-/* ANIMATION */
+
 .menu-btn.open .menu-btn__burger {
-  transform: translateX(-50px);
   background: transparent;
-  box-shadow: none;
 }
+
 .menu-btn.open .menu-btn__burger::before {
-  transform: rotate(45deg) translate(35px, -35px);
+  top: 0;
+  transform: rotate(45deg);
 }
+
 .menu-btn.open .menu-btn__burger::after {
-  transform: rotate(-45deg) translate(35px, 35px);
+  top: 0;
+  transform: rotate(-45deg);
 }
 </style>

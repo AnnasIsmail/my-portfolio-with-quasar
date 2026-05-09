@@ -1,18 +1,31 @@
 <template>
   <div class="company-logo-container">
     <div class="logo-wrapper" :class="logoClass">
-      <img
-        :src="logoSrc"
-        :alt="altText"
-        class="company-logo"
-        :style="logoStyle"
-      />
+      <img :src="logoSrc" :alt="altText" class="company-logo" />
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { computed, defineComponent } from 'vue';
+
+const logoMap: Record<string, string> = {
+  'atr-bpn': require('../assets/logos/ATR-BPN-logo.jpg'),
+  binus: require('../assets/logos/binus_it_div.jpg'),
+  'binus-university': require('../assets/logos/binus-university.jpg'),
+  'master-graduate': require('../assets/logos/logo-master-graduate.jpg'),
+  ptma: require('../assets/logos/PTMA_logo.png'),
+  telkom: require('../assets/logos/telkom_logo.jpg'),
+};
+
+const companyNames: Record<string, string> = {
+  'atr-bpn': 'Kementerian ATR/BPN',
+  binus: 'IT Division Bina Nusantara',
+  'binus-university': 'Bina Nusantara University',
+  'master-graduate': 'Master Graduate',
+  ptma: 'PTMA',
+  telkom: 'Telkom Indonesia',
+};
 
 export default defineComponent({
   name: 'CompanyLogo',
@@ -34,63 +47,29 @@ export default defineComponent({
         ['default', 'card', 'timeline'].includes(value),
     },
   },
-  computed: {
-    logoSrc() {
-      try {
-        // Try to load the specific logo for the company
-        const logoMap: Record<string, string> = {
-          binus: require('../assets/logos/binus_it_div.jpg'),
-          'binus-university': require('../assets/logos/binus-university.jpg'),
-          'master-graduate': require('../assets/logos/logo-master-graduate.jpg'),
-          telkom: require('../assets/logos/telkom_logo.jpg'),
-          'atr-bpn': require('../assets/logos/ATR-BPN-logo.jpg'),
-          ptma: require('../assets/logos/PTMA_logo.png'),
-        };
+  setup(props) {
+    const normalizedCompany = computed(() => props.company.toLowerCase());
+    const logoSrc = computed(
+      () =>
+        logoMap[normalizedCompany.value] ||
+        require('../assets/logos/placeholder-logo.svg')
+    );
+    const altText = computed(
+      () => companyNames[normalizedCompany.value] || 'Company Logo'
+    );
+    const logoClass = computed(() => ({
+      [`logo-${props.size}`]: true,
+      [`logo-${props.variant}`]: true,
+    }));
 
-        return (
-          logoMap[this.company] ||
-          require('../assets/logos/placeholder-logo.svg')
-        );
-      } catch (error) {
-        // Fallback to placeholder if logo not found
-        return require('../assets/logos/placeholder-logo.svg');
-      }
-    },
-    altText() {
-      const companyNames: Record<string, string> = {
-        binus: 'IT Division Bina Nusantara',
-        'binus-university': 'Bina Nusantara University',
-        'master-graduate': 'Master Graduate',
-        telkom: 'Telkom Indonesia',
-        'atr-bpn': 'Kementerian ATR/BPN',
-        ptma: 'PTMA',
-        default: 'Company Logo',
-      };
-
-      return (
-        companyNames[this.company.toLowerCase()] || companyNames['default']
-      );
-    },
-    logoClass() {
-      return {
-        [`logo-${this.size}`]: true,
-        [`logo-${this.variant}`]: true,
-      };
-    },
-    logoStyle() {
-      const sizeMap = {
-        small: { width: '40px', height: '40px' },
-        medium: { width: '60px', height: '60px' },
-        large: { width: '80px', height: '80px' },
-      };
-
-      return sizeMap[this.size as keyof typeof sizeMap];
-    },
+    return { altText, logoClass, logoSrc };
   },
 });
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+@import '../css/tokens';
+
 .company-logo-container {
   display: flex;
   align-items: center;
@@ -101,33 +80,47 @@ export default defineComponent({
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: $r-md;
+  background: $surface-glass;
+  border: 1px solid $border-subtle;
+  transition: transform 0.3s $ease-emph, border-color 0.3s $ease-soft,
+    background 0.3s $ease-soft, box-shadow 0.3s $ease-soft;
   overflow: hidden;
 }
 
 .logo-wrapper:hover {
-  background: rgba(255, 255, 255, 0.1);
-  border-color: rgba(45, 212, 191, 0.3);
+  background: rgba(45, 212, 191, 0.1);
+  border-color: $border-accent;
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(45, 212, 191, 0.15);
+  box-shadow: 0 10px 26px rgba(45, 212, 191, 0.14);
 }
 
 .company-logo {
   object-fit: contain;
-  filter: brightness(0.9);
-  transition: all 0.3s ease;
-  border-radius: 8px;
+  transition: transform 0.3s $ease-emph, filter 0.3s $ease-soft;
+  border-radius: $r-sm;
 }
 
 .logo-wrapper:hover .company-logo {
-  filter: brightness(1.1);
+  filter: brightness(1.08);
   transform: scale(1.05);
 }
 
-/* Size variants */
+.logo-small .company-logo {
+  width: 40px;
+  height: 40px;
+}
+
+.logo-medium .company-logo {
+  width: 60px;
+  height: 60px;
+}
+
+.logo-large .company-logo {
+  width: 80px;
+  height: 80px;
+}
+
 .logo-small {
   padding: 8px;
 }
@@ -140,25 +133,23 @@ export default defineComponent({
   padding: 16px;
 }
 
-/* Style variants */
 .logo-card {
-  background: rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(10px);
+  background: rgba(233, 244, 241, 0.04);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
 
 .logo-timeline {
   background: rgba(45, 212, 191, 0.1);
-  border: 1px solid rgba(45, 212, 191, 0.2);
+  border-color: rgba(45, 212, 191, 0.18);
 }
 
-/* Education page specific styling */
 .logo-card .company-logo,
 .logo-timeline .company-logo {
-  border-radius: 8px;
+  border-radius: $r-sm;
 }
 
-/* Responsive adjustments */
-@media (max-width: 768px) {
+@media (max-width: $bp-sm) {
   .logo-small {
     padding: 6px;
   }
@@ -169,10 +160,6 @@ export default defineComponent({
 
   .logo-large {
     padding: 14px;
-  }
-
-  .company-logo {
-    border-radius: 6px;
   }
 }
 </style>

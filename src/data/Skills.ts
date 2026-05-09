@@ -270,6 +270,42 @@ const Skills: Skill[] = [
     description:
       'LINQ provides expressive query capabilities in C# for working with collections, relational data, and optimized application data flows.',
   },
+  {
+    id: '64cd01363807d1327729475c',
+    name: 'Next.js',
+    link: 'https://nextjs.org/',
+    icon: 'logos:nextjs-icon',
+    type: 'framework',
+    description:
+      'Next.js is a production-grade React framework with App Router, server components, server actions, and built-in optimizations for performance and SEO.',
+  },
+  {
+    id: '64cd01363807d1327729475d',
+    name: 'Tailwind CSS',
+    link: 'https://tailwindcss.com/',
+    icon: 'logos:tailwindcss-icon',
+    type: 'framework',
+    description:
+      'Tailwind CSS is a utility-first CSS framework that enables rapid UI development with consistent design tokens and minimal CSS overhead.',
+  },
+  {
+    id: '64cd01363807d1327729475e',
+    name: 'Mongoose',
+    link: 'https://mongoosejs.com/',
+    icon: 'devicon:mongoose',
+    type: 'library',
+    description:
+      'Mongoose is an elegant MongoDB object modeling library for Node.js with schema validation, middleware, and rich query helpers.',
+  },
+  {
+    id: '64cd01363807d1327729475f',
+    name: 'NextAuth.js',
+    link: 'https://next-auth.js.org/',
+    icon: 'simple-icons:auth0',
+    type: 'library',
+    description:
+      'NextAuth.js is a complete authentication solution for Next.js apps with support for OAuth providers, credentials, JWT, and database sessions.',
+  },
 ];
 
 export default Skills;
