@@ -1,7 +1,7 @@
 <template>
   <header class="main-navbar" :class="{ scrolled: isScrolled }">
     <div class="logo" @click="navigateTo('/')">
-      <span class="logo-mark">A</span>
+      <img src="/icons/annas-monogram.svg" alt="Annas logo" class="logo-mark" />
       <span class="logo-name gradient-text">Annas</span>
     </div>
 
@@ -125,18 +125,11 @@ export default defineComponent({
 }
 
 .logo-mark {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+  display: block;
   width: 34px;
   height: 34px;
   border-radius: $r-md;
-  background: $grad-brand;
-  color: #08171a;
-  font-family: 'Space Grotesk', sans-serif;
-  font-weight: 800;
-  font-size: 18px;
-  box-shadow: 0 8px 22px rgba(45, 212, 191, 0.35);
+  filter: drop-shadow(0 8px 14px rgba(45, 212, 191, 0.32));
 }
 
 .logo-name {

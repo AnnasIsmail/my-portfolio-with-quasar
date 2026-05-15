@@ -3,7 +3,7 @@
     <div class="footer-inner">
       <div class="footer-top">
         <div class="footer-brand">
-          <span class="logo-mark">A</span>
+          <img src="/icons/annas-monogram.svg" alt="Annas logo" class="logo-mark" />
           <div>
             <div class="brand-name gradient-text">Annas Ismail Muhammad</div>
             <div class="brand-tag">Full Stack Developer in Jakarta, ID</div>
@@ -124,18 +124,11 @@ export default defineComponent({
 }
 
 .logo-mark {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+  display: block;
   width: 38px;
   height: 38px;
   border-radius: $r-md;
-  background: $grad-brand;
-  color: #08171a;
-  font-family: 'Space Grotesk', sans-serif;
-  font-weight: 800;
-  font-size: 18px;
-  box-shadow: 0 8px 22px rgba(45, 212, 191, 0.30);
+  filter: drop-shadow(0 8px 14px rgba(45, 212, 191, 0.28));
 }
 
 .brand-name {

@@ -6,8 +6,8 @@
         <span class="gradient-text">Professional Experience</span>
       </h1>
       <p class="page-description">
-        My professional journey in software development and enterprise
-        application development.
+        Roles where I built, maintained, and improved internal systems and
+        user-facing applications.
       </p>
     </header>
 

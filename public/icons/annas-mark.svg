@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title">
+  <title id="title">Annas monogram</title>
+  <defs>
+    <linearGradient id="rimGradient" x1="18" y1="16" x2="108" y2="112" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#4fd8f7" />
+      <stop offset="0.52" stop-color="#34e2c2" />
+      <stop offset="1" stop-color="#ffc76b" />
+    </linearGradient>
+    <linearGradient id="markFill" x1="39" y1="35" x2="87" y2="92" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fbfdfc" />
+      <stop offset="1" stop-color="#d8ebe4" />
+    </linearGradient>
+    <filter id="outerGlow" x="-30" y="-30" width="188" height="188" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#34e2c2" flood-opacity="0.18" />
+    </filter>
+  </defs>
+
+  <rect width="128" height="128" rx="30" fill="#08171b" />
+  <rect x="10" y="10" width="108" height="108" rx="24" fill="none" stroke="url(#rimGradient)" stroke-width="4" opacity="0.95" filter="url(#outerGlow)" />
+  <rect x="18" y="18" width="92" height="92" rx="20" fill="url(#rimGradient)" opacity="0.07" />
+  <path d="M64 31L92 96H79.4L72.8 79.8H55.2L48.6 96H36L64 31ZM68.9 70.1L64 57.5L59.1 70.1H68.9Z" fill="url(#markFill)" />
+</svg>

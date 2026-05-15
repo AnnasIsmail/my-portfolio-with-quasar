@@ -6,8 +6,8 @@
         <span class="gradient-text">Education & Certifications</span>
       </h1>
       <p class="page-description">
-        My academic journey, professional certifications, and research
-        contributions.
+        The academic background, certification, and research work behind my
+        technical foundation.
       </p>
     </header>
 

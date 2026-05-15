@@ -13,7 +13,10 @@
 
 html,
 body {
-  background: $bg-base;
+  background:
+    radial-gradient(circle at top, rgba(79, 216, 247, 0.08), transparent 28%),
+    radial-gradient(circle at 85% 18%, rgba(255, 199, 107, 0.08), transparent 22%),
+    $bg-base;
   color: $text-base;
 }
 
@@ -128,20 +131,118 @@ a {
   }
 }
 
+@keyframes hero-glow-rise {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 28px, 0) scale(0.96);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes grid-drift {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(-10px, 12px, 0);
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes intro-mark-bloom {
+  0% {
+    opacity: 0;
+    transform: scale(0.72) rotate(-10deg);
+    filter: blur(10px);
+  }
+  55% {
+    opacity: 1;
+    transform: scale(1.04) rotate(0deg);
+    filter: blur(0);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes intro-pulse-ring {
+  0% {
+    opacity: 0.55;
+    transform: scale(0.72);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.48);
+  }
+}
+
+@keyframes intro-door-left {
+  0%,
+  62% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-108%);
+  }
+}
+
+@keyframes intro-door-right {
+  0%,
+  62% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(108%);
+  }
+}
+
+@keyframes intro-copy-rise {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 24px, 0);
+    filter: blur(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+    filter: blur(0);
+  }
+}
+
 // Page-level Vue <transition> classes
+.intro-overlay-enter-active,
+.intro-overlay-leave-active {
+  transition: opacity 0.6s $ease-soft;
+}
+
+.intro-overlay-enter-from,
+.intro-overlay-leave-to {
+  opacity: 0;
+}
+
 .page-fade-enter-active,
 .page-fade-leave-active {
-  transition: opacity 0.45s $ease-soft, transform 0.45s $ease-soft;
+  transition: opacity 0.55s $ease-soft, transform 0.55s $ease-soft,
+    filter 0.55s $ease-soft;
 }
 
 .page-fade-enter-from {
   opacity: 0;
-  transform: translateY(12px);
+  transform: translateY(20px) scale(0.985);
+  filter: blur(12px);
 }
 
 .page-fade-leave-to {
   opacity: 0;
-  transform: translateY(-8px);
+  transform: translateY(-16px) scale(0.99);
+  filter: blur(10px);
 }
 
 // ---------------------------------------------------------------------
@@ -153,6 +254,7 @@ a {
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid $border-subtle;
   border-radius: $r-lg;
+  box-shadow: $shadow-sm;
   transition: transform 0.35s $ease-emph, border-color 0.35s $ease-soft,
     background 0.35s $ease-soft, box-shadow 0.35s $ease-soft;
 }
@@ -161,7 +263,7 @@ a {
   background: $surface-2;
   border-color: $border-accent;
   transform: translateY(-4px);
-  box-shadow: $shadow-md;
+  box-shadow: $shadow-md, 0 0 0 1px rgba(79, 216, 247, 0.06);
 }
 
 .gradient-text {
@@ -172,6 +274,16 @@ a {
   -webkit-text-fill-color: transparent;
   background-clip: text;
   color: transparent;
+}
+
+.glass-tooltip {
+  background: rgba(5, 13, 16, 0.98) !important;
+  color: $text-strong !important;
+  border: 1px solid rgba(233, 244, 241, 0.22);
+  border-radius: $r-sm;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.32);
+  font-size: 12px;
+  font-weight: 700;
 }
 
 // ---------------------------------------------------------------------
@@ -271,7 +383,7 @@ a {
 // Ghost (outlined)
 .btn--ghost {
   color: $text-strong;
-  background: rgba(233, 244, 241, 0.04);
+  background: rgba(236, 247, 244, 0.06);
   border-color: $border-soft;
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
@@ -280,9 +392,9 @@ a {
 .btn--ghost:hover {
   color: $text-strong;
   border-color: $border-accent;
-  background: rgba(45, 212, 191, 0.08);
+  background: rgba(52, 226, 194, 0.1);
   transform: translateY(-2px);
-  box-shadow: 0 12px 28px rgba(45, 212, 191, 0.14);
+  box-shadow: 0 14px 32px rgba(52, 226, 194, 0.16);
 }
 
 .btn--ghost:active {
@@ -298,7 +410,7 @@ a {
 
 .btn--soft:hover {
   color: $text-strong;
-  background: rgba(45, 212, 191, 0.10);
+  background: rgba(52, 226, 194, 0.12);
   border-color: $border-accent;
   transform: translateY(-1px);
 }
@@ -368,14 +480,38 @@ a {
 // in MainLayout.vue toggles `is-visible`.
 [data-reveal] {
   opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 0.7s $ease-emph, transform 0.7s $ease-emph;
-  will-change: opacity, transform;
+  transform: translate3d(0, 28px, 0) scale(0.985);
+  filter: blur(12px);
+  transition: opacity 0.85s $ease-emph, transform 0.85s $ease-emph,
+    filter 0.85s $ease-emph;
+  will-change: opacity, transform, filter;
 }
 
 [data-reveal].is-visible {
   opacity: 1;
-  transform: translateY(0);
+  filter: blur(0);
+  transform: translate3d(0, 0, 0) scale(1);
+}
+
+[data-reveal='left'] {
+  transform: translate3d(-34px, 18px, 0) scale(0.985);
+}
+
+[data-reveal='right'] {
+  transform: translate3d(34px, 18px, 0) scale(0.985);
+}
+
+[data-reveal='zoom'] {
+  transform: translate3d(0, 28px, 0) scale(0.94);
+}
+
+[data-reveal='hero'] {
+  transform: translate3d(0, 42px, 0) scale(0.96);
+}
+
+[data-parallax] {
+  transform: translate3d(0, var(--parallax-y, 0), 0);
+  will-change: transform;
 }
 
 [data-reveal][data-reveal-delay='1'].is-visible {
@@ -389,6 +525,34 @@ a {
 }
 [data-reveal][data-reveal-delay='4'].is-visible {
   transition-delay: 0.32s;
+}
+
+.intro-overlay__grid {
+  animation: grid-drift 8s ease-in-out infinite;
+}
+
+.intro-overlay__mark {
+  animation: intro-mark-bloom 0.9s $ease-emph both;
+}
+
+.intro-overlay__pulse {
+  animation: intro-pulse-ring 1.3s ease-out 0.18s infinite;
+}
+
+.intro-overlay__title {
+  animation: intro-copy-rise 0.7s $ease-emph 0.22s both;
+}
+
+.intro-overlay__subtitle {
+  animation: intro-copy-rise 0.7s $ease-emph 0.34s both;
+}
+
+.intro-overlay__door--left {
+  animation: intro-door-left 1.65s $ease-emph both;
+}
+
+.intro-overlay__door--right {
+  animation: intro-door-right 1.65s $ease-emph both;
 }
 
 // Mobile-only Quasar menu fix
@@ -417,5 +581,15 @@ a {
   [data-reveal] {
     opacity: 1;
     transform: none;
+  }
+
+  .intro-overlay__grid,
+  .intro-overlay__mark,
+  .intro-overlay__pulse,
+  .intro-overlay__title,
+  .intro-overlay__subtitle,
+  .intro-overlay__door--left,
+  .intro-overlay__door--right {
+    animation: none !important;
   }
 }

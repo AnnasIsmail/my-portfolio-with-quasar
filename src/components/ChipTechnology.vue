@@ -12,7 +12,7 @@
       transition-hide="scale"
       class="glass-tooltip"
     >
-      <span class="gradient-text">{{ Skill.name }}</span>
+      <span class="tooltip-label">{{ Skill.name }}</span>
     </q-tooltip>
   </a>
 </template>
@@ -91,11 +91,8 @@ export default defineComponent({
   border-radius: $r-sm;
 }
 
-.gradient-text {
-  background: $grad-brand;
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  color: transparent;
+.tooltip-label {
+  color: $text-strong;
+  text-shadow: 0 1px 8px rgba(5, 13, 16, 0.6);
 }
 </style>

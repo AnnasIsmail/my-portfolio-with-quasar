@@ -1,22 +1,24 @@
 <template>
   <q-page class="home-page">
-    <section class="hero-section" data-reveal>
+    <section class="hero-section" data-reveal="hero">
+      <div class="hero-orb hero-orb--teal" aria-hidden="true"></div>
+      <div class="hero-orb hero-orb--amber" aria-hidden="true"></div>
       <div class="hero-grid">
-        <div class="hero-copy">
-          <div class="eyebrow">Full Stack Developer</div>
+        <div class="hero-copy" data-reveal="left" data-reveal-delay="1">
+          <div class="eyebrow hero-chip">Full Stack Developer</div>
           <h1>
             Annas Ismail Muhammad
             <span class="hero-tagline">
-              builds reliable enterprise web applications.
+              builds dependable web applications for real-world use.
             </span>
           </h1>
-          <p>
-            Programmer with Information Systems and Computer Science
-            education, experienced in .NET, Angular, React.js, Azure, AWS, SQL
-            Server, and performance-focused data retrieval.
+          <p data-reveal="left" data-reveal-delay="2">
+            I work across frontend, backend, and data-heavy systems, with
+            hands-on experience in .NET, Angular, React.js, Azure, AWS, and SQL
+            Server.
           </p>
 
-          <div class="hero-actions">
+          <div class="hero-actions" data-reveal="left" data-reveal-delay="3">
             <button
               type="button"
               class="btn btn--primary btn--lg"
@@ -36,17 +38,18 @@
           </div>
         </div>
 
-        <div class="profile-panel">
-          <div class="profile-frame">
+        <div class="profile-panel" data-reveal="right" data-reveal-delay="2">
+          <div class="profile-frame" data-parallax="0.08">
             <q-img src="~assets/photo.png" class="profile-image" />
             <div class="profile-shimmer" aria-hidden="true"></div>
+            <div class="profile-ring" aria-hidden="true"></div>
           </div>
           <div class="signal-list">
             <div
               v-for="(item, idx) in careerSignals"
               :key="item.label"
               class="signal"
-              data-reveal
+              data-reveal="zoom"
               :data-reveal-delay="idx + 1"
             >
               <span>{{ item.value }}</span>
@@ -57,13 +60,13 @@
       </div>
     </section>
 
-    <section class="summary-section" data-reveal>
+    <section class="summary-section" data-reveal="hero">
       <div class="summary-grid">
         <article
           v-for="(card, idx) in summaryCards"
           :key="card.title"
           class="summary-card"
-          data-reveal
+          data-reveal="zoom"
           :data-reveal-delay="idx + 1"
         >
           <div class="summary-icon">
@@ -75,11 +78,11 @@
       </div>
     </section>
 
-    <section class="technology-section" data-reveal>
+    <section class="technology-section" data-reveal="hero">
       <div class="technology-grid">
-        <div class="section-copy">
+        <div class="section-copy" data-reveal="left" data-reveal-delay="1">
           <div class="eyebrow">Technical Focus</div>
-          <h2>Strong around enterprise stacks, data, and cloud workflows.</h2>
+          <h2>Comfortable with enterprise systems, data work, and cloud delivery.</h2>
           <p>
             My recent work spans internal warehouse systems, online exam
             platforms, student career monitoring, legal document management,
@@ -87,7 +90,7 @@
           </p>
         </div>
 
-        <div class="tech-panel">
+        <div class="tech-panel" data-reveal="right" data-reveal-delay="2">
           <div class="search-section">
             <q-input
               dense
@@ -123,38 +126,11 @@
       </div>
     </section>
 
-    <section class="projects-section" data-reveal>
-      <div class="section-heading">
-        <div>
-          <div class="eyebrow">Selected Work</div>
-          <h2>Projects aligned with the resume</h2>
-        </div>
-        <button
-          type="button"
-          class="btn btn--ghost"
-          @click="navigateTo('/projects')"
-        >
-          <span>See More</span>
-          <Icon icon="mdi:arrow-right" />
-        </button>
-      </div>
-
-      <div class="project-list">
-        <projects-card
-          v-for="(data, idx) in featuredProjects"
-          :key="data.id"
-          :Project="data"
-          data-reveal
-          :data-reveal-delay="(idx % 4) + 1"
-        />
-      </div>
-    </section>
-
-    <section class="experience-preview-section" data-reveal>
+    <section class="experience-preview-section" data-reveal="hero">
       <div class="section-heading">
         <div>
           <div class="eyebrow">Experience Snapshot</div>
-          <h2>Recent roles across enterprise, campus, and public-sector work.</h2>
+          <h2>Recent work across enterprise, campus, and public-sector teams.</h2>
         </div>
         <button
           type="button"
@@ -171,7 +147,7 @@
           v-for="(item, idx) in featuredExperiences"
           :key="item.id"
           class="experience-preview-card"
-          data-reveal
+          data-reveal="zoom"
           :data-reveal-delay="(idx % 3) + 1"
         >
           <div class="experience-preview-head">
@@ -214,11 +190,38 @@
       </div>
     </section>
 
-    <section class="education-preview-section" data-reveal>
+    <section class="projects-section" data-reveal="hero">
+      <div class="section-heading">
+        <div>
+          <div class="eyebrow">Selected Work</div>
+          <h2>A few projects I have built or worked on closely.</h2>
+        </div>
+        <button
+          type="button"
+          class="btn btn--ghost"
+          @click="navigateTo('/projects')"
+        >
+          <span>See More</span>
+          <Icon icon="mdi:arrow-right" />
+        </button>
+      </div>
+
+      <div class="project-list">
+        <projects-card
+          v-for="(data, idx) in featuredProjects"
+          :key="data.id"
+          :Project="data"
+          data-reveal="zoom"
+          :data-reveal-delay="(idx % 4) + 1"
+        />
+      </div>
+    </section>
+
+    <section class="education-preview-section" data-reveal="hero">
       <div class="section-heading">
         <div>
           <div class="eyebrow">Education Snapshot</div>
-          <h2>Academic depth backed by certification and published research.</h2>
+          <h2>Education, certification, and research that shaped how I work.</h2>
         </div>
         <button
           type="button"
@@ -235,7 +238,7 @@
           v-for="(item, idx) in featuredEducations"
           :key="item.id"
           class="education-preview-card"
-          data-reveal
+          data-reveal="zoom"
           :data-reveal-delay="idx + 1"
         >
           <div class="education-preview-head">
@@ -278,7 +281,7 @@
           </ul>
         </article>
 
-        <aside class="education-highlight-card" data-reveal data-reveal-delay="3">
+        <aside class="education-highlight-card" data-reveal="zoom" data-reveal-delay="3">
           <div class="education-highlight-badge">Recognition</div>
 
           <div class="education-highlight-block">
@@ -437,6 +440,11 @@ export default defineComponent({
   overflow: visible;
 }
 
+.hero-section {
+  position: relative;
+  isolation: isolate;
+}
+
 .hero-section,
 .summary-section,
 .technology-section,
@@ -452,6 +460,34 @@ export default defineComponent({
   grid-template-columns: minmax(0, 1.12fr) minmax(320px, 0.88fr);
   gap: 44px;
   align-items: center;
+}
+
+.hero-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(24px);
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0.7;
+  animation: float 16s ease-in-out infinite;
+}
+
+.hero-orb--teal {
+  width: 280px;
+  height: 280px;
+  top: 24px;
+  right: 28%;
+  background: radial-gradient(circle, rgba(79, 216, 247, 0.22), transparent 68%);
+}
+
+.hero-orb--amber {
+  width: 220px;
+  height: 220px;
+  bottom: -14px;
+  right: -40px;
+  background: radial-gradient(circle, rgba(255, 199, 107, 0.2), transparent 68%);
+  animation-duration: 20s;
+  animation-direction: reverse;
 }
 
 .hero-copy h1,
@@ -520,6 +556,24 @@ export default defineComponent({
   margin-top: 32px;
 }
 
+.hero-chip {
+  padding: 5px 14px 5px 0;
+  position: relative;
+}
+
+.hero-chip::after {
+  content: '';
+  position: absolute;
+  left: 38px;
+  right: -10px;
+  top: 50%;
+  height: 30px;
+  transform: translateY(-50%);
+  border-radius: $r-pill;
+  background: linear-gradient(90deg, rgba(79, 216, 247, 0.14), rgba(255, 199, 107, 0.1), transparent);
+  z-index: -1;
+}
+
 .profile-panel {
   position: relative;
   display: grid;
@@ -533,8 +587,11 @@ export default defineComponent({
   aspect-ratio: 1;
   border-radius: $r-lg;
   border: 1px solid $border-subtle;
-  background: linear-gradient(145deg, #173840, #1c4b4d);
+  background:
+    radial-gradient(circle at top, rgba(79, 216, 247, 0.14), transparent 34%),
+    linear-gradient(145deg, #17353b, #1f5053);
   box-shadow: $shadow-lg;
+  animation: hero-glow-rise 1.1s $ease-emph both;
 }
 
 .profile-frame::after {
@@ -544,6 +601,15 @@ export default defineComponent({
   height: 3px;
   background: $grad-brand;
   border-radius: $r-pill;
+}
+
+.profile-ring {
+  position: absolute;
+  inset: 12px;
+  border-radius: calc(#{$r-lg} - 6px);
+  border: 1px solid rgba(233, 244, 241, 0.14);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.03);
+  pointer-events: none;
 }
 
 .profile-shimmer {
@@ -577,7 +643,9 @@ export default defineComponent({
 .tech-panel {
   border: 1px solid $border-subtle;
   border-radius: $r-lg;
-  background: $surface-1;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.015), rgba(255, 255, 255, 0)),
+    $surface-1;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   box-shadow: $shadow-sm;
@@ -622,6 +690,12 @@ export default defineComponent({
   box-shadow: $shadow-md;
 }
 
+.summary-card:hover .summary-icon,
+.experience-preview-card:hover .experience-preview-tag,
+.education-highlight-card:hover .education-highlight-icon {
+  transform: translateY(-2px) scale(1.03);
+}
+
 .summary-icon {
   display: inline-flex;
   align-items: center;
@@ -629,10 +703,11 @@ export default defineComponent({
   width: 52px;
   height: 52px;
   border-radius: $r-md;
-  background: linear-gradient(135deg, rgba(45, 212, 191, 0.18), rgba(244, 184, 96, 0.12));
+  background: linear-gradient(135deg, rgba(52, 226, 194, 0.2), rgba(79, 216, 247, 0.12), rgba(255, 199, 107, 0.1));
   border: 1px solid $border-subtle;
   color: $brand-teal;
   margin-bottom: 18px;
+  transition: transform 0.35s $ease-emph, background 0.35s $ease-soft;
 }
 
 .summary-card h2 {
@@ -709,7 +784,9 @@ export default defineComponent({
   gap: 12px;
   padding: 24px;
   border-radius: $r-lg;
-  background: $surface-1;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.015), rgba(255, 255, 255, 0)),
+    $surface-1;
   border: 1px solid $border-subtle;
   transition: transform 0.35s $ease-emph, border-color 0.35s $ease-soft,
     background 0.35s $ease-soft, box-shadow 0.35s $ease-soft;
@@ -775,13 +852,14 @@ export default defineComponent({
 }
 
 .experience-preview-tag {
-  background: rgba(45, 212, 191, 0.08);
+  background: rgba(52, 226, 194, 0.11);
   color: $brand-teal;
   padding: 3px 9px;
   border-radius: $r-pill;
   font-size: 11px;
   font-weight: 600;
-  border: 1px solid rgba(45, 212, 191, 0.20);
+  border: 1px solid rgba(52, 226, 194, 0.24);
+  transition: transform 0.35s $ease-emph, background 0.35s $ease-soft;
 }
 
 // ---------- Education preview ----------
@@ -799,7 +877,9 @@ export default defineComponent({
   gap: 14px;
   padding: 28px;
   border-radius: $r-lg;
-  background: $surface-1;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.015), rgba(255, 255, 255, 0)),
+    $surface-1;
   border: 1px solid $border-subtle;
   transition: transform 0.35s $ease-emph, border-color 0.35s $ease-soft,
     background 0.35s $ease-soft, box-shadow 0.35s $ease-soft;
@@ -877,8 +957,8 @@ export default defineComponent({
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: $brand-amber;
-  background: rgba(244, 184, 96, 0.10);
-  border: 1px solid rgba(244, 184, 96, 0.24);
+  background: rgba(255, 199, 107, 0.12);
+  border: 1px solid rgba(255, 199, 107, 0.26);
   border-radius: $r-pill;
 }
 
@@ -903,9 +983,10 @@ export default defineComponent({
   width: 48px;
   height: 48px;
   border-radius: $r-md;
-  background: linear-gradient(135deg, rgba(45, 212, 191, 0.18), rgba(244, 184, 96, 0.12));
+  background: linear-gradient(135deg, rgba(52, 226, 194, 0.2), rgba(79, 216, 247, 0.12), rgba(255, 199, 107, 0.1));
   border: 1px solid $border-subtle;
   color: $brand-teal;
+  transition: transform 0.35s $ease-emph, background 0.35s $ease-soft;
 }
 
 .education-highlight-icon.secondary {
@@ -953,6 +1034,18 @@ export default defineComponent({
 
   .hero-copy h1 {
     font-size: 40px;
+  }
+
+  .hero-orb--teal {
+    width: 180px;
+    height: 180px;
+    right: 8%;
+  }
+
+  .hero-orb--amber {
+    width: 140px;
+    height: 140px;
+    right: -22px;
   }
 
   .hero-actions,

@@ -1,5 +1,13 @@
 <template>
-  <article class="project-card">
+  <article
+    class="project-card"
+    :class="{ 'project-card--compact': compact }"
+    role="link"
+    tabindex="0"
+    @click="goToDetail"
+    @keydown.enter.prevent="goToDetail"
+    @keydown.space.prevent="goToDetail"
+  >
     <div class="project-image-section">
       <div
         v-if="Project.urlGithub || Project.url"
@@ -31,7 +39,7 @@
         </a>
       </div>
 
-      <div class="project-image-wrapper" @click="goToDetail">
+      <div class="project-image-wrapper">
         <q-img
           :src="Project.image[0]"
           alt="Project preview"
@@ -46,18 +54,28 @@
 
     <div class="project-content">
       <div class="project-type">{{ Project.type }}</div>
-      <h3 class="project-title" @click="goToDetail">
+      <h3 class="project-title">
         {{ Project.name }}
       </h3>
-      <p class="project-description" @click="goToDetail">
+      <p class="project-description">
         {{ Project.description }}
       </p>
       <div class="tech-stack">
-        <chip-technology
-          v-for="tech in techStack"
+        <div
+          v-for="tech in visibleTechStack"
           :key="tech.id"
-          :Skill="tech"
-        />
+          class="tech-chip-wrap"
+          @click.stop
+        >
+          <chip-technology :Skill="tech" />
+        </div>
+        <div
+          v-if="compact && techStack.length > visibleTechStack.length"
+          class="tech-more"
+          @click.stop
+        >
+          +{{ techStack.length - visibleTechStack.length }}
+        </div>
       </div>
     </div>
   </article>
@@ -68,6 +86,7 @@ import { computed, defineComponent } from 'vue';
 import { Icon } from '@iconify/vue';
 import { useRoute, useRouter } from 'vue-router';
 import { movePage } from '../functions/movePage';
+import { slugifyProjectName } from '../functions/projectSlug';
 import ChipTechnology from './ChipTechnology.vue';
 import Skills from '../data/Skills';
 import type { Project, Skill } from './models';
@@ -80,6 +99,10 @@ export default defineComponent({
       type: Object as () => Project,
       required: true,
     },
+    compact: {
+      type: Boolean,
+      default: false,
+    },
   },
   setup(props) {
     const router = useRouter();
@@ -89,11 +112,18 @@ export default defineComponent({
         .map((id) => Skills.find((s) => s.id === id))
         .filter((s): s is Skill => Boolean(s))
     );
+    const visibleTechStack = computed<Skill[]>(() =>
+      props.compact ? techStack.value.slice(0, 5) : techStack.value
+    );
 
     const goToDetail = () =>
-      movePage(router, route.path, `/detail-project/${props.Project.id}`);
+      movePage(
+        router,
+        route.path,
+        `/detail-project/${slugifyProjectName(props.Project.name)}`
+      );
 
-    return { techStack, goToDetail };
+    return { techStack, visibleTechStack, goToDetail };
   },
 });
 </script>
@@ -107,7 +137,9 @@ export default defineComponent({
   min-height: 220px;
   border-radius: $r-lg;
   overflow: hidden;
-  background: $surface-1;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.015), rgba(255, 255, 255, 0)),
+    $surface-1;
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid $border-subtle;
@@ -115,6 +147,17 @@ export default defineComponent({
   transition: transform 0.4s $ease-emph, border-color 0.4s $ease-soft,
     background 0.4s $ease-soft, box-shadow 0.4s $ease-soft;
   position: relative;
+  cursor: pointer;
+}
+
+.project-card:focus-visible {
+  outline: 2px solid $brand-teal;
+  outline-offset: 4px;
+}
+
+.project-card--compact {
+  grid-template-columns: minmax(220px, 0.72fr) minmax(0, 1.28fr);
+  min-height: 168px;
 }
 
 .project-card::after {
@@ -149,8 +192,9 @@ export default defineComponent({
   gap: 12px;
   background: linear-gradient(
     135deg,
-    rgba(13, 34, 43, 0.65) 0%,
-    rgba(26, 52, 58, 0.85) 100%
+    rgba(20, 48, 56, 0.76) 0%,
+    rgba(24, 59, 64, 0.92) 52%,
+    rgba(18, 43, 49, 0.9) 100%
   );
 }
 
@@ -165,10 +209,18 @@ export default defineComponent({
   position: relative;
   flex: 1;
   overflow: hidden;
-  cursor: pointer;
   border-radius: $r-md;
   border: 1px solid $border-subtle;
   min-height: 160px;
+}
+
+.project-card--compact .project-image-section {
+  padding: 12px;
+  gap: 10px;
+}
+
+.project-card--compact .project-image-wrapper {
+  min-height: 132px;
 }
 
 .project-image {
@@ -188,8 +240,9 @@ export default defineComponent({
   gap: 6px;
   background: linear-gradient(
     135deg,
-    rgba(7, 17, 19, 0.78) 0%,
-    rgba(45, 212, 191, 0.18) 100%
+    rgba(10, 24, 28, 0.82) 0%,
+    rgba(79, 216, 247, 0.18) 48%,
+    rgba(255, 199, 107, 0.12) 100%
   );
   color: $text-strong;
   font-size: 13px;
@@ -214,6 +267,11 @@ export default defineComponent({
   padding: 24px 26px;
 }
 
+.project-card--compact .project-content {
+  gap: 8px;
+  padding: 18px 20px;
+}
+
 .project-type {
   display: inline-block;
   width: fit-content;
@@ -223,8 +281,8 @@ export default defineComponent({
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: $brand-amber;
-  background: rgba(244, 184, 96, 0.10);
-  border: 1px solid rgba(244, 184, 96, 0.24);
+  background: rgba(255, 199, 107, 0.12);
+  border: 1px solid rgba(255, 199, 107, 0.26);
   border-radius: $r-pill;
 }
 
@@ -235,12 +293,16 @@ export default defineComponent({
   font-weight: 700;
   line-height: 1.2;
   color: $text-strong;
-  cursor: pointer;
   transition: color 0.3s $ease-soft;
   background: linear-gradient(135deg, $text-strong 0%, $text-base 100%);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+
+.project-card--compact .project-title {
+  font-size: 21px;
+  line-height: 1.18;
 }
 
 .project-title:hover {
@@ -255,12 +317,17 @@ export default defineComponent({
   color: $text-base;
   font-size: 14px;
   line-height: 1.6;
-  cursor: pointer;
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;
   overflow: hidden;
   transition: color 0.3s $ease-soft;
+}
+
+.project-card--compact .project-description {
+  font-size: 13.5px;
+  line-height: 1.55;
+  -webkit-line-clamp: 2;
 }
 
 .project-description:hover {
@@ -273,6 +340,30 @@ export default defineComponent({
   gap: 6px;
   margin-top: auto;
   padding-top: 6px;
+}
+
+.project-card--compact .tech-stack {
+  gap: 5px;
+  padding-top: 2px;
+}
+
+.tech-chip-wrap {
+  display: inline-flex;
+}
+
+.tech-more {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 38px;
+  height: 32px;
+  padding: 0 10px;
+  border-radius: $r-md;
+  background: rgba(236, 247, 244, 0.07);
+  border: 1px solid $border-subtle;
+  color: $text-muted;
+  font-size: 12px;
+  font-weight: 700;
 }
 
 .glass-tooltip {

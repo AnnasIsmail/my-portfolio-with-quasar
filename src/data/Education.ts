@@ -14,7 +14,7 @@ export const educations: Education[] = [
     gpa: '3.79/4.00',
     location: 'West Jakarta, DKI Jakarta, Indonesia',
     description:
-      'Pursued advanced studies in computer science with specialized focus on artificial intelligence, cloud computing, and decision modeling systems.',
+      'Focused on computer science topics such as artificial intelligence, cloud computing, and decision modeling.',
     achievements: [
       'Published a Scopus Q3-indexed scientific article on Indonesia capital relocation readiness',
       'Achieved Alibaba Cloud Certified Associate (ACA) certification in Cloud Computing',
@@ -30,7 +30,7 @@ export const educations: Education[] = [
     gpa: '3.45/4.00',
     location: 'Tangerang, Banten, Indonesia',
     description:
-      'Completed comprehensive studies in information systems with extensive practical experience in web development and system analysis.',
+      'Studied information systems while building practical experience in web development and system analysis.',
     achievements: [
       'Completed MAGENTA BUMN internship at Telkom Indonesia with an A grade',
       'Contributed to a legal regulation management system using Vue.js, React.js, CodeIgniter, MySQL, Minio, Redis, Quasar, and Elasticsearch',
@@ -47,7 +47,7 @@ export const certifications: Certification[] = [
     date: '2024',
     icon: 'simple-icons:alibabacloud',
     description:
-      'Professional cloud computing certification demonstrating comprehensive expertise in Alibaba Cloud services and solutions.',
+      'Cloud certification covering core Alibaba Cloud services and solution fundamentals.',
   },
 ];
 
@@ -57,5 +57,5 @@ export const publication: Publication = {
   status: 'Scopus Q3-indexed Scientific Article',
   methods: 'Decision Model, Expert Judgement, Fuzzy Logic, and BERT',
   description:
-    "Published research article utilizing decision modeling techniques and artificial intelligence methods to evaluate the readiness of Indonesia's capital relocation to Nusantara.",
+    "Published research on evaluating Indonesia's capital relocation readiness using decision modeling and AI-based methods.",
 };

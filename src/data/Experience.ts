@@ -9,7 +9,7 @@ const experiences: Experience[] = [
     duration: 'Dec 2025 - Apr 2026',
     location: 'Singapore',
     description:
-      'Contributed to the development and maintenance of an internal warehouse application, covering frontend, backend, database operations, deployment, and production support in an English-speaking team environment.',
+      'Worked on an internal warehouse application across frontend, backend, database operations, deployment, and production support in an English-speaking team.',
     achievements: [
       'Developed and maintained Angular and ASP.NET modules for warehouse operations',
       'Improved system stability through bug fixing, troubleshooting, and reliability-focused maintenance',
@@ -33,11 +33,11 @@ const experiences: Experience[] = [
     duration: 'Mar 2025 - Aug 2025',
     location: 'West Jakarta, DKI Jakarta, Indonesia',
     description:
-      'Led the development, maintenance, and optimization of critical internal applications, including Online Exam platforms, Scheduling systems, Student Career Monitoring, and Event Management solutions.',
+      'Worked on several internal applications, including Online Exam platforms, scheduling systems, Student Career Monitoring, and event-related tools.',
     achievements: [
       'Successfully developed the Student Career Monitoring application from initial planning to full production deployment',
-      'Rapidly modified the Online Exam Proctoring system within two weeks, ensuring seamless exam execution capabilities',
-      "Led code review processes for vendor deliverables and implemented improvements to align with company's development standards",
+      'Updated the Online Exam Proctoring system within two weeks so it was ready for live exam use',
+      "Handled code reviews for vendor deliverables and pushed improvements to match the team's development standards",
     ],
     technologies: [
       'ASP.NET Web Forms',
@@ -60,10 +60,10 @@ const experiences: Experience[] = [
     duration: 'Oct 2023 - Feb 2025',
     location: 'West Jakarta, DKI Jakarta, Indonesia',
     description:
-      'Developed and maintained critical internal applications including Online Exam systems, Scheduler modules, LMS platforms, and Student Dashboard interfaces. Enhanced database performance through advanced query optimization and ensured robust system reliability.',
+      'Built and maintained internal applications such as Online Exam systems, scheduler modules, LMS features, and student dashboards, while also improving database performance and system reliability.',
     achievements: [
-      'Dramatically optimized query performance from over 1 minute to just 3 seconds using advanced LINQ techniques',
-      'Architected and developed the Lecturer KPI Scheduler module and Exam Question Revision Setup module, significantly improving academic process efficiency',
+      'Improved query performance from more than 1 minute to around 3 seconds using LINQ optimization',
+      'Built the Lecturer KPI Scheduler module and the Exam Question Revision Setup module for academic operations',
     ],
     technologies: ['ASP.NET', 'React.js', 'Azure', 'CI/CD', 'LINQ', 'MySQL'],
   },
@@ -75,10 +75,10 @@ const experiences: Experience[] = [
     duration: 'Mar 2023 - Aug 2023',
     location: 'South Jakarta, DKI Jakarta, Indonesia',
     description:
-      'Served as a Web Developer Intern at Telkom Indonesia, contributing to the development of a comprehensive web-based legal document management system. Designed and implemented innovative features to enhance efficiency and accuracy in regulatory processes.',
+      'Worked as a Web Developer Intern at Telkom Indonesia and contributed to a legal document management system used for internal regulatory workflows.',
     achievements: [
-      'Built responsive user interfaces using Vue.js, developed robust backend services with CodeIgniter, and integrated Elasticsearch for advanced document search and SQL database management',
-      "Achieved significant improvements in document search speed and streamlined the legal team's workflow processes",
+      'Built responsive interfaces with Vue.js, backend services with CodeIgniter, and integrated Elasticsearch for document search',
+      "Helped speed up document search and make the legal team's workflow smoother",
     ],
     technologies: [
       'Vue.js',
@@ -100,10 +100,10 @@ const experiences: Experience[] = [
     duration: 'Feb 2024 - Mar 2024',
     location: 'Indonesia',
     description:
-      'Architected and developed a comprehensive quick count system for the 2024 Presidential Election, featuring a KoboCollect-based field data collection form and a real-time dashboard built with React.js and Node.js Express for media publication.',
+      'Built a quick count system for the 2024 Presidential Election, combining a KoboCollect-based field form with a real-time dashboard in React.js and Node.js Express.',
     achievements: [
-      'Implemented automated data processing workflows to enhance accuracy and processing speed',
-      'Led the entire development lifecycle from initial system design to final production implementation',
+      'Built automated processing flows to improve speed and reduce manual work',
+      'Handled the project from early design through implementation',
     ],
     technologies: ['React.js', 'Node.js Express', 'KoboCollect', 'JavaScript'],
   },
@@ -116,10 +116,10 @@ const experiences: Experience[] = [
     duration: 'Oct 2024 - Mar 2025',
     location: 'Tangerang, Banten, Indonesia',
     description:
-      'Served as a Full-Stack Developer for the Tangkapp application, a comprehensive government document workflow solution. Led comprehensive requirement analysis and system architecture design.',
+      'Worked as a Full-Stack Developer on Tangkapp, a government document workflow application. I was involved in requirement gathering and system design.',
     achievements: [
-      'Collaborated closely with government stakeholders to translate complex bureaucratic processes into an intuitive digital platform',
-      'Successfully coordinated and led a small development team throughout the entire project lifecycle',
+      'Worked closely with government stakeholders to turn a complex manual process into a digital workflow',
+      'Coordinated a small development team through the project lifecycle',
     ],
     technologies: [
       'React.js',
